@@ -5,7 +5,7 @@
 
 </div>
 
-> Project Description
+> Medical Record Storage
 
 <h2>Technology Stack</h2>
 
