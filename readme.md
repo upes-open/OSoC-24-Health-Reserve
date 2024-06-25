@@ -9,10 +9,8 @@
 
 <h2>Technology Stack</h2>
 
-[![My Skills](https://skillicons.dev/icons?i=react,python,c,spring,js,nodejs,flask,django)](https://skillicons.dev)<br>
-[![My Skills](https://skillicons.dev/icons?i=mysql,mongodb)](https://skillicons.dev)<br>
-[![My Skills](https://skillicons.dev/icons?i=tensorflow,opencv)](https://skillicons.dev)<br>
-[![My Skills](https://skillicons.dev/icons?i=unity,blender)](https://skillicons.dev)
+[![My Skills](https://skillicons.dev/icons?i=react,js,nodejs)](https://skillicons.dev)<br>
+[![My Skills](https://skillicons.dev/icons?i=mongodb)](https://skillicons.dev)<br>
 
 ## Installation
 1. Install the NodeJS LTS (v20.14.0) [Click Here](https://nodejs.org/en/download/package-manager)
