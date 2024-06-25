@@ -34,7 +34,7 @@
 1. Create a fork on the repository
 2. Clone the forked repository 
     ```zsh
-    git clone <repo_link>
+    git clone https://github.com/upes-open/OSoC-24-Medical-Record-Documentation.git
     ```
 3. Open the cloned repository in your desired code editor (eg: VS Code, Zed, Sublime Text)
 
@@ -54,7 +54,7 @@
 1. There are 3 level of toughness of the issues.
     1. Easy: The issues which are beginner level and easy to solve. **(10 points)**
     2. Medium: The issues which are intermediate level and a bit tricky to solve. **(20 points)**
-    3. Medium: The issues which are advanced level and includes advanced concept of the technology stack to solve. **(30 points)**
+    3. Advance: The issues which are advanced level and includes advanced concept of the technology stack to solve. **(30 points)**
 2. Direct commit on `main` branch is restricted. Creating a branch is mandatory.
 3. Pull request without the issue number will not be merged.
 4. Scores will be weekly declared on the OPEN's website and discord.
