@@ -5,7 +5,7 @@
 
 </div>
 
-> Medical Record Storage
+> Health Reserve
 
 <h2>Technology Stack</h2>
 
