@@ -1,4 +1,8 @@
-// import React from 'react';
+// src/components/HospitalLogin.js
+
+// eslint-disable-next-line no-unused-vars
+import React from 'react';
+import { Link } from 'react-router-dom';
 import './HospitalLogin.css';
 import hospitalLoginImage from '../../../assets/images/hospital-login.png';
 
@@ -18,7 +22,7 @@ const HospitalLogin = () => {
           <button type="submit" className="login-button">Login</button> 
           <a href="/forgot-password" className="forgot-password">Forgot Password</a>
         </form>
-        <p className="signup-link">Dont have an account? <a href="/signup">Signup</a></p>
+        <p className="signup-link">Dont have an account? <Link to="/hospital-register">Signup</Link></p>
       </div>
       <div className="hospital-login-image">
         <div className="image-overlay">

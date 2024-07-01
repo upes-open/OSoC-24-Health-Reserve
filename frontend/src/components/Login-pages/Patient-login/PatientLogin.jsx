@@ -1,6 +1,8 @@
 // import React from 'react';
 import './PatientLogin.css';
 import Patient from '../../../assets/images/patient.png';
+import { Link } from 'react-router-dom';
+
 
 const PatientLogin = () => {
   return (
@@ -18,7 +20,7 @@ const PatientLogin = () => {
           <button type="submit" className="login-button">Login</button> 
           <a href="/forgot-password" className="forgot-password">Forgot Password</a>
         </form>
-        <p className="signup-link">Dont have an account? <a href="/signup">Signup</a></p>
+        <p className="signup-link">Dont have an account? <Link to="/patient-register">Signup</Link></p>
       </div>
       <div className="hospital-login-image">
         <div className="image-overlay">

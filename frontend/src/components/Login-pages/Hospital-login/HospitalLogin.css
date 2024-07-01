@@ -1,11 +1,5 @@
-/* Reset margin and padding for all elements */
-* {
-    margin: 0;
-    padding: 0;
-}
-
 /* Container styles */
-.hospital-login-container {
+.hospital-register-container {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -15,25 +9,54 @@
 }
 
 /* Content area styles */
-.hospital-login-content {
-    background-color: #fff;
-    color: #333; /* Default text color */
-    padding: 40px;
-    border-radius: 8px;
-    max-width: 400px;
-    width: 50%; /* Takes up half of the container */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.hospital-login-content h2 {
-    font-size: 34px;
-    margin-bottom: 30px;
-    text-align: center;
-}
-
-.login-form {
+.register-content {
     display: flex;
-    flex-direction: column;
+    justify-content: space-between; /* Ensure items are spaced apart */
+    align-items: center; /* Center items vertically */
+    width: 100%;
+    max-width: 1200px;
+}
+
+.register-info {
+    flex: 1;
+    padding: 20px;
+}
+
+.register-info h2 {
+    font-size: 36px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.register-info p {
+    font-size: 18px;
+    color: #666;
+}
+
+.hospital-register-image {
+    flex: 1;
+    padding: 20px;
+    max-width: 50%; /* Take up half of the available space */
+}
+
+.hospital-register-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.register-form-container {
+    flex: 1;
+    padding: 20px;
+    max-width: 50%; /* Take up half of the available space */
+}
+
+.register-form {
+    background-color: #fff;
+    color: #333;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     width: 100%;
 }
 
@@ -42,20 +65,21 @@
 }
 
 .form-group label {
-    margin-bottom: 15px;
-    /* font-weight: bold; */
+    margin-bottom: 5px;
     display: block;
-    color: #7b7171; /* Default text color */
+    color: #7b7171;
 }
 
-.form-group input {
-    width: calc(100% - 40px); /* Adjust padding + border */
-    padding: 10px 20px; /* Adjust padding */
-    border: none;
-    border-bottom: 1px solid #ced4da; /* Bottom border */
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
     transition: border-color 0.3s ease;
-    background-color: transparent; /* Transparent background */
-    color: #5e5c5c; /* Default text color */
+    background-color: transparent;
+    color: #5e5c5c;
 }
 
 .form-group input:focus {
@@ -63,8 +87,11 @@
     border-color: #007bff;
 }
 
-/* Login button styles */
-.login-button {
+.form-group label input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+.register-button {
     width: 100%;
     padding: 10px;
     background-color: #007bff;
@@ -75,68 +102,11 @@
     transition: background-color 0.3s;
 }
 
-.login-button:hover {
+.register-button:hover {
     background-color: #0056b3;
 }
 
-/* Forgot password link styles */
-.forgot-password {
-    padding-top: 0.5rem;
-    text-decoration: none;
-    color: #007bff;
-    transition: color 0.3s;
-}
-
-.forgot-password:hover {
-    text-decoration: underline;
-    color: #0056b3;
-}
-
-/* Signup link styles */
-.signup-link {
-    text-align: center;
-    margin-top: 20px;
-}
-
-.signup-link a {
-    color: #007bff;
-    text-decoration: none;
-}
-
-.signup-link a:hover {
-    text-decoration: underline;
-}
-
-/* Image styles */
-.hospital-login-image {
-    position: relative; /* Ensure relative positioning */
-    flex: 1; 
-    justify-content: flex-start; 
-    align-items: center;
-    padding: 20px;
-    border: 10px solid transparent;
-}
-
-.hospital-login-image img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 8px;
-    display: block;
-}
-
-/* Image overlay styles */
-.image-overlay {
-    position: absolute;
-    top: 50px; /* Adjust positioning as needed */
-    left: 300px; /* Adjust positioning as needed */
-    font-weight: bold; /* to make the text bold */
-    padding-top: 0.5rem;
-}
-
-.image-overlay h2 {
-    margin: 0;
-    font-size: 38px;
-    padding-top: 0.5rem;
-    text-align: center;
-    color: #333; /* Default text color */
+.error {
+    color: red;
+    font-size: 12px;
 }
