@@ -5,10 +5,13 @@ import './Nav.css';
 function Nav() {
   return (
     <nav>
-      <ul>
+      <div className="logo-container">
+      </div>
+      <ul className="nav-links">
         <li><Link to="/">Home</Link></li>
         <li><Link to="/login">Login</Link></li>
-        <li><Link to="/register">Register</Link></li>
+        <li><Link to="/hospital-login">Hospital Login</Link></li>
+        <li><Link to="/patient-login">Patient Login</Link></li>
       </ul>
     </nav>
   );
