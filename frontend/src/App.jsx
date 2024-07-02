@@ -1,9 +1,8 @@
-import React from 'react';
 import './App.css';
 import Nav from './components/Nav';
 import { Routes, Route, useLocation } from 'react-router-dom';
-import Login from './components/Login';
-import Register from './components/Register';
+import Login from './components/Login-page/Login';
+import Register from './components/Register-page/Register';
 import Home from './components/Home/Home';
 
 function App() {
@@ -15,7 +14,7 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/" element={<Home />} />
+        <Route path='/' element={<Home />} />
       </Routes>
     </div>
   );
