@@ -1,14 +1,13 @@
-
 // eslint-disable-next-line no-unused-vars
 import React, { useState } from 'react';
-import './PatientRegister.css';
-import PatientRegisterImage from '../../../assets/images/patient2.png';
 import { Link } from 'react-router-dom';
 
+import './Register.css';
+import hospitalRegisterImage from '../../assets/images/Doctors-home.png';
 
-const PatientRegister = () => {
+const Register = () => {
   const [form, setForm] = useState({
-    PatientName: '',
+    hospitalName: '',
     contact: '',
     email: '',
     password: '',
@@ -29,7 +28,7 @@ const PatientRegister = () => {
   const validateForm = () => {
     const newErrors = {};
 
-    if (!form.PatientName) newErrors.PatientName = 'Patient Name is required';
+    if (!form.hospitalName) newErrors.hospitalName = ' Name is required';
     if (!form.contact) newErrors.contact = 'Contact is required';
     if (!form.email) newErrors.email = 'Email is required';
     if (!form.password) newErrors.password = 'Password is required';
@@ -48,32 +47,31 @@ const PatientRegister = () => {
       // Form is valid, submit the data
       console.log(form);
     }
-
   };
 
   return (
-    <div className="patient-register-container">
+    <div className="hospital-register-container">
       <div className="register-content">
         <div className="register-info">
-          <h2>Patient Register</h2>
+          <h2> Register Form</h2>
         </div>
-        <div className="patient-register-image">
-          <img src={PatientRegisterImage} alt="Patient Register" />
+        <div className="hospital-register-image">
+          <img src={hospitalRegisterImage} alt="Hospital Register" />
         </div>
       </div>
       <div className="register-form-container">
         <form className="register-form" onSubmit={handleSubmit}>
           <div className="form-group">
-            <label htmlFor="PatientName">Patient Name</label>
+            <label htmlFor="hospitalName"> Name</label>
             <input
               type="text"
-              id="PatientName"
-              name="PatientName"
-              value={form.PatientName}
+              id="hospitalName"
+              name="hospitalName"
+              value={form.hospitalName}
               onChange={handleChange}
               required
             />
-            {errors.PatientName && <p className="error">{errors.PatientName}</p>}
+            {errors.hospitalName && <p className="error">{errors.hospitalName}</p>}
           </div>
           <div className="form-group">
             <label htmlFor="contact">Contact</label>
@@ -134,10 +132,11 @@ const PatientRegister = () => {
               />
               I confirm that the details provided are correct
             </label>
+
             {errors.termsAccepted && <p className="error">{errors.termsAccepted}</p>}
           </div>
           <button type="submit" className="register-button">Register</button>
-          <p className="signup-link">Do you have an account? <Link to="/patient-login">Login</Link></p>
+          <p className="signup-link">Do you have an account? <Link to="/hospital-login">Login</Link></p>
 
         </form>
       </div>
@@ -145,4 +144,4 @@ const PatientRegister = () => {
   );
 };
 
-export default PatientRegister;
+export default Register;

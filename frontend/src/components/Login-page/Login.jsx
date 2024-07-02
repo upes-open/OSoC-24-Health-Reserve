@@ -1,10 +1,10 @@
 // import React from 'react';
-import './PatientLogin.css';
-import Patient from '../../../assets/images/patient.png';
+import './Login.css';
+import Patient from '../../assets/images/patient.png';
 import { Link } from 'react-router-dom';
 
 
-const PatientLogin = () => {
+const Login = () => {
   return (
     <div className="hospital-login-container">
       <div className="hospital-login-content">
@@ -24,7 +24,7 @@ const PatientLogin = () => {
       </div>
       <div className="hospital-login-image">
         <div className="image-overlay">
-          <h2>Patient Login</h2>
+          <h2> Login Page</h2>
         </div>
         <img src={Patient} alt="Patient Login" />
       </div>
@@ -32,4 +32,4 @@ const PatientLogin = () => {
   );
 };
 
-export default PatientLogin;
+export default Login;
