@@ -1,12 +1,12 @@
-const mongoose=require('mongoose');
+const mongoose = require('mongoose');
 
-//database
-mongoose.connect("mongodb://localhost:27017/Health-Reserve");
 
-const userSchema=mongoose.Schema({
-    username:String,
-    email:String,
-    password:String
+const userSchema = mongoose.Schema({
+    username: { type: String, required: true },
+    contact: { type: Number },
+    email: { type: String, required: true },
+    password: { type: String, required: true },
+    license: { type: String, unique: true },
 })
 
-module.exports=mongoose.model("user",userSchema);
+module.exports = mongoose.model("user", userSchema);

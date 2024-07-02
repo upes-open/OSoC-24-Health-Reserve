@@ -1,7 +1,8 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import Nav from './components/Nav';
+import Navpatient from './components/Navbar/Navpatient';
+import Navdoctor from './components/Navbar/Navdoctor';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import Login from './components/Login-page/Login';
 import Register from './components/Register-page/Register';
@@ -31,13 +32,20 @@ function App() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  console.log(location.pathname); // Debugging log
+
   return (
     <div className="App">
-      {location.pathname !== '/' && <Nav />}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+<<<<<<< HEAD
+=======
+        <Route path='/' element={<Home />} />
+        <Route path="/navpatient" element={<Navpatient />} />
+        <Route path="/navdoctor" element={<Navdoctor />} />
+>>>>>>> 02bad4769b1a7857a7091666210ca25f7ca33f8f
       </Routes>
       { <Footer />}
     </div>

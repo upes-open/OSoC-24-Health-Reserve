@@ -1,34 +1,12 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-  min-height: 100vh;
-}
 
-/* App.css */
-html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-}
 
-.App {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh; /* Ensure the App takes the full viewport height */
-}
-
-main {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-}
-
-body {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @media (prefers-reduced-motion: no-preference) {

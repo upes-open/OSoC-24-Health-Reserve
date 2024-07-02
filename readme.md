@@ -5,7 +5,7 @@
 
 </div>
 
-> Health Reserve
+> A medical record storage for patients which can be accessed by doctors to see the patients medical history.
 
 <h2>Technology Stack</h2>
 
