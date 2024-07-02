@@ -76,3 +76,10 @@
     - Feat: Update Schema
     - Fixes: Issue 40 
     - Update: Updated backend/models
+
+  - `eb9c21e0e7f49320cbb8c898eabc4a9cfb01585a` ParthDhavan04
+    https://github.com/ParthDhavan04
+
+    - Feat: Integrate Frontend and backend
+    - Fixes: Issue 25 
+    - Update: Integrate login register with database and backend
