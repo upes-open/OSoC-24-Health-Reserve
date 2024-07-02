@@ -20,7 +20,7 @@ const Login = () => {
           <button type="submit" className="login-button">Login</button> 
           <a href="/forgot-password" className="forgot-password">Forgot Password</a>
         </form>
-        <p className="signup-link">Dont have an account? <Link to="/patient-register">Signup</Link></p>
+        <p className="signup-link">Dont have an account? <Link to="/register">Signup</Link></p>
       </div>
       <div className="hospital-login-image">
         <div className="image-overlay">

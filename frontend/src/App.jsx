@@ -36,16 +36,14 @@ function App() {
 
   return (
     <div className="App">
+      {<Navdoctor/>}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-<<<<<<< HEAD
-=======
         <Route path='/' element={<Home />} />
         <Route path="/navpatient" element={<Navpatient />} />
         <Route path="/navdoctor" element={<Navdoctor />} />
->>>>>>> 02bad4769b1a7857a7091666210ca25f7ca33f8f
       </Routes>
       { <Footer />}
     </div>
