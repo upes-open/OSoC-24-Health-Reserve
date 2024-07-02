@@ -10,12 +10,11 @@ const multer = require('multer');
 const userModel = require('./models/user');
 const patientModel = require('./models/patient');
 
-
-// app.set('view engine', 'ejs');
-// change view engine acc to project req. here
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
-app.use(express.static(path.join(__dirname, '/public')))
+
+app.use(express.static(path.join(__dirname, '..', 'frontend', 'public')));
+app.use('/src', express.static(path.join(__dirname, '..', 'frontend', 'src')));
 
 
 const storage = multer.memoryStorage();
@@ -63,15 +62,15 @@ app.get('/getrecords', async (req, res) => {
 });
 
 
-
-
-app.get("/", (req, res) => {
-    res.render('homepage');
-})
+app.get('/', (req, res) => {
+    res.send('the landing page will be here. uncomment res.sendFile to see effects')
+    // res.sendFile(path.join(__dirname, '..', 'frontend', 'public', 'index.html'));
+});
 
 app.get('/login', (req, res) => {
-    res.render('login');
-})
+    res.send('the login page will be here. uncomment res.sendFile to see effects')
+    // res.sendFile(path.join(__dirname, '..', 'frontend', 'public', 'login.html'));
+});
 
 app.post("/login", async (req, res) => {
     let user = await userModel.findOne({ email: req.body.email })
@@ -80,7 +79,7 @@ app.post("/login", async (req, res) => {
     else
         bcrypt.compare(req.body.password, user.password, (err, result) => {
             if (result) {
-                let token = jwt.sign({ email: user.email }, "boyismine");
+                let token = jwt.sign({ email: user.email }, "tokenGoesHere");
                 res.cookie("token", token);
                 return res.redirect('/');
             }
@@ -89,10 +88,12 @@ app.post("/login", async (req, res) => {
         })
 })
 
-
 app.get('/signup', (req, res) => {
-    res.render('signp');
-})
+    res.send('the signup page will be here. uncomment res.sendFile to see effects.create a basic form with post method to see results')
+    // res.sendFile(path.join(__dirname, '..', 'frontend', 'public', 'login.html'));
+});
+
+
 
 app.post("/signup", (req, res) => {
     let { username, email, password } = req.body;
