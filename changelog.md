@@ -76,3 +76,31 @@
     - Feat: Update Schema
     - Fixes: Issue 40 
     - Update: Updated backend/models
+
+  - `eb9c21e0e7f49320cbb8c898eabc4a9cfb01585a` ParthDhavan04
+    https://github.com/ParthDhavan04
+
+    - Feat: Integrate Frontend and backend
+    - Fixes: Issue 25 
+    - Update: Integrate login register with database and backend
+
+  - `f95c795e47d4000cf7fd03cec55a00ac82fa26a6` Siddharthaaa21
+    https://github.com/Siddharthaaa21
+
+    - Feat: Create Footer
+    - Fixes: Issue 37 
+    - Update: Changes in frontend/src/assets/components
+
+  - `f0aa8df41e4691ba3fee90c9c1ce228e957a94a6` Saga690
+    https://github.com/Saga690
+
+    - Feat: Create Schema for storing patient data
+    - Fixes: Issue 22 
+    - Update: Created backend/models and updated other files
+
+  - `f0aa8df41e4691ba3fee90c9c1ce228e957a94a6` Saga690
+    https://github.com/Saga690
+
+    - Feat: Create Schema for storing patient data
+    - Fixes: Issue 48 
+    - Update: Created backend/index.js
