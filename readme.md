@@ -25,7 +25,7 @@
 1. Create a fork on the repository
 2. Clone the forked repository 
     ```zsh
-    git clone https://github.com/upes-open/OSoC-24-Medical-Record-Documentation.git
+    git clone https://github.com/upes-open/OSoC-24-Health-Reserve.git
     ```
 3. Open the cloned repository in your desired code editor (eg: VS Code, Zed, Sublime Text)
 
