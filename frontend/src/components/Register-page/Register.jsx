@@ -136,7 +136,7 @@ const Register = () => {
             {errors.termsAccepted && <p className="error">{errors.termsAccepted}</p>}
           </div>
           <button type="submit" className="register-button">Register</button>
-          <p className="signup-link">Do you have an account? <Link to="/hospital-login">Login</Link></p>
+          <p className="signup-link">Do you have an account? <Link to="/login">Login</Link></p>
 
         </form>
       </div>

@@ -22,3 +22,19 @@
 .read-the-docs {
   color: #888;
 }
+
+/* Added styles for the footer visibility
+.footer {
+  background-color: rgb(130, 98, 235);
+  padding: 20px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: -1; /* Initially hide the footer */
+  /* transition: z-index 0.3s ease; Smooth transition for z-index */
+/* } */
+
+/* .footer.visible {
+  z-index: 1; /* Show the footer when it has the .visible class */
+/* } */ 
