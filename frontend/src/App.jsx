@@ -8,6 +8,7 @@ import Login from './components/Login-page/Login';
 import Register from './components/Register-page/Register';
 import Home from './components/Home/Home';
 import Footer from './components/Footer/Footer';
+import Dashboard from './components/User-Upload-Dashboard/userDashboard';
 
 function App() {
   const location = useLocation();
@@ -44,6 +45,7 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path="/navpatient" element={<Navpatient />} />
         <Route path="/navdoctor" element={<Navdoctor />} />
+        <Route path="/upload" element={<Dashboard />} />
       </Routes>
       { <Footer />}
     </div>

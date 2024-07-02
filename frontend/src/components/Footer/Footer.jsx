@@ -21,7 +21,7 @@ const Footer = () => {
           </div>
           <div className="sb__footer-links_div">
             <h4>Services</h4>
-            <a href="/lost">
+            <a href="/upload">
               <p>Document Upload</p>
             </a>
           </div>
