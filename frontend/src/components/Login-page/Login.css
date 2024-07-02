@@ -1,17 +1,25 @@
 /* Reset margin and padding for all elements */
 * {
-    margin: 0;
+    margin: auto;
     padding: 0;
+    /* box-sizing: border-box; Ensure box-sizing consistency */
 }
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 120vh;
+  }
 
 /* Container styles */
 .hospital-login-container {
     display: flex;
-    align-items: center;
+    flex-direction: row;
+    align-items: center; 
     justify-content: center;
     background-color: #f8f8f8;
+    margin-top: -100px;
     height: 100vh;
-    padding: 0 30px;
 }
 
 /* Content area styles */
@@ -21,20 +29,16 @@
     padding: 40px;
     border-radius: 8px;
     max-width: 400px;
-    width: 50%; /* Takes up half of the container */
+    width: 100%; /* Take full width of container */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20%; 
 }
 
-.hospital-login-content h2 {
-    font-size: 34px;
-    margin-bottom: 30px;
-    text-align: center;
-}
+
 
 .login-form {
     display: flex;
     flex-direction: column;
-    width: 100%;
 }
 
 .form-group {
@@ -42,15 +46,14 @@
 }
 
 .form-group label {
-    margin-bottom: 15px;
-    /* font-weight: bold; */
+    font-weight: bold; /* Bring back bold for labels */
     display: block;
     color: #7b7171; /* Default text color */
 }
 
 .form-group input {
-    width: calc(100% - 40px); /* Adjust padding + border */
-    padding: 10px 20px; /* Adjust padding */
+    width: 100%; /* Full width input */
+    padding: 10px 20px; /* Adjusted padding */
     border: none;
     border-bottom: 1px solid #ced4da; /* Bottom border */
     transition: border-color 0.3s ease;
@@ -73,6 +76,7 @@
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s;
+    margin-top: 10px; /* Add margin top for spacing */
 }
 
 .login-button:hover {
@@ -110,11 +114,12 @@
 /* Image styles */
 .hospital-login-image {
     position: relative; /* Ensure relative positioning */
-    flex: 1; 
-    justify-content: flex-start; 
+    flex: 1;
+    justify-content: flex-start;
     align-items: center;
     padding: 20px;
-    border: 10px solid transparent;
+    margin-right: 30px; 
+    top: 80px;
 }
 
 .hospital-login-image img {
