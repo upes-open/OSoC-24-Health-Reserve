@@ -1,19 +1,18 @@
-/* eslint-disable no-unused-vars */
-import React from 'react';
 import './App.css';
 import Nav from './components/Nav';
 import { Routes, Route } from 'react-router-dom';
-import Login from './components/Login-page/Login';
-import Register from './components/Register-page/Register';
+import Login from './components/Login';
+import Register from './components/Register';
 
 function App() {
+  const location = useLocation();
+
   return (
     <div className="App">
-      <Nav />
+      {location.pathname !== '/' && <Nav />}
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        {/* Add more routes as needed */}
       </Routes>
     </div>
   );
