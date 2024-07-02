@@ -13,8 +13,7 @@ body {
 
 .footer {
   background-color:rgb(28, 93, 115);
-  padding: 20px;
-  width: 100%;
+  width: 98.84vw;
   margin-top: 10rem;
   position:  inherit;
   bottom: -70px;
@@ -22,6 +21,10 @@ body {
   
   z-index: -1;
   transition: z-index 0.3s ease; /* Smooth transition for z-index */
+}
+
+sb__footer__section__padding {
+  width: 95%;
 }
 
 
