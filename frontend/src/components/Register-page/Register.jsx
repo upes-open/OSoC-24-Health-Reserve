@@ -34,8 +34,18 @@ const Register = () => {
     if (!form.password) newErrors.password = 'Password is required';
     if (form.password !== form.confirmPassword) newErrors.confirmPassword = 'Passwords do not match';
     if (!form.termsAccepted) newErrors.termsAccepted = 'You must accept the terms';
+    if (form.role === 'Doctor' && !form.license) newErrors.license = 'License is required for doctors';
 
     return newErrors;
+  };
+
+  const handleRoleChange = (e) => {
+    const { value } = e.target;
+    setForm({
+      ...form,
+      role: value,
+      license: value === 'Doctor' ? form.license : '',
+    });
   };
 
   const handleSubmit = (e) => {
@@ -121,6 +131,50 @@ const Register = () => {
             />
             {errors.confirmPassword && <p className="error">{errors.confirmPassword}</p>}
           </div>
+
+          <div className="form-group2">
+            <label>Role</label>
+            <div className="options">
+              <label>
+                <input
+                  type="radio"
+                  name="role"
+                  value="Doctor"
+                  checked={form.role === 'Doctor'}
+                  onChange={handleRoleChange}
+                  required
+                />
+                Doctor
+              </label>
+              {form.role === 'Doctor' && (
+                <div>
+                  <label htmlFor="license">License</label>
+                  <input
+                    type="text"
+                    id="license"
+                    name="license"
+                    value={form.license}
+                    onChange={handleChange}
+                    required
+                  />
+                  {errors.license && <p className="error">{errors.license}</p>}
+                </div>
+              )}
+              <label>
+                <input
+                  type="radio"
+                  name="role"
+                  value="Patient"
+                  checked={form.role === 'Patient'}
+                  onChange={handleRoleChange}
+                  required
+                />
+                Patient
+              </label>
+            </div>
+            {errors.role && <p className="error">{errors.role}</p>}
+          </div>
+
           <div className="form-group">
             <label>
               <input

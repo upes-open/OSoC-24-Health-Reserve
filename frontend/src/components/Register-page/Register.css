@@ -1,119 +1,156 @@
 .hospital-register-container {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    padding: 1px;
-    background-color: #f8f8f8;    
-    
-  }
-  
-  .register-content {
-    flex: 1;
-    flex-direction: column;
-    align-items: right;
-    justify-content: right;    
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 1px;
+  background-color: #f8f8f8;
 
-  }
-  
-  
-  .hospital-register-image {
-    flex: 5;
-    display: flex;
+}
 
+.register-content {
+  flex: 1;
+  flex-direction: column;
+  align-items: right;
   justify-content: right;
-    
-  }
-.register-info h2{
-    font-size: 30px;
-    font-weight: 600;
-    color: #333;
-    margin-bottom: 20px;
-    text-align: center;
-  }
-  
- 
-  
-  .hospital-register-image img {
-    max-width: 100%;
-    height: 100%;
-    
-    /* make this move toward right */
-    /* margin-right: -100px; */
-    margin-top: -50px;
-    background:transparent;
-  }
-  
-  
-  .register-form-container {
-    flex: 1;
-    padding: 120px;
-    background-color: #f9f9f9; /* Light background color for the form */
-    border-radius: 8px;
-    margin-top: auto;
 
-    
-      }
-  
-      .register-form {
-        max-width: 400px; /* Adjust the maximum width as needed */
-         /* Center the form horizontally */
-        padding: 32px; /* Add padding for spacing inside the form */
-        background-color: #ffffff; /* White background for the form */
-        border-radius: 0px; /* Rounded corners */
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
-      }
-  
-  .form-group {
-    margin-bottom: 0px;
+}
 
-    
-  }
-  .form-group label {
-    display: flex;
-    align-items: center ;
-    margin-bottom: 10px;
-    padding: 5px;
-    color: rgb(121, 121, 121)
-    
-  }
-  
-  .form-group label input[type="checkbox"] {
-    padding: 3%;
 
-    -webkit-appearance: none; /* Remove default appearance for Safari */
-    width: 0px; /* Adjust size of the checkbox */
-    height: 0px;
-    border: 1px solid #007bff; /* Blue border */
-    border-radius: 10px;
-    margin-right: 15px; /* Add space between the checkbox and text */       }
-  
-  .form-group label input[type="checkbox"]:checked {
-    background-color: #007bff; /* Blue background when checked */
-    border-color: #007bff; /* Blue border when checked */
-  }
-  
-  .form-group label input[type="checkbox"]::after {
-    content: '\2713'; /* Unicode character for checkmark */
-    font-size: 16px; /* Adjust size of the checkmark */
-    color: #fff; /* White color for the checkmark */
-    position: absolute;
-    top: 50%; /* Position vertically */
-    left: 50%; /* Position horizontally */
-    transform: translate(-50%, -50%); /* Center the checkmark */
-    visibility: hidden; /* Hidden by default */
-  }
-  
-  .form-group label input[type="checkbox"]:checked::after {
-    visibility: visible; /* Show the checkmark when checked */
-  }
-  .register-button {
-    width: 100%;
-    padding: 10px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    margin-top: 10px; /* Add margin top for spacing */
+.hospital-register-image {
+  flex: 5;
+  display: flex;
+  justify-content: right;
+}
+
+.register-info h2 {
+  font-size: 30px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+
+
+.hospital-register-image img {
+  max-width: 100%;
+  height: 100%;
+
+  /* make this move toward right */
+  /* margin-right: -100px; */
+  margin-top: -50px;
+  background: transparent;
+}
+
+
+.register-form-container {
+  flex: 1;
+  padding: 120px;
+  background-color: #f9f9f9;
+  /* Light background color for the form */
+  border-radius: 8px;
+  margin-top: auto;
+
+
+}
+
+.register-form {
+  max-width: 400px;
+  /* Adjust the maximum width as needed */
+  /* Center the form horizontally */
+  padding: 32px;
+  /* Add padding for spacing inside the form */
+  background-color: #ffffff;
+  /* White background for the form */
+  border-radius: 0px;
+  /* Rounded corners */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  /* Add a subtle box shadow */
+}
+
+.form-group {
+  margin-bottom: 0px;
+}
+
+.form-group2 {
+  color: rgb(121, 121, 121);
+  padding: 5px;
+  margin: 20px 0px;
+  display: flex;
+}
+
+.form-group2 label {
+  font-weight: 600;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.form-group label {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 5px;
+  color: rgb(121, 121, 121)
+}
+
+.form-group label input[type="checkbox"] {
+  padding: 3%;
+
+  -webkit-appearance: none;
+  /* Remove default appearance for Safari */
+  width: 0px;
+  /* Adjust size of the checkbox */
+  height: 0px;
+  border: 1px solid #007bff;
+  /* Blue border */
+  border-radius: 10px;
+  margin-right: 15px;
+  /* Add space between the checkbox and text */
+}
+
+.form-group label input[type="checkbox"]:checked {
+  background-color: #007bff;
+  /* Blue background when checked */
+  border-color: #007bff;
+  /* Blue border when checked */
+}
+
+.form-group label input[type="checkbox"]::after {
+  content: '\2713';
+  /* Unicode character for checkmark */
+  font-size: 16px;
+  /* Adjust size of the checkmark */
+  color: #fff;
+  /* White color for the checkmark */
+  position: absolute;
+  top: 50%;
+  /* Position vertically */
+  left: 50%;
+  /* Position horizontally */
+  transform: translate(-50%, -50%);
+  /* Center the checkmark */
+  visibility: hidden;
+  /* Hidden by default */
+}
+
+.form-group label input[type="checkbox"]:checked::after {
+  visibility: visible;
+  /* Show the checkmark when checked */
+}
+
+.register-button {
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 10px;
+  /* Add margin top for spacing */
 }
