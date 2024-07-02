@@ -67,7 +67,7 @@ const Login = () => {
             Forgot Password
           </Link>
         </form>
-        <p className="signup-link">Dont have an account? <Link to="/patient-register">Signup</Link></p>
+        <p className="signup-link">Dont have an account? <Link to="/register">Signup</Link></p>
       </div>
       <div className="hospital-login-image">
         <div className="image-overlay">
