@@ -47,11 +47,8 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path="/navpatient" element={<Navpatient />} />
         <Route path="/navdoctor" element={<Navdoctor />} />
-<<<<<<< HEAD
         <Route path="/upload" element={<Dashboard />} />
-=======
         {/* <Route path="/viewrecord" element={<ViewRecord />} /> */}
->>>>>>> fbb73af5ac8b1851069a982f39d1c756cad14025
       </Routes>
       {!isHome && <Footer />}
     </div>

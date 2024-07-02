@@ -11,12 +11,12 @@ const Footer = () => {
       <div className="sb__footer__section__padding">
         <div className="sb__footer-links">
           <div className="sb__footer-links_div">
-            <h4>About Us</h4>
+            <h4>Home</h4>
             <a href="/">
-              <p>Home</p>
+              
             </a>
             <a href="/feedback">
-              <p>Feedback</p>
+              <p>About us</p>
             </a>
           </div>
           <div className="sb__footer-links_div">

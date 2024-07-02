@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './DashBoard.css';
-import image from '../../assets/images/bg.jpg';
+// import image from '../../assets/images/bg.jpg';
 
 const Dashboard = () => {
   const [description, setDescription] = useState('');
@@ -46,7 +46,7 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
-    document.body.style.background = `url(${image})`;
+    // document.body.style.background = `url(${image})`;
     document.body.style.backgroundSize = 'cover';
 
     return () => {
@@ -60,9 +60,10 @@ const Dashboard = () => {
 
   return (
     <>
+    <div className="dashboard">
       <h1>Upload Reports</h1>
 
-      <form onSubmit={handleFormSubmit}>
+      <form  className ="dashboardForm"onSubmit={handleFormSubmit}>
         <div className="col-5">
           <label htmlFor="description">
             Description
@@ -143,6 +144,7 @@ const Dashboard = () => {
           </button>
         </div>
       </form>
+    </div>
     </>
   );
 };

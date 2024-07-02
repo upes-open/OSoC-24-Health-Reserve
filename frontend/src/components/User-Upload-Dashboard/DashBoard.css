@@ -1,29 +1,39 @@
 @import url(http://fonts.googleapis.com/css?family=Laila:400,700);
+.dashboard {
+  display: flex;
+  align-items: center;
+  justify-content: space-around; 
 
-h1 {
-  padding-top: 10px;
-  display: block;
+  margin-top: -10px;
+  height: 70vh;
+}
+
+ h1 {
+  font-display: block ;
+  padding-top: 5px;
   font-size: 2.3em;
-  line-height: 1.45em;
+  line-height: 2.45em;
   text-align: center;
   font-weight: bold;
-  color: #555;
+  color: #484040;
   text-shadow: 1px 1px 0 #fff;
 }
 
-form {
+
+
+.dashboardForm {
   display: block;
-  margin: 30px;
+  margin: 50px;
   overflow: hidden;
   background: #fff;
   border: 1px solid #e4e4e4;
   border-radius: 20px;
   font-size: 0;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-
 form > div > label {
   display: block;
-  padding: 20px 20px 10px;
+  padding: 30px 30px 20px;
   font-size: 13px;
   font-weight: bold;
   text-transform: uppercase;
@@ -35,15 +45,9 @@ form > div.switch > label {
   padding: 16px 20px 13px;
 }
 
-.col-2,
-.col-3,
-.col-4,
-.col-5 {
-  border-bottom: 1px solid #e4e4e4;
-}
 
 form > div > .col-4 {
-  height: 86px;
+  height: 76px;
 }
 
 label > input {
@@ -58,6 +62,7 @@ label > input {
   outline: none;
   color: #555;
   background-color: #fff;
+  
   font-size: 14px;
   opacity: .4;
   transition: all linear .3s;
@@ -66,6 +71,7 @@ label > input {
 .col-submit {
   text-align: center;
   padding: 20px;
+  
 }
 
 label > select,
@@ -100,32 +106,37 @@ button {
   font-weight: bold;
   text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.3);
   overflow: hidden;
+  
   outline: none;
 }
 
 button.submitbtn {
-  background-image: -moz-linear-gradient(#1c5d73, #1c5d73);
-  background-image: -webkit-linear-gradient(#1d6b85, #1d6b85);
-  background-image: linear-gradient(#227895, #227895);
-  border-bottom: 1px solid #1c5d73;
-  cursor: pointer;
-  color: #fff;
+  height: 35px;
+  border: none;
+  border-radius: 20px;
+  margin: 0 0 15px 0;
+  font-size: 14px;
+  color: #fff; /* White text color */
+  font-weight: bold;
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  outline: none;
+  background-image: linear-gradient(#1c5d73, #1c5d73); /* Adjusted gradient */
 }
 
 button.submitbtn:hover {
-  background-image: -moz-linear-gradient(#8b59b9, #7a4a9e);
-  background-image: -webkit-linear-gradient(#8b59b9, #7a4a9e);
-  background-image: linear-gradient(#8b59b9, #7a4a9e);
+  background-image: linear-gradient(#1d6b85, #1d6b85); /* Adjusted hover gradient */
 }
 
 button.submitbtn:active {
-  background-image: -moz-linear-gradient(#7a4a9e, #8b59b9);
-  background-image: -webkit-linear-gradient(#7a4a9e, #8b59b9);
-  background-image: linear-gradient(#7a4a9e, #8b59b9);
+  background-image: linear-gradient(#1d6b85, #1d6b85); /* Adjusted active gradient */
   -moz-box-shadow: inset 0 1px 3px 1px rgba(0, 0, 0, 0.3);
   -webkit-box-shadow: inset 0 1px 3px 1px rgba(0, 0, 0, 0.3);
   box-shadow: inset 0 1px 3px 1px rgba(0, 0, 0, 0.3);
 }
+
+
+
 
 @media (min-width: 850px) {
   form > div {
@@ -137,6 +148,7 @@ button.submitbtn:active {
     width: 50%;
     margin-left: auto;
     margin-right: auto;
+    
   }
 
   .col-2,
@@ -166,12 +178,14 @@ button.submitbtn:active {
   .col-submit button {
     width: 30%;
     margin: 15px;
+    
   }
 }
 
 @media (max-width: 850px) {
   form > div {
     display: block;
+    
   }
 
   .col-submit {
@@ -184,6 +198,7 @@ button.submitbtn:active {
   .col-5 {
     box-shadow: 1px 1px #e4e4e4;
     border: none;
+    
   }
 
   .col-2 {
@@ -205,5 +220,6 @@ button.submitbtn:active {
   .col-submit button {
     width: 80%;
     margin: 0 auto;
+    
   }
 }
