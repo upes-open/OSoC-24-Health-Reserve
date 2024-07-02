@@ -21,8 +21,8 @@ app.use(express.static(path.join(__dirname, '/public')))
 const storage = multer.memoryStorage();
 
 const upload = multer({ storage: storage })
-const __filename = fileURLToPath(import.meta.url)
-const _dirname = path.dirname(_filename)
+// const __filename = fileURLToPath(import.meta.url)
+// const _dirname = path.dirname(_filename)
 
 
 app.post('/upload', upload.single('image'), async (req, res) => {
