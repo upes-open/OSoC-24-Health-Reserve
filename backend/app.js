@@ -1,4 +1,5 @@
 const express = require('express');
+const { connectToDb } = require('./connectDB/connect');
 //const path = require('path');
 
 const app = express();
@@ -10,5 +11,6 @@ app.get('/', (req, res) => {
 
 // Start the server
 app.listen(port, () => {
+    connectToDb();
     console.log(`Server is running at http://localhost:${port}`);
 });
