@@ -15,14 +15,7 @@
 ## Installation
 1. Install the NodeJS LTS (v20.14.0) [Click Here](https://nodejs.org/en/download/package-manager)
 
-2. Install the latest Python version (v3.12.4) [Click Here](https://www.python.org/downloads/)
-
-3. For Python based projects:
-    ```zsh
-    pip install -r requirements.txt
-    python3 app.py
-    ```
-4. Node based projects: 
+2. Node based projects: 
     ```zsh
     cd <folder_name>
     npm i
@@ -32,7 +25,7 @@
 1. Create a fork on the repository
 2. Clone the forked repository 
     ```zsh
-    git clone https://github.com/upes-open/OSoC-24-Medical-Record-Documentation.git
+    git clone https://github.com/upes-open/OSoC-24-Health-Reserve.git
     ```
 3. Open the cloned repository in your desired code editor (eg: VS Code, Zed, Sublime Text)
 
