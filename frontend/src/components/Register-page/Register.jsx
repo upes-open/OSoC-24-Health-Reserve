@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Register.css';
@@ -145,7 +146,8 @@ const Register = () => {
             {errors.termsAccepted && <p className="error">{errors.termsAccepted}</p>}
           </div>
           <button type="submit" className="register-button">Register</button>
-          <p className="signup-link">Do you have an account? <Link to="/hospital-login">Login</Link></p>
+          <p className="signup-link">Do you have an account? <Link to="/login">Login</Link></p>
+
         </form>
       </div>
     </div>

@@ -1,12 +1,14 @@
+// eslint-disable-next-line no-unused-vars
 import React, { useState } from 'react';
 import './Login.css';
 import Patient from '../../assets/images/patient.png';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const history = useHistory();
+  // eslint-disable-next-line no-undef
+  // const history = useHistory 
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -67,9 +69,7 @@ const Login = () => {
             Forgot Password
           </Link>
         </form>
-        <p className="signup-link">
-          Don't have an account? <Link to="/patient-register">Signup</Link>
-        </p>
+        <p className="signup-link">Dont have an account? <Link to="/register">Signup</Link></p>
       </div>
       <div className="hospital-login-image">
         <div className="image-overlay">

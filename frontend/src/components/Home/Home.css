@@ -1,14 +1,12 @@
 /* Home.css */
 body, html {
-    overflow: hidden;
-    height: 100%; /* Ensure full height of viewport is covered */
+  height: 100%; /* Ensure full height of viewport is covered */
   }
   .home-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
-    position: relative; 
+      position: relative; 
   }
   
   .background-image {
