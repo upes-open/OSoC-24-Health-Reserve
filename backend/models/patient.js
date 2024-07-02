@@ -6,9 +6,8 @@ const patientSchema = new mongoose.Schema({
     hospitalName: { type: String },
     dateOfUpload: { type: Date, required: true },
     image: {
-        data: Buffer,
-        contentType: String,
-        required: true
+        data: { type: Buffer, required: true },
+        contentType: { type: String, required: true }
     }
 })
 
