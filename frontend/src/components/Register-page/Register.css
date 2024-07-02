@@ -3,7 +3,7 @@
     justify-content: space-around;
     align-items: center;
     padding: 1px;
-    background-color: #f8f8f8;
+    background-color: #f8f8f8;    
     
   }
   
@@ -11,16 +11,15 @@
     flex: 1;
     flex-direction: column;
     align-items: right;
-    /* margin-top: -150px; */
-    
+    justify-content: right;    
 
   }
+  
   
   .hospital-register-image {
     flex: 5;
     display: flex;
 
-margin: auto;  
   justify-content: right;
     
   }
@@ -35,7 +34,7 @@ margin: auto;
  
   
   .hospital-register-image img {
-    max-width: 120%;
+    max-width: 100%;
     height: 100%;
     
     /* make this move toward right */
@@ -50,7 +49,7 @@ margin: auto;
     padding: 120px;
     background-color: #f9f9f9; /* Light background color for the form */
     border-radius: 8px;
-    margin-top: -120px;
+    margin-top: auto;
 
     
       }
@@ -74,6 +73,8 @@ margin: auto;
     align-items: center ;
     margin-bottom: 10px;
     padding: 5px;
+    color: rgb(121, 121, 121)
+    
   }
   
   .form-group label input[type="checkbox"] {
@@ -82,7 +83,7 @@ margin: auto;
     -webkit-appearance: none; /* Remove default appearance for Safari */
     width: 0px; /* Adjust size of the checkbox */
     height: 0px;
-    border: 2px solid #0f1010; /* Blue border */
+    border: 1px solid #007bff; /* Blue border */
     border-radius: 10px;
     margin-right: 15px; /* Add space between the checkbox and text */       }
   
@@ -105,4 +106,14 @@ margin: auto;
   .form-group label input[type="checkbox"]:checked::after {
     visibility: visible; /* Show the checkmark when checked */
   }
-  
+  .register-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 10px; /* Add margin top for spacing */
+}
