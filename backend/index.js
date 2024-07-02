@@ -1,68 +1,112 @@
-const express=require('express');
-const app=express();
-
-const path = require('path')
+const express = require('express');
+const { connectToDb } = require('./connectDB/connect');
+const path = require('path');
 const ejs = require('ejs');
 const jwt = require('jsonwebtoken');
-const cookie = require('cookie-parser');
+const cookieParser = require('cookie-parser');
 const bcrypt = require('bcrypt');
+const cors = require('cors');
 const userModel = require('./models/user');
 
-// app.set('view engine', 'ejs');
-// change view engine acc to project req. here
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }))
-app.use(express.static(path.join(__dirname, '/public')))
+const app = express();
+const port = 3000;
 
-app.get("/",(req,res)=>{
-    res.render('homepage');
-})
+// Middleware
+app.use(cors({ origin: 'http://localhost:5173', credentials: true }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, '/public')));
+app.use(cookieParser());
+
+// Routes
+app.get("/", (req, res) => {
+    res.render('homepage'); // Render your homepage or serve static files
+});
 
 app.get('/login', (req, res) => {
-    res.render('login');
-})
+    res.render('login'); // Render your login page or serve static files
+});
 
+// Login endpoint
 app.post("/login", async (req, res) => {
-    let user=await userModel.findOne({email:req.body.email})
-    if(!user)
-        return res.send("something is wrong");
-    else
-    bcrypt.compare(req.body.password,user.password,(err,result)=>{
-        if(result){
-            let token=jwt.sign({email:user.email},"boyismine");
-            res.cookie("token",token);
-            return res.redirect('/');    
-        }
-        else
-        return res.send("something is wrong");
-    })
-})
+    try {
+        const { email, password } = req.body;
+        const user = await userModel.findOne({ email });
 
+        if (!user) {
+            return res.status(400).json({ message: "Invalid email or password" });
+        }
+
+        // Compare hashed password
+        bcrypt.compare(password, user.password, (err, result) => {
+            if (err || !result) {
+                return res.status(400).json({ message: "Invalid email or password" });
+            }
+
+            // Create JWT token
+            const token = jwt.sign({ email: user.email, userId: user._id }, "yourSecretKeyHere", { expiresIn: '1h' });
+
+            // Set token in cookie
+            res.cookie("token", token, { httpOnly: true });
+
+            // Respond with token and success message
+            res.json({ message: "Login successful", token });
+        });
+    } catch (error) {
+        res.status(500).json({ message: "Server error" });
+    }
+});
 
 app.get('/signup', (req, res) => {
-    res.render('signp');
-})
+    res.render('signup'); // Render your signup page or serve static files
+});
 
-app.post("/signup", (req, res) => {
-    let { username, email, password } = req.body;
+// Signup endpoint
+app.post("/signup", async (req, res) => {
+    try {
+        const { username, email, password, confirmPassword } = req.body;
 
-    bcrypt.genSalt(10, (err, salt) => {
-        bcrypt.hash(password, salt, async (err, hash) => {
-            let u = await userModel.create({
-                username,
-                email,
-                password: hash
-            })
-            res.redirect('dashboard/'+username);
-        })
-        let token=jwt.sign({email},"tokenGoesHere");
-        res.cookie("token",token) ;  
-    })
-})
+        // Validate inputs
+        if (!username || !email || !password || !confirmPassword) {
+            return res.status(400).json({ message: 'All fields are required' });
+        }
 
+        // Check if passwords match
+        if (password !== confirmPassword) {
+            return res.status(400).json({ message: 'Passwords do not match' });
+        }
 
-app.get('/logout',(req,res)=>{
-    res.cookie("token","");
-})
+        // Hash password
+        const hashedPassword = await bcrypt.hash(password, 10);
 
-app.listen(3000);
+        // Create user
+        const newUser = await userModel.create({
+            username,
+            email,
+            password: hashedPassword
+        });
+
+        // Create JWT token
+        const token = jwt.sign({ email: newUser.email, userId: newUser._id }, "yourSecretKeyHere", { expiresIn: '1h' });
+
+        // Set token in cookie
+        res.cookie("token", token, { httpOnly: true });
+
+        // Respond with token and user info
+        res.status(201).json({ message: 'User created', token, user: { username, email } });
+    } catch (error) {
+        res.status(500).json({ message: "Server error" });
+    }
+});
+
+// Logout endpoint
+app.get('/logout', (req, res) => {
+    res.clearCookie("token"); // Clear token cookie
+    res.json({ message: "Logged out successfully" });
+});
+
+// Start server
+app.listen(port, () => {
+    connectToDb();
+    console.log(`Server is running at http://localhost:${port}`);
+});
