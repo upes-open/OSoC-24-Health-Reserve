@@ -12,6 +12,7 @@ import Footer from './components/Footer/Footer';
 
 function App() {
   const location = useLocation();
+  const isHome = location.pathname === '/';
   const [showFooter, setShowFooter] = useState(false);
 
   useEffect(() => {
@@ -37,7 +38,7 @@ function App() {
 
   return (
     <div className="App">
-      {<Navdoctor/>}
+      {!isHome && <Navdoctor />}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
@@ -47,7 +48,7 @@ function App() {
         <Route path="/navdoctor" element={<Navdoctor />} />
         {/* <Route path="/viewrecord" element={<ViewRecord />} /> */}
       </Routes>
-      { <Footer />}
+      {!isHome && <Footer />}
     </div>
   );
 }
