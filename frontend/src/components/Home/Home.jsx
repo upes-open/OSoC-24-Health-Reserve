@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import React from 'react';
 import './Home.css'; 
 const Home = () => {
@@ -7,7 +8,7 @@ const Home = () => {
       </div>
       <div className="content">
         <div className="centered-box">
-          <h1>Welcome to MedVault</h1>
+          <h1>Welcome to Health Reserve</h1>
           <p>Your secure solution for managing medical records!</p>
           <div className="button-row">
             <button className="button">Login</button>
