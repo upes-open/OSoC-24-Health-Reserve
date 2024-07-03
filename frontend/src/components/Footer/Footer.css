@@ -13,15 +13,17 @@ body {
 
 .footer {
   background-color:rgb(28, 93, 115);
-  padding: 20px;
-  width: 100%;
-  margin-top: 10rem;
+  width: 98.84vw;
   position:  inherit;
   bottom: -70px;
   left: 0;  
   
   z-index: -1;
   transition: z-index 0.3s ease; /* Smooth transition for z-index */
+}
+
+sb__footer__section__padding {
+  width: 95%;
 }
 
 
