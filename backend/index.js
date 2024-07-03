@@ -77,19 +77,31 @@ app.get("/", (req, res) => {
 
 
 app.post("/login", async (req, res) => {
-    let user = await userModel.findOne({ email: req.body.email })
-    if (!user)
-        return res.send("something is wrong");
-    else
-        bcrypt.compare(req.body.password, user.password, (err, result) => {
-            if (result) {
-                let token = jwt.sign({ email: user.email }, "tokenGoesHere");
-                res.cookie("token", token);
-                return res.redirect('/');
+
+    const { email, password } = req.body;
+
+    try {
+        const user = await userModel.findOne({ email });
+
+        if (!user) {
+            return res.status(401).json({ error: "User not found" });
+        }
+
+        bcrypt.compare(password, user.password, (err, result) => {
+            if (err || !result) {
+                return res.status(401).json({ error: "Invalid credentials" });
             }
-            else
-                return res.send("something is wrong");
-        })
+
+            const token = jwt.sign({ email: user.email }, "tokenGoesHere", { expiresIn: '1h' });
+
+            res.cookie("token", token, { httpOnly: true });
+
+            res.status(200).json({ message: "Login successful" });
+        });
+    } catch (err) {
+        console.error("Login error:", err);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
 })
 
 
