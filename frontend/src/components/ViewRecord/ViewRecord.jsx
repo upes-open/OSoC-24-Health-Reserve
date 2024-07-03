@@ -6,6 +6,7 @@ import './ViewRecord.css';
 import hospitalRegisterImage from '../../assets/images/Doctors-home.png';
 import Card from '../PatientCard/Card';
 
+
 const ViewRecord = () => {
 
     const [patients, setPatients] = useState([]);
@@ -24,17 +25,35 @@ const ViewRecord = () => {
         fetchPatients();
     }, []);
 
+    // useEffect(() => {
+    //     const mockPatients = [
+    //         {
+    //             _id: 1,
+    //             description: "Patient description 1",
+    //             username: "Patient1",
+    //             hospitalName: "Hospital A",
+    //             dateOfUpload: new Date(),
+    //             image: "https://plus.unsplash.com/premium_photo-1692574096074-85b35e49a818?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90b3MtZmVlZHwxfHx8ZW58MHx8fHx8" 
+    //         },
+    //         {
+    //             _id: 2,
+    //             description: "Patient description 2",
+    //             username: "Patient2",
+    //             hospitalName: "Hospital B",
+    //             dateOfUpload: new Date(),
+    //             image: "https://plus.unsplash.com/premium_photo-1692574096074-85b35e49a818?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90b3MtZmVlZHwxfHx8ZW58MHx8fHx8" 
+    //         }
+    //     ];
+
+    //     setPatients(mockPatients);
+    // }, []);
+
 
     return (
-        <div className="hospital-register-container">
-            <div className="register-content">
-                <div className="hospital-register-image">
-                    <img src={hospitalRegisterImage} alt="Hospital Register" />
-                </div>
-            </div>
+        <div className="record-container">
             <div className="cont">
                 <h2> Patient Info </h2>
-                <div className="register-form-container">
+                <div className="record-card-container">
                     {patients.map((patient) => (
                         <Card key={patient._id} item={patient} />
                     ))}
