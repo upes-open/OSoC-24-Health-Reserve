@@ -1,8 +1,8 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-}
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
 
 nav {
     background-color: #1C5D73;
@@ -57,13 +57,13 @@ ul {
 ul li {
     position: relative;
     display: inline-block;
-    /* margin-right: 20px; */
+    margin-right: 20px;
 }
 
 ul li a {
     color: #fff;
     text-decoration: none;
-    /* padding: 10px 15px;  */
+    padding: 10px 15px; 
     display: inline-block;
     transition: all 0.3s ease;
     font-weight: 700;

@@ -1,17 +1,17 @@
 .hospital-register-container {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  padding: 1px;
-  background-color: #f8f8f8;
-
-}
-
-.register-content {
-  flex: 1;
-  flex-direction: column;
-  align-items: right;
-  justify-content: right;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 1px;
+    background-color: #f8f8f8;    
+    
+  }
+  
+  .register-content {
+    flex: 1;
+    flex-direction: column;
+    align-items: right;
+    justify-content: right;    
 
 }
 

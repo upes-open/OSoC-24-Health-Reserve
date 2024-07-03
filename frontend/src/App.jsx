@@ -46,6 +46,7 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path="/navpatient" element={<Navpatient />} />
         <Route path="/navdoctor" element={<Navdoctor />} />
+        {/* <Route path="/upload" element={<Dashboard />} /> */}
         {/* <Route path="/viewrecord" element={<ViewRecord />} /> */}
       </Routes>
       {!isHome && <Footer />}
