@@ -13,6 +13,9 @@ const Home = () => {
   const handleRegisterClick = () => {
     navigate('/register'); // Adjust the path to your Register page
   };
+  const handleUploadClick = () => {
+    navigate('/upload'); // Adjust the path to your Register page
+  };
 
   return (
     <div className="home-container">
@@ -24,6 +27,7 @@ const Home = () => {
           <div className="button-row">
             <button className="button" onClick={handleLoginClick}>Login</button>
             <button className="button" onClick={handleRegisterClick}>Register</button>
+            <button className='button' onClick={handleUploadClick}>Upload</button>
           </div>
           <p className="copyright">© 2024 Health Reserve. All rights reserved.</p>
         </div>
