@@ -1,10 +1,13 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Register.css';
 import hospitalRegisterImage from '../../assets/images/Doctors-home.png';
 
 const Register = () => {
+
+  const navigate = useNavigate()
+
   const [form, setForm] = useState({
     hospitalName: '',
     contact: '',
@@ -74,9 +77,12 @@ const Register = () => {
 
         if (response.ok) {
           const data = await response.json();
+          alert("Successfully registered, you may now login using your credentials!")
+          navigate('/login')
           console.log('User registered successfully', data);
         } else {
           console.error('Failed to register user');
+          alert("Failed to register user");
         }
       } catch (error) {
         console.error('Error:', error);
