@@ -11,42 +11,42 @@ const ViewRecord = () => {
 
     const [patients, setPatients] = useState([]);
 
-    // useEffect(() => {
-    //     const fetchPatients = async () => {
-    //         try {
-    //             const response = await fetch('/getrecords');
-    //             const data = await response.json();
-    //             setPatients(data);
-    //         } catch (error) {
-    //             console.error('Error fetching patient data:', error);
-    //         }
-    //     };
-
-    //     fetchPatients();
-    // }, []);
-
     useEffect(() => {
-        const mockPatients = [
-            {
-                _id: 1,
-                description: "Patient description 1",
-                username: "Patient1",
-                hospitalName: "Hospital A",
-                dateOfUpload: new Date(),
-                image: "https://plus.unsplash.com/premium_photo-1692574096074-85b35e49a818?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90b3MtZmVlZHwxfHx8ZW58MHx8fHx8" 
-            },
-            {
-                _id: 2,
-                description: "Patient description 2",
-                username: "Patient2",
-                hospitalName: "Hospital B",
-                dateOfUpload: new Date(),
-                image: "https://plus.unsplash.com/premium_photo-1692574096074-85b35e49a818?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90b3MtZmVlZHwxfHx8ZW58MHx8fHx8" 
+        const fetchPatients = async () => {
+            try {
+                const response = await fetch('/getrecords');
+                const data = await response.json();
+                setPatients(data);
+            } catch (error) {
+                console.error('Error fetching patient data:', error);
             }
-        ];
+        };
 
-        setPatients(mockPatients);
+        fetchPatients();
     }, []);
+
+    // useEffect(() => {
+    //     const mockPatients = [
+    //         {
+    //             _id: 1,
+    //             description: "Patient description 1",
+    //             username: "Patient1",
+    //             hospitalName: "Hospital A",
+    //             dateOfUpload: new Date(),
+    //             image: "https://plus.unsplash.com/premium_photo-1692574096074-85b35e49a818?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90b3MtZmVlZHwxfHx8ZW58MHx8fHx8" 
+    //         },
+    //         {
+    //             _id: 2,
+    //             description: "Patient description 2",
+    //             username: "Patient2",
+    //             hospitalName: "Hospital B",
+    //             dateOfUpload: new Date(),
+    //             image: "https://plus.unsplash.com/premium_photo-1692574096074-85b35e49a818?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90b3MtZmVlZHwxfHx8ZW58MHx8fHx8" 
+    //         }
+    //     ];
+
+    //     setPatients(mockPatients);
+    // }, []);
 
 
     return (

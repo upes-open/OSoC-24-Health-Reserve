@@ -17,10 +17,8 @@ const Card = ({item}) => {
             </div>
             <hr className="hr" />
             <div className="details">
-                <div>
                     <span className="pspan">UPLOADED AT</span>
                     <h2 className="ph2">{formattedDate}</h2>
-                </div>
             </div>
         </div>
     )
