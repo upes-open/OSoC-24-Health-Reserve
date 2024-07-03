@@ -1,7 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-
 import './Register.css';
 import hospitalRegisterImage from '../../assets/images/Doctors-home.png';
 
@@ -13,6 +12,8 @@ const Register = () => {
     password: '',
     confirmPassword: '',
     termsAccepted: false,
+    role: '',
+    license: ''
   });
 
   const [errors, setErrors] = useState({});
@@ -48,14 +49,38 @@ const Register = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const validationErrors = validateForm();
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
-    } else {
-      // Form is valid, submit the data
-      console.log(form);
+    }
+    else {
+      try {
+        const response = await fetch('http://localhost:3000/signup', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            username: form.hospitalName,
+            contact: form.contact,
+            email: form.email,
+            password: form.password,
+            role: form.role,
+            license: form.license,
+          }),
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          console.log('User registered successfully', data);
+        } else {
+          console.error('Failed to register user');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      }
     }
   };
 
