@@ -6,7 +6,7 @@ import Navdoctor from './components/Navbar/Navdoctor';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import Login from './components/Login-page/Login';
 import Register from './components/Register-page/Register';
-// import ViewRecord from './components/ViewRecord/ViewRecord';
+import ViewRecord from './components/ViewRecord/ViewRecord';
 import Home from './components/Home/Home';
 import Footer from './components/Footer/Footer';
 import Dashboard from './components/User-Dashboard/userDashboard';
@@ -49,7 +49,7 @@ function App() {
         <Route path="/navdoctor" element={<Navdoctor />} />
         <Route path="/upload" element={<Dashboard />} />
         {/* <Route path="/upload" element={<Dashboard />} /> */}
-        {/* <Route path="/viewrecord" element={<ViewRecord />} /> */}
+        <Route path="/viewrecord" element={<ViewRecord />} />
       </Routes>
       {!isHome && <Footer />}
     </div>

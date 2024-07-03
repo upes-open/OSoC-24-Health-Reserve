@@ -23,5 +23,5 @@ dist-ssr
 *.sln
 *.sw?
 
-src/components/PatientCard
-src/components/ViewRecord
+# src/components/PatientCard
+# src/components/ViewRecord
