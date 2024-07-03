@@ -7,7 +7,7 @@ import './Navdoctor.css';
 
 function Navdoctor() {
   return (
-    <nav className='mainnav'>
+    <nav>
       <div className="container">
         <div className="logo">
           <img src="/dummylogo.jpg" alt="Logo" />

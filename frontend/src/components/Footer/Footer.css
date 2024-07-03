@@ -13,10 +13,10 @@ body {
 
 .footer {
   background-color:rgb(28, 93, 115);
-  width: 98.84vw;
-  position:  inherit;
-  bottom: -70px;
-  left: 0;  
+  width:100%;
+  /* position:  inherit; */
+  /* bottom: -70px; */
+  /* left: 0;   */
   
   z-index: -1;
   transition: z-index 0.3s ease; /* Smooth transition for z-index */
@@ -115,7 +115,6 @@ a {
 
 hr {
   color: white !important;
-  width: 100%;
 }
 
 .sb__footer-copyright p {
