@@ -28,17 +28,17 @@ const ViewRecord = () => {
     return (
         <div className="hospital-register-container">
             <div className="register-content">
-                <div className="register-info">
-                </div>
                 <div className="hospital-register-image">
                     <img src={hospitalRegisterImage} alt="Hospital Register" />
                 </div>
             </div>
-            <h2> Patient Info </h2>
-            <div className="register-form-container">
-                {patients.map((patient) => (
-                    <Card key={patient._id} item={patient} />
-                ))}
+            <div className="cont">
+                <h2> Patient Info </h2>
+                <div className="register-form-container">
+                    {patients.map((patient) => (
+                        <Card key={patient._id} item={patient} />
+                    ))}
+                </div>
             </div>
         </div>
     );

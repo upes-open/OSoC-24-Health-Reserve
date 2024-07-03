@@ -1,28 +1,25 @@
 import React from 'react'
+import './Card.css';
 
-const Card = ({ item }) => {
+const Card = ({item}) => {
     return (
-            <div className="gigCard">
-                <img className="img1" src={item.image} alt="" />
-                <div className="info">
-                    <div className="user">
-                        <span>{item.username}</span>
-                    </div>
-                    <p className="p">{item.hospitalName}</p>
-                    <div className="star">
-                        <img className="simg" src="/star.png" alt="" />
-                        <span className="sstar">{item.dateOfUpload}</span>
-                    </div>
+        <div className="Card">
+            <img className="img1" src={item.image} alt="" />
+            <div className="info">
+                <div className="user">
+                    <span>{item.username}</span>
                 </div>
-                <hr className="hr" />
-                <div className="details">
-                    <img className="img2" src="https://cdn-icons-png.flaticon.com/128/1077/1077035.png" alt="" />
-                    <div>
-                        <span className="pspan">STARTING AT</span>
-                        <h2 className="ph2">${item.dateOfUpload}</h2>
-                    </div>
+                <p className="p">KLD</p>
+                <span className="sstar">{item.hospitalName}</span>
+            </div>
+            <hr className="hr" />
+            <div className="details">
+                <div>
+                    <span className="pspan">UPLOADED AT</span>
+                    <h2 className="ph2">{item.dateOfUpload}</h2>
                 </div>
             </div>
+        </div>
     )
 }
 
