@@ -54,7 +54,7 @@ function App() {
         {/* <Route path="/upload" element={<Dashboard />} /> */}
         <Route path="/viewrecord" element={<ViewRecord />} />
       </Routes>
-      <Footer />
+      {!isHome && <Footer />}
     </div>
   );
 }
