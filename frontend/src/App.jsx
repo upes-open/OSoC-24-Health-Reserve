@@ -13,7 +13,10 @@ import Dashboard from './components/User-Dashboard/userDashboard';
 
 function App() {
   const location = useLocation();
-  const isHome = location.pathname === '/';
+  const path = location.pathname;
+  const isHome = path === '/';
+  const showNavdoctor = !(path === '/' || path === '/login' || path === '/register');
+
   const [showFooter, setShowFooter] = useState(false);
 
   useEffect(() => {
@@ -39,7 +42,7 @@ function App() {
 
   return (
     <div className="App">
-      {!isHome && <Navdoctor />}
+      {showNavdoctor && <Navdoctor />}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
@@ -51,7 +54,7 @@ function App() {
         {/* <Route path="/upload" element={<Dashboard />} /> */}
         <Route path="/viewrecord" element={<ViewRecord />} />
       </Routes>
-      {!isHome && <Footer />}
+      <Footer />
     </div>
   );
 }
