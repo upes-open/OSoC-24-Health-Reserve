@@ -10,8 +10,15 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 10px;
-    
+    width: 100%;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    padding: 10px 0px;
 }
 
 .logo {

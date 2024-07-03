@@ -14,11 +14,29 @@ body {
 }
 
 .footer {
-  background-color: rgb(28, 93, 115);
-  padding: 20px;
-  width: 100%;
-  margin-top: auto; /* Place footer at the bottom of the viewport */
-  color: white; /* Ensure text color is readable */
+  background-color:rgb(28, 93, 115);
+  width:100%;
+  /* position:  inherit; */
+  /* bottom: -70px; */
+  /* left: 0;   */
+  
+  z-index: -1;
+  transition: z-index 0.3s ease; /* Smooth transition for z-index */
+}
+
+sb__footer__section__padding {
+  width: 95%;
+}
+
+
+
+.footer.visible {
+  z-index: 1; /* Show the footer when it has the .visible class */
+}
+
+
+.section__padding {
+  padding: 8rem 8rem;
 }
 
 .sb__footer {
@@ -89,7 +107,7 @@ a {
 }
 
 hr {
-  border-color: white; /* Change to border-color for compatibility */
+  color: white !important;
 }
 
 .sb__footer-copyright p {
