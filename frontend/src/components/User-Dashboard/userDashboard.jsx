@@ -34,7 +34,7 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
-    // document.body.style.background = `url(${image})`;
+    // document.body.style.background = url(${image});
     document.body.style.backgroundSize = 'cover';
 
     return () => {
@@ -49,7 +49,7 @@ const Dashboard = () => {
   return (
     <>
     <div className="dashboard">
-      <h1>Upload Reports</h1>
+      <h1 id='reportheader'>Upload Reports</h1>
 
       <form  className ="dashboardForm"onSubmit={handleFormSubmit}>
         <div className="col-5">
@@ -96,18 +96,13 @@ const Dashboard = () => {
         <div className="col-3">
           <label htmlFor="category">
             Hospital Name
-            <select
-              className="pb-1 pt-2"
+            <input
+              type="text"
               id="category"
               value={category}
+              placeholder="Enter hospital name"
               onChange={handleCategoryChange}
-              required
-            >
-              <option value="">Select hospitals</option>
-              <option value="">Doon hospita</option>
-              <option value="">hospital via api</option>
-              <option value="">hospital via api2</option>
-            </select>
+              required />
           </label>
         </div>
 
