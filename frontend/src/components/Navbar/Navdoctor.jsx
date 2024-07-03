@@ -11,16 +11,18 @@ function Navdoctor() {
       <div className="container">
         <div className="logo">
           <img src="/dummylogo.jpg" alt="Logo" />
-          <h1>Your Organization Name</h1>
+          <h1>Health Reserve</h1>
         </div>
-        <ul id="doc">
-          <li><Link to="/contact">CONTACT US</Link></li>
-          <li><Link to="/doctors">SEE PATIENTS</Link></li>
-        </ul>
-        <div className="profile">
-          <img src="/profile.jpeg" alt="Profile Picture" />
-          <div className="upload-text">Upload Your Image</div>
-          <span>Username</span>
+        <div className="right">
+          <ul className="doc">
+            <li><Link to="/contact">CONTACT US</Link></li>
+            <li><Link to="/doctors">SEE PATIENTS</Link></li>
+          </ul>
+          <div className="profile">
+            <img src="/profile.jpeg" alt="Profile Picture" />
+            <div className="upload-text">Upload Your Image</div>
+            <span>Username</span>
+          </div>
         </div>
       </div>
     </nav>
