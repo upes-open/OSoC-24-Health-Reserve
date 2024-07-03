@@ -26,6 +26,7 @@
         display: flex;
         align-items: center;
         gap: 10px;
+        margin: 0px;
     }
 
     .logo img {
@@ -40,6 +41,7 @@
 
     .right {
         display: flex;
+        margin: 0;
     }
 
 
