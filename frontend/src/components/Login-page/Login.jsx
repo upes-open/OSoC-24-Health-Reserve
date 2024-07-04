@@ -1,12 +1,9 @@
-// eslint-disable-next-line no-unused-vars
 import React, { useState } from 'react';
 import './Login.css';
 import Patient from '../../assets/images/patient.png';
 import { Link, useNavigate } from 'react-router-dom';
 
-
 const Login = () => {
-
     const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
@@ -38,7 +35,7 @@ const Login = () => {
 
             if (response.ok) {
                 const data = await response.json();
-                navigate("/upload");
+                navigate("/dashboard"); // Redirect to the /dashboard
                 console.log('Login successful', data);
             } else {
                 const data = await response.json();
