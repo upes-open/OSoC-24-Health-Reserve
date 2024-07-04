@@ -6,6 +6,7 @@ const jwt = require('jsonwebtoken');
 const cookie = require('cookie-parser');
 const bcrypt = require('bcrypt');
 const multer = require('multer');
+const session = require('express-session')
 const userModel = require('./models/user');
 const patientModel = require('./models/patient');
 const { connectToDb } = require('./connectDB/connect'); // Updated import path
@@ -30,7 +31,34 @@ app.use(cors({
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
-// Routes
+
+app.use(session({
+    secret: 'secret-key',
+    resave: false,
+    saveUninitialized: false
+}));
+
+const isAuthenticated = (req, res, next) => {
+    if (req.session && req.session.email) {
+        next();
+    } else {
+        res.status(401).json('Unauthorized');
+    }
+};
+
+app.get('/main', isAuthenticated, async (req, res) => {
+    if (req.session.email) {
+        console.log("redirecting to dashboard")
+        res.redirect('dashboard/' + username);
+    }
+    else {
+        res.json("Unauthorised")
+    }
+
+})
+
+
+
 app.post('/upload', upload.single('image'), async (req, res) => {
     try {
         const { description, username, hospitalName, dateOfUpload } = req.body;
@@ -88,9 +116,6 @@ app.get("/", (req, res) => {
     res.render('homepage');
 });
 
-app.get('/login', (req, res) => {
-    res.render('login');
-});
 
 app.post("/login", async (req, res) => {
     const { email, password } = req.body;
@@ -109,6 +134,12 @@ app.post("/login", async (req, res) => {
             const token = jwt.sign({ email: user.email }, "tokenGoesHere", { expiresIn: '1h' });
 
             res.cookie("token", token, { httpOnly: true });
+
+            req.session.email = email;
+            req.session.username = user.username;
+            req.session.license = user.license;
+
+            console.log(req.session.email, req.session.username, req.session.license)
 
             res.status(200).json({ message: "Login successful" });
         });
