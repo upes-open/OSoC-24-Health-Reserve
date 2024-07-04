@@ -17,6 +17,12 @@ const PORT = process.env.PORT || 3000;
 // Connect to MongoDB
 connectToDb();
 
+app.use(session({
+    secret: 'secret-key',
+    resave: true,
+    saveUninitialized: true,
+}));
+
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -32,11 +38,7 @@ const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
 
-app.use(session({
-    secret: 'secret-key',
-    resave: false,
-    saveUninitialized: false
-}));
+
 
 const isAuthenticated = (req, res, next) => {
     if (req.session && req.session.email) {
@@ -61,7 +63,12 @@ app.get('/main', isAuthenticated, async (req, res) => {
 
 app.post('/upload', upload.single('image'), async (req, res) => {
     try {
-        const { description, username, hospitalName, dateOfUpload } = req.body;
+
+        console.log('Session:', req.session);
+
+        console.log('Session email:', req.session.email); 
+
+        const { description, doctorName, hospitalName, dateOfUpload } = req.body;
 
         if (!req.file) {
             throw new Error('No file uploaded');
@@ -69,9 +76,10 @@ app.post('/upload', upload.single('image'), async (req, res) => {
 
         // Creating a new instance of patientModel with data from request
         const saveItem = new patientModel({
-            description,
-            username,
-            hospitalName,
+            description: description,
+            doctorName: doctorName,
+            email: 'saga@gmail.com',
+            hospitalName: hospitalName,
             dateOfUpload: new Date(dateOfUpload),
             image: {
                 data: req.file.buffer,
@@ -91,13 +99,13 @@ app.post('/upload', upload.single('image'), async (req, res) => {
 
 app.get('/getrecords', async (req, res) => {
     try {
-        const records = await patientModel.find();
+        const records = await patientModel.find({email: req.session.email});
 
         const productsWithBase64 = records.map(record => {
             const base64Image = Buffer.from(record.image.data).toString('base64');
             return {
                 description: record.description,
-                username: record.username,
+                email: record.email,
                 hospitalName: record.hospitalName,
                 dateOfUpload: record.dateOfUpload,
                 image: base64Image,
@@ -140,6 +148,13 @@ app.post("/login", async (req, res) => {
             req.session.license = user.license;
 
             console.log(req.session.email, req.session.username, req.session.license)
+
+            req.session.save(err => {
+                if (err) {
+                    console.error('Session save error:', err);
+                }
+                console.log('Session after login:', req.session);
+            });
 
             res.status(200).json({ message: "Login successful" });
         });

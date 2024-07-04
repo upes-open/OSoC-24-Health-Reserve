@@ -4,8 +4,8 @@ import './Dashboard.css';
 const Dashboard = () => {
   const [description, setDescription] = useState('');
   const [date, setDate] = useState('');
-  const [username, setUsername] = useState(''); // Changed to match backend schema
-  const [hospitalName, setHospitalName] = useState(''); // Changed to match backend schema
+  const [doctorName, setDoctorName] = useState(''); 
+  const [hospitalName, setHospitalName] = useState(''); 
   const [itemImages, setItemImages] = useState([]);
 
   const handleFormSubmit = async (e) => {
@@ -14,7 +14,7 @@ const Dashboard = () => {
     const formData = new FormData();
     formData.append('description', description);
     formData.append('dateOfUpload', date); // Changed to match backend schema
-    formData.append('username', username); // Changed to match backend schema
+    formData.append('doctorName', doctorName); // Changed to match backend schema
     formData.append('hospitalName', hospitalName); // Changed to match backend schema
     if (itemImages.length > 0) {
       formData.append('image', itemImages[0]); // Adjusted to match Multer field name
@@ -34,7 +34,7 @@ const Dashboard = () => {
       // Reset form fields after successful submission
       setDescription('');
       setDate('');
-      setUsername(''); // Changed to match backend schema
+      setDoctorName(''); // Changed to match backend schema
       setHospitalName(''); // Changed to match backend schema
       setItemImages([]);
       alert('Data uploaded successfully!');
@@ -92,10 +92,10 @@ const Dashboard = () => {
               Doctor Name
               <input
                 type="text"
-                id="username"
-                value={username}
+                id="doctorName"
+                value={doctorName}
                 placeholder="Enter your name"
-                onChange={(e) => setUsername(e.target.value)}
+                onChange={(e) => setDoctorName(e.target.value)}
                 required
                 autoComplete="off"
               />
