@@ -10,6 +10,7 @@ import ViewRecord from './components/ViewRecord/ViewRecord';
 import Home from './components/Home/Home';
 import Footer from './components/Footer/Footer';
 import Dashboard from './components/User-Dashboard/userDashboard';
+// import Profile from './components/Profile Page/profile';
 
 function App() {
   const location = useLocation();
@@ -53,8 +54,10 @@ function App() {
         <Route path="/upload" element={<Dashboard />} />
         {/* <Route path="/upload" element={<Dashboard />} /> */}
         <Route path="/viewrecord" element={<ViewRecord />} />
+        {/* <Route path = "/profile" element={<Profile/>}/> */}
+        {/* <Route path="/viewrecord" element={<ViewRecord />} /> */}
       </Routes>
-      {!isHome && <Footer />}
+      {!isHome && <Footer />} 
     </div>
   );
 }

@@ -46,7 +46,7 @@ body {
     flex-direction: column;
     align-items: right;
     justify-content: right;
-    padding: 20px;
+    
 
 }
 
@@ -56,17 +56,17 @@ body {
 
 .form-group label {
     font-weight: bold; /* Bring back bold for labels */
-    display: block;
-    margin-bottom: 50px; /* Add margin bottom for spacing */
+    width: 400px;
+     /* Add margin bottom for spacing */
     /* color: #d22323; Default text color */
     
 }
 
 .form-group input {
-    width: 100%; /* Full width input */
-    padding: 10px 40px; /* Adjusted padding */
+     /* Full width input */
+     /* Adjusted padding */
     border: none;
-    border-bottom: 1px solid #ced4da; /* Bottom border */
+    border-bottom: 1px solid black ; /* Bottom border */
     transition: border-color 0.3s ease;
     background-color: transparent; /* Transparent background */
     color: #5e5c5c; /* Default text color */
@@ -156,5 +156,107 @@ body {
     font-size: 38px;
     left: 100px; 
     padding-top: 10%;
-    color: #333; /* Default text color */
+    color: rgb(235, 229, 229); /* Default text color */
+}
+
+/* Media queries for tablets and phones */
+
+/* Tablets in landscape and portrait mode */
+@media (max-width: 1024px) {
+    .hospital-login-container {
+        flex-direction: column;
+        margin-top: 0;
+        height: auto;
+    }
+
+    .hospital-login-content {
+        width: 80%;
+        margin-left: 0;
+        margin-right: 0;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .hospital-login-image {
+        margin-right: 0;
+        margin-bottom: 20px;
+        padding: 0;
+        top: 0;
+    }
+
+    .hospital-login-image img {
+        max-width: 50%;
+        height: auto;
+        padding-left: 0;
+        display: none;
+    }
+
+    .image-overlay {
+        position: relative;
+        top: 0;
+        left: 0;
+        padding-top: 0;
+    }
+
+    .image-overlay h2 {
+        font-size: 24px;
+        text-align: center;
+        color: rgb(235, 229, 229); /* Default text color */
+        display: none;
+    }
+}
+
+/* Phones in landscape and portrait mode */
+@media (max-width: 768px) {
+    .hospital-login-container {
+        flex-direction: column;
+        margin-top: 0;
+        height: auto;
+    }
+
+    .hospital-login-content {
+        width: 90%;
+        margin-left: 0;
+        margin-right: 0;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    .hospital-login-image {
+        margin-right: 0;
+        margin-bottom: 20px;
+        padding: 0;
+        top: 0;
+    }
+
+    .hospital-login-image img {
+        max-width: 80%;
+        height: auto;
+        padding-left: 0;
+        display: none;
+    }
+
+    .image-overlay {
+        position: relative;
+        top: 0;
+        left: 0;
+        padding-top: 0;
+    }
+
+    .image-overlay h2 {
+        font-size: 20px;
+        text-align: center;
+        color: rgb(235, 229, 229); /* Default text color */
+        display: none;
+    }
+
+    .form-group label {
+        width: auto; /* Allow label to adjust width */
+    }
+
+
+    .login-form {
+        align-items: center; /* Center the form on smaller screens */
+        justify-content: center; /* Center the form on smaller screens */
+    }
 }
