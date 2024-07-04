@@ -21,7 +21,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '/public')));
 app.use(cookie());
-app.use(cors());
+app.use(cors({
+    origin: 'http://localhost:5173',
+    credentials: true
+}));
 
 // Multer setup
 const storage = multer.memoryStorage();
@@ -90,39 +93,64 @@ app.get('/login', (req, res) => {
 });
 
 app.post("/login", async (req, res) => {
-    let user = await userModel.findOne({ email: req.body.email });
-    if (!user)
-        return res.send("something is wrong");
-    else
-        bcrypt.compare(req.body.password, user.password, (err, result) => {
-            if (result) {
-                let token = jwt.sign({ email: user.email }, "boyismine");
-                res.cookie("token", token);
-                return res.redirect('/');
-            } else
-                return res.send("something is wrong");
+    const { email, password } = req.body;
+
+    try {
+        const user = await userModel.findOne({ email });
+
+        if (!user) {
+            return res.status(401).json({ error: "User not found" });
+        }
+
+        bcrypt.compare(password, user.password, (err, result) => {
+            if (err || !result) {
+                return res.status(401).json({ error: "Invalid credentials" });
+            }
+            const token = jwt.sign({ email: user.email }, "tokenGoesHere", { expiresIn: '1h' });
+
+            res.cookie("token", token, { httpOnly: true });
+
+            res.status(200).json({ message: "Login successful" });
         });
+    } catch (err) {
+        console.error("Login error:", err);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
 });
 
 app.get('/signup', (req, res) => {
     res.render('signup');
 });
 
-app.post("/signup", (req, res) => {
-    let { username, email, password } = req.body;
+app.post("/signup", async (req, res) => {
+    let { username, contact, email, password, role, license } = req.body;
 
-    bcrypt.genSalt(10, (err, salt) => {
-        bcrypt.hash(password, salt, async (err, hash) => {
-            let u = await userModel.create({
-                username,
-                email,
-                password: hash
-            });
-            res.redirect('dashboard/' + username);
+    if (!username || !email || !password || !role || (role === 'Doctor' && !license)) {
+        return res.status(400).send('All required fields must be filled');
+    }
+
+    console.log('Signup data:', req.body);
+
+    try {
+        const salt = await bcrypt.genSalt(10);
+        const hash = await bcrypt.hash(password, salt);
+
+        const user = await userModel.create({
+            username,
+            contact,
+            email,
+            password: hash,
+            license: role === 'Doctor' ? license : undefined
         });
-        let token = jwt.sign({ email }, "tokenGoesHere");
+
+        const token = jwt.sign({ email }, "tokenGoesHere");
         res.cookie("token", token);
-    });
+
+        // res.status(201).redirect('dashboard/' + username);
+        res.status(201).json({ message: "User registered successfully" })
+    } catch (err) {
+        res.status(500).send(err.message);
+    }
 });
 
 app.get('/logout', (req, res) => {
