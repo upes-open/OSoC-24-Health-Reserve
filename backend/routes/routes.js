@@ -8,6 +8,15 @@ const patientModel = require('../models/patient.js');
 
 const app = express();
 
+app.use(session({
+    secret: 'secret-key',
+    resave: true,
+    saveUninitialized: true,
+}));
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 
 const router = express.Router();
 
@@ -41,7 +50,8 @@ router.post('/upload', upload.single('image'), async (req, res) => {
         const saveItem = new patientModel({
             description: description,
             doctorName: doctorName,
-            email: 'saga@gmail.com',
+            email: req.session.email,
+            // email: 'saga@gmail.com',
             hospitalName: hospitalName,
             dateOfUpload: new Date(dateOfUpload),
             image: {
@@ -103,8 +113,6 @@ router.post("/login", async (req, res) => {
             }
             const token = jwt.sign({ email: user.email }, "tokenGoesHere", { expiresIn: '1h' });
 
-            res.cookie("token", token, { httpOnly: true });
-
             req.session.email = email;
             req.session.username = user.username;
             req.session.license = user.license;
@@ -118,7 +126,9 @@ router.post("/login", async (req, res) => {
                 console.log('Session after login:', req.session);
             });
 
-            res.status(200).json({ message: "Login successful" });
+            res.cookie("token", token, { httpOnly: true }).status(200).json({ message: "Login successful" });
+
+            // res.status(200).json({ message: "Login successful" });
         });
     } catch (err) {
         console.error("Login error:", err);
