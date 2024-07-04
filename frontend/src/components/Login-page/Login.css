@@ -1,9 +1,9 @@
-/* Reset margin and padding for all elements */
+/* 
 * {
     margin: auto;
 
-    /* box-sizing: border-box; Ensure box-sizing consistency */
-}
+    /* box-sizing: border-box; Ensure box-sizing consistency 
+}*/
 
 body {
     display: flex;
