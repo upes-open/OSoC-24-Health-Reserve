@@ -15,7 +15,7 @@ const PORT = process.env.PORT || 3000;
 app.use(session({
     secret: 'secret-key',
     resave: true,
-    saveUninitialized: true,
+    saveUninitialized: false
 }));
 
 // Middleware
@@ -28,9 +28,6 @@ app.use(cors({
     credentials: true
 }));
 
-// Multer setup
-const storage = multer.memoryStorage();
-const upload = multer({ storage: storage });
 
 
 app.use('/', routes)

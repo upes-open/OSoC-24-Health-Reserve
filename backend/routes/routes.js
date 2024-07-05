@@ -11,7 +11,7 @@ const app = express();
 app.use(session({
     secret: 'secret-key',
     resave: true,
-    saveUninitialized: true,
+    saveUninitialized: false
 }));
 
 app.use(express.json());
@@ -37,7 +37,6 @@ router.post('/upload', upload.single('image'), async (req, res) => {
     try {
 
         console.log('Session:', req.session);
-
         console.log('Session email:', req.session.email);
 
         const { description, doctorName, hospitalName, dateOfUpload } = req.body;
@@ -46,7 +45,6 @@ router.post('/upload', upload.single('image'), async (req, res) => {
             throw new Error('No file uploaded');
         }
 
-        // Creating a new instance of patientModel with data from request
         const saveItem = new patientModel({
             description: description,
             doctorName: doctorName,
@@ -60,7 +58,6 @@ router.post('/upload', upload.single('image'), async (req, res) => {
             }
         });
 
-        // Saving the new patient record to the database
         await saveItem.save();
         console.log('Data registered');
         res.send('Data registered successfully');
