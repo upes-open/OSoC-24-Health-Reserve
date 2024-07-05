@@ -1,10 +1,3 @@
-/* 
-* {
-    margin: auto;
-
-    /* box-sizing: border-box; Ensure box-sizing consistency 
-}*/
-
 body {
     display: flex;
     flex-direction: column;
@@ -12,18 +5,14 @@ body {
     min-height: 120vh;
   }
 
-/* Container styles */
 .hospital-login-container {
     display: flex;
     flex-direction: row;
     align-items: center; 
     justify-content: center;
-    /* background-color: #f8f8f8; */
-    margin-top: -70px;
     height: 100vh;
 }
 
-/* Content area styles */
 .hospital-login-content {
     background-color: #fff;
     color: #333333a7; /* Default text color */
@@ -159,104 +148,18 @@ body {
     color: rgb(235, 229, 229); /* Default text color */
 }
 
-/* Media queries for tablets and phones */
 
-/* Tablets in landscape and portrait mode */
 @media (max-width: 1024px) {
-    .hospital-login-container {
-        flex-direction: column;
-        margin-top: 0;
-        height: auto;
-    }
-
-    .hospital-login-content {
-        width: 80%;
-        margin-left: 0;
-        margin-right: 0;
-        margin-top: 20px;
-        margin-bottom: 20px;
-    }
-
-    .hospital-login-image {
-        margin-right: 0;
-        margin-bottom: 20px;
-        padding: 0;
-        top: 0;
-    }
-
-    .hospital-login-image img {
-        max-width: 50%;
-        height: auto;
-        padding-left: 0;
+    .login-image {
         display: none;
+    }
+
+    .hospital-login-container {
+        display: flex;
+        flex-direction: column-reverse;
     }
 
     .image-overlay {
-        position: relative;
-        top: 0;
-        left: 0;
-        padding-top: 0;
-    }
-
-    .image-overlay h2 {
-        font-size: 24px;
-        text-align: center;
-        color: rgb(235, 229, 229); /* Default text color */
-        display: none;
-    }
-}
-
-/* Phones in landscape and portrait mode */
-@media (max-width: 768px) {
-    .hospital-login-container {
-        flex-direction: column;
-        margin-top: 0;
-        height: auto;
-    }
-
-    .hospital-login-content {
-        width: 90%;
-        margin-left: 0;
-        margin-right: 0;
-        margin-top: 10px;
-        margin-bottom: 10px;
-    }
-
-    .hospital-login-image {
-        margin-right: 0;
-        margin-bottom: 20px;
-        padding: 0;
-        top: 0;
-    }
-
-    .hospital-login-image img {
-        max-width: 80%;
-        height: auto;
-        padding-left: 0;
-        display: none;
-    }
-
-    .image-overlay {
-        position: relative;
-        top: 0;
-        left: 0;
-        padding-top: 0;
-    }
-
-    .image-overlay h2 {
-        font-size: 20px;
-        text-align: center;
-        color: rgb(235, 229, 229); /* Default text color */
-        display: none;
-    }
-
-    .form-group label {
-        width: auto; /* Allow label to adjust width */
-    }
-
-
-    .login-form {
-        align-items: center; /* Center the form on smaller screens */
-        justify-content: center; /* Center the form on smaller screens */
+        margin-left: -300px;
     }
 }

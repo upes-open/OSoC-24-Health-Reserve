@@ -84,7 +84,7 @@ const Login = () => {
                 <div className="image-overlay">
                     <h2> Login Page</h2>
                 </div>
-                <img src={Patient} alt="Patient Login" />
+                <img className="login-image" src={Patient} alt="Patient Login" />
             </div>
         </div>
     );
