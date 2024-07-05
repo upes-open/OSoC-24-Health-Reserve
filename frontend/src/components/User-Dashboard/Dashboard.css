@@ -3,9 +3,9 @@
   display: flex;
   align-items: center;
   justify-content: space-around; 
-
-  margin-top: -10px;
-  height: 80vh;
+  flex-direction: column;
+  /* margin-top: -10px; */
+  /* height: 80vh; */
 }
 
  #reportheader {
@@ -16,7 +16,7 @@
   text-align: center;
   font-weight: bold;
   color: #484040;
-  position: absolute;
+  /* position: absolute; */
   top: 80px;
   text-shadow: 1px 1px 0 #fff;
 }
@@ -24,7 +24,7 @@
 
 
 .dashboardForm {
-  display: block;
+  /* display: block; */
   margin: 50px;
   overflow: hidden;
   background: #fff;
@@ -54,9 +54,9 @@ form > div > .col-4 {
 
 label > input {
   display: inline-block;
-  position: relative;
+  /* position: relative; */
   width: 100%;
-  height: 27px;
+  /* height: 27px; */
   line-height: 27px;
   margin: 5px -5px 0;
   padding: 5px 5px 3px;
@@ -72,8 +72,8 @@ label > input {
 
 .col-submit {
   text-align: center;
-  padding: 10px;
-  position: absolute;
+  padding: 20px;
+  /* position: absolute; */
   left: 25%;
   top: 65%;
 
@@ -111,14 +111,14 @@ button {
   font-weight: bold;
   text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.3);
   overflow: hidden;
-
+  padding: 10px;
   outline: none;
 }
 
 button.submitbtn {
   position: relative;
-  top: 40px;
-  height: 35px;
+  margin-bottom: 40px;
+  /* height: 35px; */
   border: none;
   border-radius: 20px;
   margin: 0 0 15px 0;
@@ -146,6 +146,12 @@ button.submitbtn:active {
 
 
 @media (min-width: 850px) {
+  .dashboard {
+    display: flex;
+    flex-direction: column;
+  }
+
+
   .dashboard form > div {
     display: inline-block;
   }
@@ -187,6 +193,7 @@ button.submitbtn:active {
     margin: 15px;
 
   }
+
 }
 
 @media (max-width: 850px) {
@@ -225,7 +232,7 @@ button.submitbtn:active {
   }
 
   .col-submit button {
-    width: 80%;
+    /* width: 80%; */
     margin: 0 auto;
 
   }

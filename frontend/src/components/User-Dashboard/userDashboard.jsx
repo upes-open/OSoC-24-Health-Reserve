@@ -4,8 +4,8 @@ import './Dashboard.css';
 const Dashboard = () => {
   const [description, setDescription] = useState('');
   const [date, setDate] = useState('');
-  const [doctorName, setDoctorName] = useState(''); 
-  const [hospitalName, setHospitalName] = useState(''); 
+  const [doctorName, setDoctorName] = useState('');
+  const [hospitalName, setHospitalName] = useState('');
   const [itemImages, setItemImages] = useState([]);
 
   const handleFormSubmit = async (e) => {
@@ -134,10 +134,11 @@ const Dashboard = () => {
             </label>
           </div>
 
-          <div className="col-submit">
-            <button type="submit" className="submitbtn"> Submit </button>
-          </div>
         </form>
+        
+        <div className="col-submit">
+          <button type="submit" className="submitbtn"> Submit </button>
+        </div>
       </div>
     </>
   );
