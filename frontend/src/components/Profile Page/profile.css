@@ -114,13 +114,22 @@ span{
   gap: 1.5rem;
   align-items:center;
 }
-.edit-btn{
+.edit-btn,
+.profile-logout {
   cursor: pointer;
   padding: 10px;
-  background-color: white ;
+  background-color: white;
   color: black;
-  position :relative;
-  left: 12rem;
-  font-weight:500;
+  font-weight: 500;
   border-radius: 1.5rem;
+  border: none; /* Remove default border */
+  transition: background-color 0.3s, color 0.3s; /* Smooth hover effect */
+}
+
+
+.prof-button-container {
+  display: flex;
+  gap: 1rem; /* Space between buttons */
+  justify-content: center; /* Center buttons horizontally */
+  margin-top: 1rem; /* Space above buttons */
 }
