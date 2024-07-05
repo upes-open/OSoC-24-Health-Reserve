@@ -81,8 +81,13 @@ const Register = () => {
           navigate('/login')
           console.log('User registered successfully', data);
         } else {
+          const errorText = await response.text();
+          if (errorText === 'User with the same email or contact already exists') {
+            alert("User with the same email or contact already exists");
+          } else {
+            alert("Failed to register user");
+          }
           console.error('Failed to register user');
-          alert("Failed to register user");
         }
       } catch (error) {
         console.error('Error:', error);
@@ -220,7 +225,6 @@ const Register = () => {
           </div>
           <button type="submit" className="register-button">Register</button>
           <p className="signup-link">Do you have an account? <Link to="/login">Login</Link></p>
-
         </form>
       </div>
     </div>

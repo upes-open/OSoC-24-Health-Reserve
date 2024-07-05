@@ -144,6 +144,12 @@ router.post("/signup", async (req, res) => {
     console.log('Signup data:', req.body);
 
     try {
+
+        const existingUser = await userModel.findOne({ $or: [{ email }, { contact }] });
+        if (existingUser) {
+            return res.status(400).send('User with the same email or contact already exists');
+        }
+
         const salt = await bcrypt.genSalt(10);
         const hash = await bcrypt.hash(password, salt);
 
