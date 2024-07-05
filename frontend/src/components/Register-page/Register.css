@@ -161,3 +161,25 @@
   margin-top: 10px;
   /* Add margin top for spacing */
 }
+
+@media (max-width: 1024px) {
+  .hospital-register-image {
+    display: none;
+  }
+
+  .hospital-register-container {
+    display: flex;
+    flex-direction: column;
+    padding: 50px;
+  }
+
+  .register-form-container {
+    padding: 50px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hospital-register-container {
+    padding: 0;
+  }
+}
