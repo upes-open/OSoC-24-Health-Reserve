@@ -1,22 +1,20 @@
-/* 
+/* Resetting margins */
 * {
     margin: auto;
-
-    /* box-sizing: border-box; Ensure box-sizing consistency 
-}*/
+    /* box-sizing: border-box; Ensure box-sizing consistency */
+}
 
 body {
     display: flex;
     flex-direction: column;
-    
     min-height: 120vh;
-  }
+}
 
 /* Container styles */
 .hospital-login-container {
     display: flex;
     flex-direction: row;
-    align-items: center; 
+    align-items: center;
     justify-content: center;
     /* background-color: #f8f8f8; */
     margin-top: -70px;
@@ -32,22 +30,16 @@ body {
     max-width: 400px;
     width: 70%;    
     box-shadow: 0 4px 8px rgba(0, 4, 0, 0.1);
-
     margin-bottom: 15%;
     margin-top: 15%;   
-    /* margin-right: 50px;   */
     margin-left: 50px;
 }
-
-
 
 .login-form {
     display: flex;
     flex-direction: column;
-    align-items: right;
-    justify-content: right;
-    
-
+    align-items: flex-end;
+    justify-content: flex-end;
 }
 
 .form-group {
@@ -57,16 +49,13 @@ body {
 .form-group label {
     font-weight: bold; /* Bring back bold for labels */
     width: 400px;
-     /* Add margin bottom for spacing */
+    /* Add margin bottom for spacing */
     /* color: #d22323; Default text color */
-    
 }
 
 .form-group input {
-     /* Full width input */
-     /* Adjusted padding */
     border: none;
-    border-bottom: 1px solid black ; /* Bottom border */
+    border-bottom: 1px solid black; /* Bottom border */
     transition: border-color 0.3s ease;
     background-color: transparent; /* Transparent background */
     color: #5e5c5c; /* Default text color */
@@ -137,7 +126,6 @@ body {
     max-width: 70%;
     height: 10%;
     padding-left: 15%;
-    
     /* border-radius: 8px; */
     /* display: block; */
 }
@@ -154,7 +142,7 @@ body {
 .image-overlay h2 {
     margin: 0;
     font-size: 38px;
-    left: 100px; 
+    left: 100px;
     padding-top: 10%;
     color: rgb(235, 229, 229); /* Default text color */
 }
@@ -254,9 +242,37 @@ body {
         width: auto; /* Allow label to adjust width */
     }
 
-
     .login-form {
         align-items: center; /* Center the form on smaller screens */
         justify-content: center; /* Center the form on smaller screens */
+    }
+}
+
+/* Additional media query for mobile devices (480px and below) */
+@media (max-width: 480px) {
+    .hospital-login-content {
+        width: 95%;
+        padding: 20px;
+    }
+
+    .form-group label {
+        font-size: 14px;
+    }
+
+    .form-group input {
+        font-size: 14px;
+    }
+
+    .login-button {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    .signup-link {
+        font-size: 14px;
+    }
+
+    .forgot-password {
+        font-size: 14px;
     }
 }

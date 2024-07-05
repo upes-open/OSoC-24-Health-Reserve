@@ -71,3 +71,57 @@ body, html {
   font-size: 0.8rem;
   margin-top: 20px;
 }
+
+
+
+@media (max-width: 1024px) and (min-width: 768px) {
+  .content {
+    padding: 15px; /* Adjust padding for smaller screens */
+  }
+
+  .content h1 {
+    font-size: 2rem; /* Adjust heading size */
+  }
+
+  .content p {
+    font-size: 1rem; /* Adjust paragraph size */
+  }
+
+  .button {
+    font-size: 0.9rem; /* Adjust button font size */
+    padding: 8px 18px; /* Adjust button padding */
+  }
+}
+
+/* For mobile devices (screen width 767px and below) */
+@media (max-width: 767px) {
+  .home-container {
+    padding: 10px; /* Add padding for small screens */
+  }
+
+  .content {
+    padding: 10px; /* Reduce padding for small screens */
+  }
+
+  .content h1 {
+    font-size: 1.8rem; /* Adjust heading size */
+  }
+
+  .content p {
+    font-size: 0.9rem; /* Adjust paragraph size */
+  }
+
+  .button {
+    font-size: 0.8rem; /* Adjust button font size */
+    padding: 8px 15px; /* Adjust button padding */
+    margin: 5px; /* Adjust button margin */
+  }
+
+  .button-row {
+    flex-direction: column; /* Stack buttons vertically */
+  }
+
+  .copyright {
+    font-size: 0.7rem; /* Adjust copyright text size */
+  }
+}
