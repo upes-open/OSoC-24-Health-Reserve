@@ -8,6 +8,15 @@ const patientModel = require('../models/patient.js');
 
 const app = express();
 
+app.use(session({
+    secret: 'secret-key',
+    resave: true,
+    saveUninitialized: false
+}));
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 
 const router = express.Router();
 
@@ -28,7 +37,6 @@ router.post('/upload', upload.single('image'), async (req, res) => {
     try {
 
         console.log('Session:', req.session);
-
         console.log('Session email:', req.session.email);
 
         const { description, doctorName, hospitalName, dateOfUpload } = req.body;
@@ -37,11 +45,11 @@ router.post('/upload', upload.single('image'), async (req, res) => {
             throw new Error('No file uploaded');
         }
 
-        // Creating a new instance of patientModel with data from request
         const saveItem = new patientModel({
             description: description,
             doctorName: doctorName,
-            email: 'saga@gmail.com',
+            email: req.session.email,
+            // email: 'saga@gmail.com',
             hospitalName: hospitalName,
             dateOfUpload: new Date(dateOfUpload),
             image: {
@@ -50,7 +58,6 @@ router.post('/upload', upload.single('image'), async (req, res) => {
             }
         });
 
-        // Saving the new patient record to the database
         await saveItem.save();
         console.log('Data registered');
         res.send('Data registered successfully');
@@ -103,8 +110,6 @@ router.post("/login", async (req, res) => {
             }
             const token = jwt.sign({ email: user.email }, "tokenGoesHere", { expiresIn: '1h' });
 
-            res.cookie("token", token, { httpOnly: true });
-
             req.session.email = email;
             req.session.username = user.username;
             req.session.license = user.license;
@@ -118,7 +123,9 @@ router.post("/login", async (req, res) => {
                 console.log('Session after login:', req.session);
             });
 
-            res.status(200).json({ message: "Login successful" });
+            res.cookie("token", token, { httpOnly: true }).status(200).json({ message: "Login successful" });
+
+            // res.status(200).json({ message: "Login successful" });
         });
     } catch (err) {
         console.error("Login error:", err);
@@ -137,6 +144,12 @@ router.post("/signup", async (req, res) => {
     console.log('Signup data:', req.body);
 
     try {
+
+        const existingUser = await userModel.findOne({ $or: [{ email }, { contact }] });
+        if (existingUser) {
+            return res.status(400).send('User with the same email or contact already exists');
+        }
+
         const salt = await bcrypt.genSalt(10);
         const hash = await bcrypt.hash(password, salt);
 
