@@ -2,69 +2,58 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  padding: 1px;
+  padding: 10px; /* Adjust padding as needed */
   background-color: #f8f8f8;
 }
 
 .register-content {
-  flex: 1;
+  flex: 1; /* Take up remaining space */
+  display: flex;
   flex-direction: column;
-  align-items: flex-end;
-  justify-content: flex-end;
+  align-items: flex-end; /* Align items to the right within the column */
 }
 
 .hospital-register-image {
-  flex: 5;
+  flex: 5; /* Take 5/12 of the available space */
   display: flex;
-  justify-content: flex-end;
-}
-
-.register-info h2 {
-  font-size: 30px;
-  font-weight: 600;
-  color: #333;
-  margin-bottom: 20px;
-  text-align: center;
+  justify-content: flex-end; /* Align content to the right */
 }
 
 .hospital-register-image img {
   max-width: 100%;
-  height: 100%;
-  margin-top: -50px;
-  background: transparent;
+  height: auto; /* Maintain aspect ratio */
+  margin-top: -50px; /* Adjust margin-top as needed */
 }
 
 .register-form-container {
-  flex: 1;
-  padding: 120px;
+  flex: 1; /* Take up remaining space */
+  padding: 20px; /* Adjust padding as needed */
   background-color: #f9f9f9;
   border-radius: 8px;
-  margin-top: auto;
+  margin-top: auto; /* Push it to the bottom */
 }
 
 .register-form {
-  max-width: 400px;
-  padding: 32px;
+  max-width: 400px; /* Adjust max-width as needed */
+  margin: 0 auto; /* Center horizontally */
+  padding: 20px; /* Adjust padding as needed */
   background-color: #ffffff;
-  border-radius: 0px;
+  border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .form-group {
-  margin-bottom: 0px;
+  margin-bottom: 20px; /* Adjust margin-bottom as needed */
 }
 
 .form-group input {
   width: 100%;
-  margin-bottom: 5px;
-  padding: 10px 0px;
+  padding: 10px;
 }
 
 .form-group2 {
   color: rgb(121, 121, 121);
-  padding: 5px;
-  margin: 20px 0px;
-  display: flex;
+  margin: 20px 0;
 }
 
 .form-group2 label {
@@ -81,18 +70,17 @@
   display: flex;
   align-items: center;
   margin-bottom: 10px;
-  padding: 5px;
   color: rgb(121, 121, 121);
 }
 
 .form-group label input[type="checkbox"] {
-  padding: 3%;
   -webkit-appearance: none;
-  width: 0px;
-  height: 0px;
+  width: 20px;
+  height: 20px;
   border: 1px solid #007bff;
-  border-radius: 10px;
-  margin-right: 15px;
+  border-radius: 4px;
+  margin-right: 10px;
+  cursor: pointer;
 }
 
 .form-group label input[type="checkbox"]:checked {
@@ -102,12 +90,9 @@
 
 .form-group label input[type="checkbox"]::after {
   content: '\2713';
-  font-size: 16px;
+  font-size: 14px;
   color: #fff;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  display: inline-block;
   visibility: hidden;
 }
 
@@ -125,105 +110,4 @@
   cursor: pointer;
   transition: background-color 0.3s;
   margin-top: 10px;
-}
-
-/* Media queries for tablets and phones */
-
-/* Tablets in landscape and portrait mode */
-@media (max-width: 1024px) {
-  .hospital-register-container {
-      flex-direction: column;
-      padding: 20px;
-  }
-
-  .hospital-register-image {
-      margin-bottom: 20px;
-      justify-content: center;
-  }
-
-  .hospital-register-image img {
-      max-width: 80%;
-      height: auto;
-  }
-
-  .register-form-container {
-      padding: 60px;
-      margin-top: 20px;
-  }
-}
-
-/* Phones in landscape and portrait mode */
-@media (max-width: 768px) {
-  .hospital-register-container {
-      flex-direction: column;
-      padding: 20px;
-  }
-
-  .hospital-register-image {
-      margin-bottom: 20px;
-      justify-content: center;
-  }
-
-  .hospital-register-image img {
-      max-width: 70%;
-      height: auto;
-  }
-
-  .register-form-container {
-      padding: 30px;
-      margin-top: 10px;
-  }
-}
-
-/* Additional media query for mobile devices (480px and below) */
-@media (max-width: 480px) {
-  .hospital-register-container {
-      flex-direction: column;
-      padding: 10px;
-  }
-
-  .hospital-register-image {
-      margin-bottom: 10px;
-      justify-content: center;
-  }
-
-  .hospital-register-image img {
-      max-width: 60%;
-      height: auto;
-  }
-
-  .register-form-container {
-      padding: 15px;
-      margin-top: 5px;
-  }
-
-  .register-form {
-      padding: 16px;
-  }
-
-  .register-info h2 {
-      font-size: 24px;
-  }
-
-  .form-group label {
-      font-size: 14px;
-  }
-
-  .form-group input {
-      font-size: 14px;
-      padding: 8px 0px;
-  }
-
-  .form-group2 {
-      font-size: 14px;
-  }
-
-  .register-button {
-      font-size: 14px;
-      padding: 8px;
-  }
-
-  .options {
-      gap: 3px;
-  }
 }
