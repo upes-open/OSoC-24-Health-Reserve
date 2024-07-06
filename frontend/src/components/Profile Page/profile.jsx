@@ -52,7 +52,10 @@ const Profile = ()=>{
             <div className="gender"><span>Gender</span> : lorem </div>
             <div className="role"><span>Role</span> : \Doctor</div>
             <div className="bio"><span>Bio</span> : Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore similique excepturi at odio molestiae consectetur porro delectus ea ipsam iusto possimus, modi, ducimus dolorem illum id laudantium. Numquam, dicta reiciendis.</div>
+            <div className="prof-button-container">
+            <button className='profile-logout' >Logout</button>
             <button className='edit-btn' >Edit Profile</button>
+            </div>
           </div>
         </div>
       </div>

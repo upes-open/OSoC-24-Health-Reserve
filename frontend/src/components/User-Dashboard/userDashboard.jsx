@@ -4,8 +4,8 @@ import './Dashboard.css';
 const Dashboard = () => {
   const [description, setDescription] = useState('');
   const [date, setDate] = useState('');
-  const [doctorName, setDoctorName] = useState(''); 
-  const [hospitalName, setHospitalName] = useState(''); 
+  const [doctorName, setDoctorName] = useState('');
+  const [hospitalName, setHospitalName] = useState('');
   const [itemImages, setItemImages] = useState([]);
 
   const handleFormSubmit = async (e) => {
@@ -13,9 +13,9 @@ const Dashboard = () => {
 
     const formData = new FormData();
     formData.append('description', description);
-    formData.append('dateOfUpload', date); // Changed to match backend schema
-    formData.append('doctorName', doctorName); // Changed to match backend schema
-    formData.append('hospitalName', hospitalName); // Changed to match backend schema
+    formData.append('dateOfUpload', date); // Adjusted to match backend schema
+    formData.append('doctorName', doctorName); // Adjusted to match backend schema
+    formData.append('hospitalName', hospitalName); // Adjusted to match backend schema
     if (itemImages.length > 0) {
       formData.append('image', itemImages[0]); // Adjusted to match Multer field name
     }
@@ -24,7 +24,6 @@ const Dashboard = () => {
       const response = await fetch('http://localhost:3000/upload', {
         method: 'POST',
         body: formData,
-        credentials: 'include',
       });
 
       if (!response.ok) {
@@ -35,8 +34,8 @@ const Dashboard = () => {
       // Reset form fields after successful submission
       setDescription('');
       setDate('');
-      setDoctorName(''); // Changed to match backend schema
-      setHospitalName(''); // Changed to match backend schema
+      setDoctorName('');
+      setHospitalName('');
       setItemImages([]);
       alert('Data uploaded successfully!');
     } catch (error) {
@@ -46,7 +45,7 @@ const Dashboard = () => {
   };
 
   const handleCategoryChange = (e) => {
-    setHospitalName(e.target.value); // Changed to match backend schema
+    setHospitalName(e.target.value);
   };
 
   const handleFileChange = (e) => {
@@ -54,92 +53,92 @@ const Dashboard = () => {
   };
 
   return (
-    <>
-      <div className="dashboard">
-        <h1 id='reportheader'>Upload Reports</h1>
+    <div className="dashboard">
+      <h1 id="reportheader">Upload Reports</h1>
 
-        <form className="dashboardForm" onSubmit={handleFormSubmit}>
-          <div className="col-5">
-            <label htmlFor="description">
-              Description
+      <form className="dashboardForm" onSubmit={handleFormSubmit}>
+        <div className="col-5">
+          <label htmlFor="description">
+            Description
+            <input
+              type="text"
+              id="description"
+              value={description}
+              placeholder="Enter description of the item"
+              onChange={(e) => setDescription(e.target.value)}
+              required
+              autoComplete="off"
+            />
+          </label>
+        </div>
+
+        <div className="col-4">
+          <label htmlFor="date">
+            Date
+            <input
+              type="date"
+              id="date"
+              value={date}
+              onChange={(e) => setDate(e.target.value)}
+              required
+              autoComplete="off"
+            />
+          </label>
+        </div>
+
+        <div className="col-3">
+          <label htmlFor="doctorName">
+            Doctor Name
+            <input
+              type="text"
+              id="doctorName"
+              value={doctorName}
+              placeholder="Enter your name"
+              onChange={(e) => setDoctorName(e.target.value)}
+              required
+              autoComplete="off"
+            />
+          </label>
+        </div>
+
+        <div className="col-3">
+          <label htmlFor="hospitalName">
+            Hospital Name
+            <input
+              type="text"
+              id="hospitalName"
+              value={hospitalName}
+              placeholder="Enter hospital name"
+              onChange={handleCategoryChange}
+              required
+              autoComplete="off"
+            />
+          </label>
+        </div>
+
+        <div className="col-3">
+          <label htmlFor="itemImages">
+            Please upload your reports
+            <div>
               <input
-                type="text"
-                id="description"
-                value={description}
-                placeholder="Enter description of the item"
-                onChange={(e) => setDescription(e.target.value)}
+                className="select"
+                type="file"
+                id="itemImages"
+                multiple
+                onChange={handleFileChange}
                 required
-                autoComplete="off"
               />
-            </label>
-          </div>
+            </div>
+          </label>
+        </div>
 
-          <div className="col-4">
-            <label htmlFor="date">
-              Date
-              <input
-                type="date"
-                id="date"
-                value={date}
-                onChange={(e) => setDate(e.target.value)}
-                required
-                autoComplete="off"
-              />
-            </label>
-          </div>
-
-          <div className="col-3">
-            <label htmlFor="username">
-              Doctor Name
-              <input
-                type="text"
-                id="doctorName"
-                value={doctorName}
-                placeholder="Enter your name"
-                onChange={(e) => setDoctorName(e.target.value)}
-                required
-                autoComplete="off"
-              />
-            </label>
-          </div>
-
-          <div className="col-3">
-            <label htmlFor="hospitalName">
-              Hospital Name
-              <input
-                type="text"
-                id="hospitalName"
-                value={hospitalName}
-                placeholder="Enter hospital name"
-                onChange={handleCategoryChange}
-                required
-                autoComplete="off"
-              />
-            </label>
-          </div>
-
-          <div className="col-3">
-            <label htmlFor="itemImages">
-              Please upload your reports
-              <div>
-                <input
-                  className="select pt-1"
-                  type="file"
-                  id="itemImages"
-                  multiple
-                  onChange={handleFileChange}
-                  required
-                />
-              </div>
-            </label>
-          </div>
-
-          <div className="col-submit">
-            <button type="submit" className="submitbtn"> Submit </button>
-          </div>
-        </form>
-      </div>
-    </>
+        <div className="col-submit">
+          <button type="submit" className="submitbtn">
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
   );
 };
 
