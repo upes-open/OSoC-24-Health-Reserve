@@ -81,10 +81,7 @@ const Login = () => {
                 <p className="signup-link">Don't have an account? <Link to="/register">Signup</Link></p>
             </div>
             <div className="hospital-login-image">
-                <div className="image-overlay">
-                    <h2> Login Page</h2>
-                </div>
-                <img className="login-image" src={Patient} alt="Patient Login" />
+                <img src={Patient} alt="Patient Login" />
             </div>
         </div>
     );

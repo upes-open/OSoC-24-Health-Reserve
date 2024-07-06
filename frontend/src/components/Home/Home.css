@@ -71,21 +71,3 @@ body, html {
   font-size: 0.8rem;
   margin-top: 20px;
 }
-
-@media (max-width: 768px) {
-  .content {
-    margin: 10px;
-  }
-}
-
-@media (max-width: 480px) {
-  .centered-box h1 {
-    font-size: 2rem;
-  }
-  .centered-box p {
-    font-size: 1rem;
-  }
-  .button {
-    font-size: 0.8rem;
-  }
-}
