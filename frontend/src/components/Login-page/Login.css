@@ -1,102 +1,104 @@
-/* 
+/* Reset margins and box-sizing consistency */
 * {
-    margin: auto;
-
-    /* box-sizing: border-box; Ensure box-sizing consistency 
-}*/
+    margin: 0;
+    box-sizing: border-box;
+}
 
 body {
     display: flex;
     flex-direction: column;
-    
-    min-height: 120vh;
-  }
+    min-height: 100vh; /* Adjusted to ensure full viewport coverage */
+    margin: 0; /* Ensure no default margin */
+    font-family: Arial, sans-serif; /* Improved font stack for readability */
+}
 
 /* Container styles */
 .hospital-login-container {
     display: flex;
-    flex-direction: row;
-    align-items: center; 
+    align-items: center;
     justify-content: center;
-    /* background-color: #f8f8f8; */
-    margin-top: -70px;
-    height: 100vh;
+    height: 100vh; /* Full viewport height */
+    padding: 20px; /* Added padding for better spacing */
+}
+
+/* Image container styles */
+.hospital-login-image {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    max-width: 50%; /* Limited max-width for image container */
+    text-align: center; /* Center align text content */
+}
+
+.hospital-login-image img {
+    max-width: 100%; /* Ensure image does not exceed container */
+    height: auto; /* Maintain aspect ratio */
 }
 
 /* Content area styles */
 .hospital-login-content {
+    flex: 1;
     background-color: #fff;
-    color: #333333a7; /* Default text color */
+    color: #333; /* Improved contrast for readability */
     padding: 30px;
     border-radius: 8px;
-    max-width: 400px;
-    width: 70%;    
-    box-shadow: 0 4px 8px rgba(0, 4, 0, 0.1);
-
-    margin-bottom: 15%;
-    margin-top: 15%;   
-    /* margin-right: 50px;   */
-    margin-left: 50px;
+    max-width: 400px; /* Limit width for better readability */
+    width: 100%; /* Ensure full width flexibility */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Improved shadow for depth */
+    margin: 0 20px; /* Adjusted for spacing */
 }
 
-
-
+/* Form container styles */
 .login-form {
     display: flex;
     flex-direction: column;
-    align-items: right;
-    justify-content: right;
-    
-
 }
 
+/* Form group styles */
 .form-group {
-    margin-bottom: 30px;
+    margin-bottom: 20px; /* Reduced margin for compact form */
 }
 
 .form-group label {
-    font-weight: bold; /* Bring back bold for labels */
-    width: 400px;
-     /* Add margin bottom for spacing */
-    /* color: #d22323; Default text color */
-    
+    font-weight: bold; /* Bold label text for emphasis */
 }
 
 .form-group input {
-     /* Full width input */
-     /* Adjusted padding */
     border: none;
-    border-bottom: 1px solid black ; /* Bottom border */
-    transition: border-color 0.3s ease;
+    border-bottom: 1px solid #ccc; /* Subtle border for inputs */
     background-color: transparent; /* Transparent background */
-    color: #5e5c5c; /* Default text color */
+    color: #333; /* Darker text color */
+    padding: 10px; /* Improved input padding */
 }
 
 .form-group input:focus {
     outline: none;
-    border-color: #3277c0;
+    border-color: #007bff; /* Highlight border color on focus */
 }
 
 /* Login button styles */
 .login-button {
     width: 100%;
-    padding: 10px;
+    padding: 12px; /* Increased button padding for touch targets */
     background-color: #007bff;
     color: #fff;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s;
-    margin-top: 10px; /* Add margin top for spacing */
+    margin-top: 15px; /* Increased margin for better spacing */
 }
 
 .login-button:hover {
-    background-color: #0056b3;
+    background-color: #0056b3; /* Darker hover color for contrast */
 }
 
 /* Forgot password link styles */
 .forgot-password {
-    padding-top: 0.5rem;
+    margin-top: 10px; /* Adjusted margin for spacing */
+    text-align: center; /* Center align for better presentation */
     text-decoration: none;
     color: #007bff;
     transition: color 0.3s;
@@ -104,7 +106,7 @@ body {
 
 .forgot-password:hover {
     text-decoration: underline;
-    color: #0056b3;
+    color: #0056b3; /* Darker hover color for contrast */
 }
 
 /* Signup link styles */
@@ -120,41 +122,4 @@ body {
 
 .signup-link a:hover {
     text-decoration: underline;
-}
-
-/* Image styles */
-.hospital-login-image {
-    position: relative; /* Ensure relative positioning */
-    flex: 1;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 20px;
-    margin-right: 50px; 
-    top: 80px;
-}
-
-.hospital-login-image img {
-    max-width: 70%;
-    height: 10%;
-    padding-left: 15%;
-    
-    /* border-radius: 8px; */
-    /* display: block; */
-}
-
-/* Image overlay styles */
-.image-overlay {
-    position: absolute;
-    top: -100px; /* Adjust positioning as needed */
-    left: 300px; /* Adjust positioning as needed */
-    font-weight: bold; /* to make the text bold */
-    padding-top: 0.5rem;
-}
-
-.image-overlay h2 {
-    margin: 0;
-    font-size: 38px;
-    left: 100px; 
-    padding-top: 10%;
-    color: rgb(235, 229, 229); /* Default text color */
 }
