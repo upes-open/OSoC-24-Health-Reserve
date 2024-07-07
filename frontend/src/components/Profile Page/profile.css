@@ -115,7 +115,7 @@ span{
   gap: 1.5rem;
   align-items:center;
 }
-.edit-btn,
+.edit-btn, .save-btn,
 .profile-logout {
   cursor: pointer;
   padding: 10px;
