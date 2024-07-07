@@ -32,12 +32,26 @@ const isAuthenticated = (req, res, next) => {
     }
 };
 
+const verifyToken = (req, res, next) => {
+    const token = req.cookies.token;
 
-router.post('/upload', upload.single('image'), async (req, res) => {
+    if (!token) {
+        return res.status(403).json({ error: "No token provided" });
+    }
+
+    jwt.verify(token, "tokenGoesHere", (err, decoded) => {
+        if (err) {
+            return res.status(401).json({ error: "Failed to authenticate token" });
+        }
+
+        req.email = decoded.email;
+        next();
+    });
+};
+
+
+router.post('/upload', verifyToken, upload.single('image'), async (req, res) => {
     try {
-
-        console.log('Session:', req.session);
-        console.log('Session email:', req.session.email);
 
         const { description, doctorName, hospitalName, dateOfUpload } = req.body;
 
@@ -48,7 +62,7 @@ router.post('/upload', upload.single('image'), async (req, res) => {
         const saveItem = new patientModel({
             description: description,
             doctorName: doctorName,
-            email: req.session.email,
+            email: req.email,
             // email: 'saga@gmail.com',
             hospitalName: hospitalName,
             dateOfUpload: new Date(dateOfUpload),
@@ -109,19 +123,6 @@ router.post("/login", async (req, res) => {
                 return res.status(401).json({ error: "Invalid credentials" });
             }
             const token = jwt.sign({ email: user.email }, "tokenGoesHere", { expiresIn: '1h' });
-
-            req.session.email = email;
-            req.session.username = user.username;
-            req.session.license = user.license;
-
-            console.log(req.session.email, req.session.username, req.session.license)
-
-            req.session.save(err => {
-                if (err) {
-                    console.error('Session save error:', err);
-                }
-                console.log('Session after login:', req.session);
-            });
 
             res.cookie("token", token, { httpOnly: true }).status(200).json({ message: "Login successful" });
 
