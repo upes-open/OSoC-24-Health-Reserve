@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './profile.css';
 
@@ -6,6 +7,7 @@ const Profile = () => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Fetch user data when the component mounts
@@ -41,6 +43,11 @@ const Profile = () => {
   if (!user) {
     return <div>User not found</div>;
   }
+
+const logout = ()=>{
+  localStorage.clear();
+  navigate('/login');
+}
 
   return (
     <>
@@ -91,7 +98,7 @@ const Profile = () => {
             <div className="role"><span>Role</span> : \Doctor</div>
             <div className="bio"><span>Bio</span> : Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore similique excepturi at odio molestiae consectetur porro delectus ea ipsam iusto possimus, modi, ducimus dolorem illum id laudantium. Numquam, dicta reiciendis.</div>
             <div className="prof-button-container">
-            <button className='profile-logout' >Logout</button>
+            <button onClick={logout} className='profile-logout' >Logout</button>
             <button className='edit-btn' >Edit Profile</button>
             </div>
           </div>
