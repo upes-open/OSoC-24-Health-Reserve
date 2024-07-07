@@ -1,11 +1,18 @@
 /* eslint-disable no-unused-vars */
 // src/components/Navbar/Navpatient.jsx
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Navdoctor.css';
 //import logo from './path/to/logo'; // Update the path to the actual location of your logo
 
 function Navdoctor() {
+
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate('profile');
+  }
+
   return (
     <nav>
       <div className="container">
@@ -18,7 +25,7 @@ function Navdoctor() {
             <li><Link to="/contact">CONTACT US</Link></li>
             <li><Link to="/doctors">SEE PATIENTS</Link></li>
           </ul>
-          <div className="profile">
+          <div className="profile" onClick={handleClick}>
             <img src="/profile.jpeg" alt="Profile Picture" />
             <div className="upload-text">Upload Your Image</div>
             <span>Username</span>
