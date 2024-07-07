@@ -23,7 +23,7 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+    
         try {
             const response = await fetch('http://localhost:3000/login', {
                 method: 'POST',
@@ -32,11 +32,15 @@ const Login = () => {
                 },
                 body: JSON.stringify(formData),
             });
-
+    
             if (response.ok) {
-                const data = await response.json();
-                navigate("/dashboard"); // Redirect to the /dashboard
-                console.log('Login successful', data);
+                const result = await response.json();
+                
+                // Store the email in local storage
+                localStorage.setItem('email', formData.email);
+    
+                navigate("/dashboard");
+                console.log('Login successful', result);
             } else {
                 const data = await response.json();
                 setError(data.error);
@@ -47,7 +51,8 @@ const Login = () => {
             setError('Something went wrong. Please try again.');
         }
     };
-
+    
+    
     return (
         <div className="hospital-login-container">
             <div className="hospital-login-content">
