@@ -12,7 +12,6 @@ body {
     font-family: Arial, sans-serif; /* Improved font stack for readability */
 }
 
-/* Container styles */
 .hospital-login-container {
     display: flex;
     align-items: center;
@@ -37,7 +36,6 @@ body {
     height: auto; /* Maintain aspect ratio */
 }
 
-/* Content area styles */
 .hospital-login-content {
     flex: 1;
     background-color: #fff;
