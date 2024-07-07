@@ -135,6 +135,22 @@ router.post("/login", async (req, res) => {
 });
 
 
+// app.get('/user/:email', async (req, res) => {
+//     try {
+//       const email = req.params.email;
+//       const user = await User.findOne({ email });
+//       if (!user) {
+//         return res.status(404).json({ message: 'User not found' });
+//       }
+//       res.json(user);
+//     } catch (err) {
+//       console.error(err);
+//       res.status(500).json({ message: 'Server error' });
+//     }
+//   });
+  
+    
+
 router.post("/signup", async (req, res) => {
     let { username, contact, email, password, role, license } = req.body;
 
@@ -145,7 +161,6 @@ router.post("/signup", async (req, res) => {
     console.log('Signup data:', req.body);
 
     try {
-
         const existingUser = await userModel.findOne({ $or: [{ email }, { contact }] });
         if (existingUser) {
             return res.status(400).send('User with the same email or contact already exists');
@@ -165,8 +180,8 @@ router.post("/signup", async (req, res) => {
         const token = jwt.sign({ email }, "tokenGoesHere");
         res.cookie("token", token);
 
-        // res.status(201).redirect('dashboard/' + username);
-        res.status(201).json({ message: "User registered successfully" })
+        // Instead of returning a static message, return req.body
+        res.status(201).json(req.body);
     } catch (err) {
         res.status(500).send(err.message);
     }
@@ -189,6 +204,30 @@ router.get('/main', isAuthenticated, async (req, res) => {
     }
 
 })
+// New route to fetch profile information of the currently logged-in user
+router.get('/profile', isAuthenticated, async (req, res) => {
+    try {
+        const user = await userModel.findOne({ email: req.session.email });
+
+        if (!user) {
+            return res.status(404).json({ error: "User not found" });
+        }
+
+        res.json({
+            username: user.username,
+            email: user.email,
+            contact: user.contact,
+            role: user.role,
+            license: user.license,
+            bio: user.bio // assuming you have a bio field in your user model
+        });
+    } catch (error) {
+        console.error('Error fetching profile:', error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
+
 
 
 
