@@ -3,8 +3,12 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const session = require('express-session')
 const multer = require('multer');
+const crypto = require('crypto');
 const userModel = require('../models/user.js')
 const patientModel = require('../models/patient.js');
+
+const algorithm = 'aes-256-cbc';
+const key = crypto.randomBytes(32);
 
 const app = express();
 
@@ -22,6 +26,24 @@ const router = express.Router();
 
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
+
+
+
+function encrypt(data) {
+    const iv = crypto.randomBytes(16); 
+    const cipher = crypto.createCipheriv(algorithm, key, iv);
+    let encrypted = cipher.update(data);
+    encrypted = Buffer.concat([encrypted, cipher.final()]);
+    return { iv: iv.toString('hex'), encryptedData: encrypted.toString('hex') };
+}
+
+function decrypt(encryptedData, iv) {
+    const decipher = crypto.createDecipheriv(algorithm, key, Buffer.from(iv, 'hex'));
+    let decrypted = decipher.update(Buffer.from(encryptedData, 'hex'));
+    decrypted = Buffer.concat([decrypted, decipher.final()]);
+    return decrypted;
+}
+
 
 
 const isAuthenticated = (req, res, next) => {
@@ -59,6 +81,8 @@ router.post('/upload', verifyToken, upload.single('image'), async (req, res) => 
             throw new Error('No file uploaded');
         }
 
+        const encryptedImage = encrypt(req.file.buffer);
+
         const saveItem = new patientModel({
             description: description,
             doctorName: doctorName,
@@ -67,8 +91,9 @@ router.post('/upload', verifyToken, upload.single('image'), async (req, res) => 
             hospitalName: hospitalName,
             dateOfUpload: new Date(dateOfUpload),
             image: {
-                data: req.file.buffer,
-                contentType: req.file.mimetype
+                data: encryptedImage.encryptedData,
+                contentType: req.file.mimetype,
+                iv: encryptedImage.iv
             }
         });
 
@@ -88,7 +113,8 @@ router.get('/getrecords', async (req, res) => {
         const records = await patientModel.find({ email: req.session.email });
 
         const productsWithBase64 = records.map(record => {
-            const base64Image = Buffer.from(record.image.data).toString('base64');
+            const decryptedImage = decrypt(record.image.data, record.image.iv);
+            const base64Image = decryptedImage.toString('base64');
             return {
                 description: record.description,
                 email: record.email,
