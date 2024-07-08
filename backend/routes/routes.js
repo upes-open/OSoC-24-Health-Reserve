@@ -115,35 +115,6 @@ router.get('/record/:email', async (req, res) => {
     }
 });
 
-
-
-
-// router.get('/getrecords', async (req, res) => {
-//     try {
-//         const records = await patientModel.find({ email: req.session.email });
-
-//         const productsWithBase64 = records.map(record => {
-//             const decryptedImage = decrypt(record.image.data, record.image.iv);
-//             const base64Image = decryptedImage.toString('base64');
-//             return {
-//                 description: record.description,
-//                 email: record.email,
-//                 hospitalName: record.hospitalName,
-//                 dateOfUpload: record.dateOfUpload,
-//                 image: base64Image,
-//                 contentType: record.image.contentType,
-//             };
-//         });
-//         console.log(productsWithBase64);
-//         res.json(productsWithBase64);
-//     } catch (error) {
-//         console.error('Error fetching items:', error);
-//         res.status(500).send('Internal Server Error');
-//     }
-// });
-
-
-
 router.post("/login", async (req, res) => {
     const { email, password } = req.body;
 
@@ -268,5 +239,21 @@ router.put('/user/:email', async (req, res) => {
       res.status(500).json({ message: 'Server error' });
     }
   });
+
+  router.delete('/record/:id', async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const deletedRecord = await patientModel.findByIdAndDelete(id);
+        if (!deletedRecord) {
+            return res.status(404).json({ error: 'Record not found' });
+        }
+        res.status(200).json({ message: 'Record deleted successfully' });
+    } catch (err) {
+        console.error('Error deleting record:', err);
+        res.status(500).json({ error: 'Server error' });
+    }
+});
+
 
 module.exports = router
