@@ -7,10 +7,11 @@ const Profile = () => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [editMode, setEditMode] = useState(false);
+  const [formData, setFormData] = useState({});
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Fetch user data when the component mounts
     const fetchUserData = async () => {
       const email = localStorage.getItem('email'); // Retrieve email from local storage
       if (!email) {
@@ -22,6 +23,7 @@ const Profile = () => {
       try {
         const response = await axios.get(`http://localhost:3000/user/${email}`); // Use email in API call
         setUser(response.data); // Assuming response.data contains the user object
+        setFormData(response.data); // Initialize form data with user data
         setLoading(false);
       } catch (err) {
         setError(err.message);
@@ -44,10 +46,41 @@ const Profile = () => {
     return <div>User not found</div>;
   }
 
-const logout = ()=>{
-  localStorage.clear();
-  navigate('/login');
-}
+  const logout = () => {
+    localStorage.clear();
+    navigate('/login');
+  };
+
+  const handleEditClick = () => {
+    setEditMode(true);
+  };
+
+  const handleSaveClick = async () => {
+    try {
+      // Create a partial object with only the updated fields
+      const updatedFields = {};
+      if (formData.fullname !== user.fullname) updatedFields.fullname = formData.fullname;
+      if (formData.age !== user.age) updatedFields.age = formData.age;
+      if (formData.gender !== user.gender) updatedFields.gender = formData.gender;
+      if (formData.username !== user.username) updatedFields.username = formData.username;
+
+      if (Object.keys(updatedFields).length > 0) { // Only send if there are updates
+        const response = await axios.put(`http://localhost:3000/user/${user.email}`, updatedFields);
+        setUser(response.data);
+        setEditMode(false);
+      } else {
+        alert('No changes detected');
+      }
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
 
   return (
     <>
@@ -90,19 +123,35 @@ const logout = ()=>{
           </ul>
         </div>
         <div className='second-container'>
-          <div className='main-info'>
+      <div className='main-info'>
+        
+        {!editMode ? (
+          <>
             <div className="username"><span>Username : </span>{user.username}</div>
-            <div className="full-name"><span>Full Name</span> : lorem </div>
-            <div className='age'><span>Age</span> : lorem </div>
-            <div className="gender"><span>Gender</span> : lorem </div>
-            <div className="role"><span>Role</span> : \Doctor</div>
-            <div className="bio"><span>Bio</span> : Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore similique excepturi at odio molestiae consectetur porro delectus ea ipsam iusto possimus, modi, ducimus dolorem illum id laudantium. Numquam, dicta reiciendis.</div>
-            <div className="prof-button-container">
-            <button onClick={logout} className='profile-logout' >Logout</button>
-            <button className='edit-btn' >Edit Profile</button>
-            </div>
-          </div>
+            <div className="full-name"><span>Full Name</span> : {user.fullname}</div>
+            <div className='age'><span>Age</span> : {user.age}</div>
+            <div className="gender"><span>Gender</span> : {user.gender}</div>
+            
+          </>
+        ) : (
+          <>
+            <div className="username"><span>Username</span> : <input type="text" name="username" value={formData.username} onChange={handleChange} /></div>
+            <div className="full-name"><span>Full Name</span> : <input type="text" name="fullname" value={formData.fullname} onChange={handleChange} /></div>
+            <div className='age'><span>Age</span> : <input type="text" name="age" value={formData.age} onChange={handleChange} /></div>
+            <div className="gender"><span>Gender</span> : <input type="text" name="gender" value={formData.gender} onChange={handleChange} /></div>
+          </>
+        )}
+        <div className="role"><span>Role</span> : Doctor</div> {/* Assuming role is fixed */}
+        <div className="prof-button-container">
+          <button onClick={logout} className='profile-logout' >Logout</button>
+          {!editMode ? (
+            <button onClick={handleEditClick} className='edit-btn' >Edit Profile</button>
+          ) : (
+            <button onClick={handleSaveClick} className='save-btn'>Save</button>
+          )}
         </div>
+      </div>
+    </div>
       </div>
     </div>
   </section>
