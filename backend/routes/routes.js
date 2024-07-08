@@ -4,11 +4,13 @@ const bcrypt = require('bcrypt');
 const session = require('express-session')
 const multer = require('multer');
 const crypto = require('crypto');
+const path = require('path');
+const fs = require('fs');
 const userModel = require('../models/user.js')
 const patientModel = require('../models/patient.js');
 
-const algorithm = 'aes-256-cbc';
-const key = crypto.randomBytes(32);
+// const algorithm = 'aes-256-cbc';
+// const key = crypto.randomBytes(32);
 
 const app = express();
 
@@ -29,20 +31,20 @@ const upload = multer({ storage: storage });
 
 
 
-function encrypt(data) {
-    const iv = crypto.randomBytes(16); 
-    const cipher = crypto.createCipheriv(algorithm, key, iv);
-    let encrypted = cipher.update(data);
-    encrypted = Buffer.concat([encrypted, cipher.final()]);
-    return { iv: iv.toString('hex'), encryptedData: encrypted.toString('hex') };
-}
+// function encrypt(data) {
+//     const iv = crypto.randomBytes(16); 
+//     const cipher = crypto.createCipheriv(algorithm, key, iv);
+//     let encrypted = cipher.update(data);
+//     encrypted = Buffer.concat([encrypted, cipher.final()]);
+//     return { iv: iv.toString('hex'), encryptedData: encrypted.toString('hex') };
+// }
 
-function decrypt(encryptedData, iv) {
-    const decipher = crypto.createDecipheriv(algorithm, key, Buffer.from(iv, 'hex'));
-    let decrypted = decipher.update(Buffer.from(encryptedData, 'hex'));
-    decrypted = Buffer.concat([decrypted, decipher.final()]);
-    return decrypted;
-}
+// function decrypt(encryptedData, iv) {
+//     const decipher = crypto.createDecipheriv(algorithm, key, Buffer.from(iv, 'hex'));
+//     let decrypted = decipher.update(Buffer.from(encryptedData, 'hex'));
+//     decrypted = Buffer.concat([decrypted, decipher.final()]);
+//     return decrypted;
+// }
 
 
 
@@ -72,65 +74,73 @@ const verifyToken = (req, res, next) => {
 };
 
 
-router.post('/upload', verifyToken, upload.single('image'), async (req, res) => {
+router.post('/upload', async (req, res) => {
+    const { description, dateOfUpload, doctorName, hospitalName, image, email } = req.body;
+
+    if (!image) {
+        return res.status(400).send('No file uploaded');
+    }
     try {
-
-        const { description, doctorName, hospitalName, dateOfUpload } = req.body;
-
-        if (!req.file) {
-            throw new Error('No file uploaded');
-        }
-
-        const encryptedImage = encrypt(req.file.buffer);
-
+        // Save other data into MongoDB using Mongoose
         const saveItem = new patientModel({
             description: description,
             doctorName: doctorName,
-            email: req.email,
-            // email: 'saga@gmail.com',
             hospitalName: hospitalName,
             dateOfUpload: new Date(dateOfUpload),
             image: {
-                data: encryptedImage.encryptedData,
-                contentType: req.file.mimetype,
-                iv: encryptedImage.iv
-            }
+                data: image, // You can directly store the buffer if needed 
+            },
+            email: email
         });
 
-        await saveItem.save();
+        await saveItem.save(); // Save the document
+        //console.log(image);
         console.log('Data registered');
-        res.send('Data registered successfully');
-    } catch (error) {
-        console.error('Error registering item:', error);
-        res.status(500).send(`Internal Server Error: ${error.message}`);
+        res.status(200).send('Data uploaded successfully!');
+    } catch (err) {
+        console.error('Error saving file or registering item:', err);
+        res.status(500).send('Error saving file or registering item');
     }
 });
 
 
+router.get('/record/:email', async (req, res) => {
+    const email = req.params.email;
 
-router.get('/getrecords', async (req, res) => {
     try {
-        const records = await patientModel.find({ email: req.session.email });
-
-        const productsWithBase64 = records.map(record => {
-            const decryptedImage = decrypt(record.image.data, record.image.iv);
-            const base64Image = decryptedImage.toString('base64');
-            return {
-                description: record.description,
-                email: record.email,
-                hospitalName: record.hospitalName,
-                dateOfUpload: record.dateOfUpload,
-                image: base64Image,
-                contentType: record.image.contentType,
-            };
-        });
-        console.log(productsWithBase64);
-        res.json(productsWithBase64);
-    } catch (error) {
-        console.error('Error fetching items:', error);
-        res.status(500).send('Internal Server Error');
+        const patients = await patientModel.find({ email });
+        res.json(patients);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
     }
 });
+
+
+
+
+// router.get('/getrecords', async (req, res) => {
+//     try {
+//         const records = await patientModel.find({ email: req.session.email });
+
+//         const productsWithBase64 = records.map(record => {
+//             const decryptedImage = decrypt(record.image.data, record.image.iv);
+//             const base64Image = decryptedImage.toString('base64');
+//             return {
+//                 description: record.description,
+//                 email: record.email,
+//                 hospitalName: record.hospitalName,
+//                 dateOfUpload: record.dateOfUpload,
+//                 image: base64Image,
+//                 contentType: record.image.contentType,
+//             };
+//         });
+//         console.log(productsWithBase64);
+//         res.json(productsWithBase64);
+//     } catch (error) {
+//         console.error('Error fetching items:', error);
+//         res.status(500).send('Internal Server Error');
+//     }
+// });
 
 
 
@@ -159,24 +169,7 @@ router.post("/login", async (req, res) => {
         res.status(500).json({ error: "Internal Server Error" });
     }
 });
-
-
-// app.get('/user/:email', async (req, res) => {
-//     try {
-//       const email = req.params.email;
-//       const user = await User.findOne({ email });
-//       if (!user) {
-//         return res.status(404).json({ message: 'User not found' });
-//       }
-//       res.json(user);
-//     } catch (err) {
-//       console.error(err);
-//       res.status(500).json({ message: 'Server error' });
-//     }
-//   });
-  
     
-
 router.post("/signup", async (req, res) => {
     let { username, contact, email, password, role, license } = req.body;
 
@@ -229,32 +222,51 @@ router.get('/main', isAuthenticated, async (req, res) => {
         res.json("Unauthorised")
     }
 
-})
-// New route to fetch profile information of the currently logged-in user
-router.get('/profile', isAuthenticated, async (req, res) => {
+});
+
+router.get('/user/:email', async (req, res) => {
     try {
-        const user = await userModel.findOne({ email: req.session.email });
-
+        const email = req.params.email;
+        const user = await userModel.findOne({ email });
         if (!user) {
-            return res.status(404).json({ error: "User not found" });
+            return res.status(404).json({ message: 'User not found' });
         }
-
-        res.json({
-            username: user.username,
-            email: user.email,
-            contact: user.contact,
-            role: user.role,
-            license: user.license,
-            bio: user.bio // assuming you have a bio field in your user model
-        });
-    } catch (error) {
-        console.error('Error fetching profile:', error);
-        res.status(500).send('Internal Server Error');
+        res.json(user);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: 'Server error' });
     }
 });
 
-
-
-
+router.put('/user/:email', async (req, res) => {
+    const email = req.params.email;
+    const updateData = req.body;
+  
+    try {
+      // Find user by email
+      const user = await userModel.findOne({ email });
+  
+      if (!user) {
+        return res.status(404).json({ message: 'User not found' });
+      }
+  
+      // Update user details
+      // Only update fields that are present in the request body
+      Object.keys(updateData).forEach(key => {
+        if (updateData[key] !== undefined) {
+          user[key] = updateData[key];
+        }
+      });
+  
+      // Save the updated user document
+      const updatedUser = await user.save();
+      
+      // Return the updated user document
+      res.status(200).json(updatedUser);
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ message: 'Server error' });
+    }
+  });
 
 module.exports = router

@@ -7,9 +7,10 @@ const patientSchema = new mongoose.Schema({
     hospitalName: { type: String, required: true },
     dateOfUpload: { type: Date, required: true },
     image: {
-        data: { type: Buffer, required: true },
-        contentType: { type: String, required: true }
+        data: { type: String, required: true } // Ensure it's a String for hex encoding
+        // Ensure it's a String for hex encoding
     }
 });
+
 
 module.exports = mongoose.model('Patient', patientSchema);
