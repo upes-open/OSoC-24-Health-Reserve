@@ -1,27 +1,25 @@
-import React from 'react'
-import './Card.css';
+import React from 'react';
+import './Card.css'; // Import your CSS file for styling
 
-const Card = ({item}) => {
-
+const Card = ({ item }) => {
     const formattedDate = new Date(item.dateOfUpload).toLocaleDateString();
 
     return (
         <div className="Card">
-            <img className="img1" src={item.image} alt="" />
-            <div className="info">
-                <div className="user">
-                    <span>{item.username}</span>
-                </div>
-                <p className="p">{item.description}</p>
-                <span className="sstar">{item.hospitalName}</span>
+            <div className="image-container">
+                <img src={item.image.data} alt="Patient" className="card-image" />
             </div>
-            <hr className="hr" />
+            <div className="info">
+                <div className="doctor-name"><span>Doctor Name: </span>{item.doctorName}</div>
+                <div className="description"><span>Description: </span>{item.description}</div>
+                <div className="hospital"><span>Hospital Name: </span>{item.hospitalName}</div>
+            </div>
             <div className="details">
-                    <span className="pspan">UPLOADED AT</span>
-                    <h2 className="ph2">{formattedDate}</h2>
+                <span className="uploaded-at">UPLOADED AT</span>
+                <div className="date">{formattedDate}</div>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default Card
+export default Card;

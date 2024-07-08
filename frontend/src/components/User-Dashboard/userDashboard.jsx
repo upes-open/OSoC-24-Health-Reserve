@@ -6,24 +6,27 @@ const Dashboard = () => {
   const [date, setDate] = useState('');
   const [doctorName, setDoctorName] = useState('');
   const [hospitalName, setHospitalName] = useState('');
-  const [itemImages, setItemImages] = useState([]);
-
+  const [itemImages, setItemImages] = useState(null);
+  const email = localStorage.getItem('email');
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
-    const formData = new FormData();
-    formData.append('description', description);
-    formData.append('dateOfUpload', date); // Adjusted to match backend schema
-    formData.append('doctorName', doctorName); // Adjusted to match backend schema
-    formData.append('hospitalName', hospitalName); // Adjusted to match backend schema
-    if (itemImages.length > 0) {
-      formData.append('image', itemImages[0]); // Adjusted to match Multer field name
-    }
+    const payload = {
+      description : description,
+      dateOfUpload: date,
+      doctorName : doctorName,
+      hospitalName : hospitalName,
+      image: itemImages,
+      email: email
+    };
 
     try {
       const response = await fetch('http://localhost:3000/upload', {
         method: 'POST',
-        body: formData,
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload),
         credentials: 'include'
       });
 
@@ -37,7 +40,7 @@ const Dashboard = () => {
       setDate('');
       setDoctorName('');
       setHospitalName('');
-      setItemImages([]);
+      setItemImages(null);
       alert('Data uploaded successfully!');
     } catch (error) {
       console.error('Error uploading data:', error);
@@ -45,12 +48,17 @@ const Dashboard = () => {
     }
   };
 
-  const handleCategoryChange = (e) => {
-    setHospitalName(e.target.value);
-  };
-
-  const handleFileChange = (e) => {
-    setItemImages(Array.from(e.target.files));
+  const convertToBase64 = (e) => {
+    console.log(e);
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        console.log(reader.result);
+        setItemImages(reader.result); // Store the base64 string
+      };
+    }
   };
 
   return (
@@ -110,7 +118,7 @@ const Dashboard = () => {
               id="hospitalName"
               value={hospitalName}
               placeholder="Enter hospital name"
-              onChange={handleCategoryChange}
+              onChange={(e) => setHospitalName(e.target.value)}
               required
               autoComplete="off"
             />
@@ -123,10 +131,10 @@ const Dashboard = () => {
             <div>
               <input
                 className="select"
+                accept="image/*"
                 type="file"
                 id="itemImages"
-                multiple
-                onChange={handleFileChange}
+                onChange={convertToBase64}
                 required
               />
             </div>
