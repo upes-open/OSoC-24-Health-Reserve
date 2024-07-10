@@ -23,7 +23,7 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-    
+
         try {
             const response = await fetch('http://localhost:3000/login', {
                 method: 'POST',
@@ -33,13 +33,13 @@ const Login = () => {
                 body: JSON.stringify(formData),
                 credentials: 'include'
             });
-    
+
             if (response.ok) {
                 const result = await response.json();
-                
+
                 // Store the email in local storage
                 localStorage.setItem('email', formData.email);
-    
+
                 navigate("/dashboard");
                 console.log('Login successful', result);
             } else {
@@ -52,42 +52,45 @@ const Login = () => {
             setError('Something went wrong. Please try again.');
         }
     };
-    
-    
+
+
     return (
-        <div className="hospital-login-container">
-            <div className="hospital-login-content">
-                <form className="login-form" onSubmit={handleSubmit}>
-                    <div className="form-group">
-                        <label htmlFor="email">Email</label>
-                        <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            value={formData.email}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="password">Password</label>
-                        <input
-                            type="password"
-                            id="password"
-                            name="password"
-                            value={formData.password}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
-                    {error && <p className="error">{error}</p>}
-                    <button type="submit" className="login-button">Login</button>
-                    <a href="/forgot-password" className="forgot-password">Forgot Password</a>
-                </form>
-                <p className="signup-link">Don't have an account? <Link to="/register">Signup</Link></p>
-            </div>
-            <div className="hospital-login-image">
-                <img src={Patient} alt="Patient Login" />
+        <div>
+            <span className='login-head'>Login</span>
+            <div className="hospital-login-container">
+                <div className="hospital-login-content">
+                    <form className="login-form" onSubmit={handleSubmit}>
+                        <div className="form-group">
+                            <label htmlFor="email">Email</label>
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                value={formData.email}
+                                onChange={handleChange}
+                                required
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="password">Password</label>
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                value={formData.password}
+                                onChange={handleChange}
+                                required
+                            />
+                        </div>
+                        {error && <p className="error">{error}</p>}
+                        <button type="submit" className="login-button">Login</button>
+                        <a href="/forgot-password" className="forgot-password">Forgot Password</a>
+                    </form>
+                    <p className="signup-link">Don't have an account? <Link to="/register">Signup</Link></p>
+                </div>
+                <div className="hospital-login-image">
+                    <img src={Patient} alt="Patient Login" />
+                </div>
             </div>
         </div>
     );

@@ -12,11 +12,18 @@ body {
     font-family: Arial, sans-serif; /* Improved font stack for readability */
 }
 
+.login-head {
+    font-size: 36px;
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
 .hospital-login-container {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100vh; /* Full viewport height */
+    height: 90vh; /* Full viewport height */
     padding: 20px; /* Added padding for better spacing */
 }
 
