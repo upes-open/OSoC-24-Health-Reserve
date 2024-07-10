@@ -14,12 +14,6 @@ const patientModel = require('../models/patient.js');
 
 const app = express();
 
-app.use(session({
-    secret: 'secret-key',
-    resave: true,
-    saveUninitialized: false
-}));
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
