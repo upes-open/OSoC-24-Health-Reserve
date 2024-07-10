@@ -5,6 +5,7 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const mongoose = require('mongoose');
+const MongoStore = require('connect-mongo');
 const { connectToDb } = require('./connectDB/connect'); // Updated import path
 const routes = require('./routes/routes.js');
 
@@ -31,9 +32,14 @@ const User = mongoose.model("User", userSchema);
 
 // Session middleware
 app.use(session({
-    secret: 'secret-key',
-    resave: true,
-    saveUninitialized: false
+  secret: 'your secret key',
+  resave: false,
+  saveUninitialized: true,
+  store: MongoStore.create({
+    mongoUrl: 'mongodb+srv://Contributors:kj0zL1RFxCurMsm0@cluster0.mzvwlgt.mongodb.net/?retryWrites=true&w=majority&appName=Cluster03',
+    collectionName: 'sessions' 
+  }),
+  cookie: { maxAge: 1000 * 60 * 60 * 24 } // 1 day
 }));
 
 // Middleware

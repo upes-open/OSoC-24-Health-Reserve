@@ -131,6 +131,8 @@ router.post("/login", async (req, res) => {
             }
             const token = jwt.sign({ email: user.email }, "tokenGoesHere", { expiresIn: '1h' });
 
+            req.session.email = user.email;
+
             res.cookie("token", token, { httpOnly: true }).status(200).json({ message: "Login successful" });
 
             // res.status(200).json({ message: "Login successful" });
@@ -187,7 +189,9 @@ router.get('/logout', (req, res) => {
 router.get('/main', isAuthenticated, async (req, res) => {
     if (req.session.email) {
         console.log("redirecting to dashboard")
-        res.redirect('dashboard/' + username);
+        console.log(req.session)
+        res.send("Session is working")
+        // res.redirect('dashboard/' + username);
     }
     else {
         res.json("Unauthorised")
