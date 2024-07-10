@@ -3,15 +3,43 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Navdoctor.css';
+import axios from 'axios';
+import { useState, useEffect } from 'react';
 //import logo from './path/to/logo'; // Update the path to the actual location of your logo
 
 function Navdoctor() {
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   const navigate = useNavigate();
 
   const handleClick = () => {
     navigate('profile');
   }
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      const email = localStorage.getItem('email'); // Retrieve email from local storage
+      if (!email) {
+        setError('No email found in local storage');
+        setLoading(false);
+        return;
+      }
+
+      try {
+        const response = await axios.get(`http://localhost:3000/user/${email}`); // Use email in API call
+        setUser(response.data); // Assuming response.data contains the user object
+        setFormData(response.data); // Initialize form data with user data
+        setLoading(false);
+      } catch (err) {
+        setError(err.message);
+        setLoading(false);
+      }
+    };
+
+    fetchUserData();
+  }, []);
 
   return (
     <nav>
@@ -28,7 +56,7 @@ function Navdoctor() {
           <div className="profile" onClick={handleClick}>
             <img src="/profile.jpeg" alt="Profile Picture" />
             <div className="upload-text">Upload Your Image</div>
-            <span>Username</span>
+            <span>{user.username}</span>
           </div>
         </div>
       </div>
