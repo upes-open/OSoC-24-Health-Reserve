@@ -2,19 +2,9 @@ import React from 'react';
 import './SinglePatientCard.css';
 import axios from 'axios';
 
-const Card = ({ item, onDelete }) => {
+const Card = ({ item }) => {
     const formattedDate = new Date(item.dateOfUpload).toLocaleDateString();
 
-    const handleDelete = async () => {
-        try {
-            const response = await axios.delete(`http://localhost:3000/record/${item._id}`);
-            onDelete(item._id); // Update state to remove the deleted item from the UI
-            alert('Record deleted successfully');
-        } catch (error) {
-            console.error('Error deleting item:', error);
-            // Handle error, show message, etc.
-        }
-    };
 
     return (
         <div className="Card">
@@ -30,7 +20,6 @@ const Card = ({ item, onDelete }) => {
                 <span className="uploaded-at">UPLOADED AT</span>
                 <div className="date">{formattedDate}</div>
             </div>
-            <button onClick={handleDelete} className="delete-button">Delete Record</button>
         </div>
     );
 };
