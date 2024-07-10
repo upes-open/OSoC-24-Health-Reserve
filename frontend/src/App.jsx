@@ -11,7 +11,9 @@ import Home from './components/Home/Home';
 import Footer from './components/Footer/Footer';
 import Dashboard from './components/User-Dashboard/userDashboard';
 import Profile from './components/Profile Page/profile';
+import Doctor from './components/Doctor/Doctor';
 import Try from './components/FolderDash/dash'; // Correct path to Dash component
+import PatientRecords from './components/PatientRecord/PatientRecords';
 
 
 function App() {
@@ -56,7 +58,8 @@ function App() {
         <Route path="/dashboard" element={<Try />} />
         <Route path="/viewrecord" element={<ViewRecord />} />
         <Route path = "/profile" element={<Profile/>}/>
-        {/* <Route path="/viewrecord" element={<ViewRecord />} /> */}
+        <Route path = "/doctors" element={<Doctor/>}/>
+        <Route path = "/patient/:username" element={<PatientRecords/>}/>
       </Routes>
       {!isHome && <Footer />} 
     </div>

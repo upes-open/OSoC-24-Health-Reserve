@@ -140,7 +140,7 @@ router.post("/login", async (req, res) => {
         res.status(500).json({ error: "Internal Server Error" });
     }
 });
-    
+
 router.post("/signup", async (req, res) => {
     let { username, contact, email, password, role, license } = req.body;
 
@@ -212,35 +212,35 @@ router.get('/user/:email', async (req, res) => {
 router.put('/user/:email', async (req, res) => {
     const email = req.params.email;
     const updateData = req.body;
-  
-    try {
-      // Find user by email
-      const user = await userModel.findOne({ email });
-  
-      if (!user) {
-        return res.status(404).json({ message: 'User not found' });
-      }
-  
-      // Update user details
-      // Only update fields that are present in the request body
-      Object.keys(updateData).forEach(key => {
-        if (updateData[key] !== undefined) {
-          user[key] = updateData[key];
-        }
-      });
-  
-      // Save the updated user document
-      const updatedUser = await user.save();
-      
-      // Return the updated user document
-      res.status(200).json(updatedUser);
-    } catch (err) {
-      console.error(err);
-      res.status(500).json({ message: 'Server error' });
-    }
-  });
 
-  router.delete('/record/:id', async (req, res) => {
+    try {
+        // Find user by email
+        const user = await userModel.findOne({ email });
+
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        // Update user details
+        // Only update fields that are present in the request body
+        Object.keys(updateData).forEach(key => {
+            if (updateData[key] !== undefined) {
+                user[key] = updateData[key];
+            }
+        });
+
+        // Save the updated user document
+        const updatedUser = await user.save();
+
+        // Return the updated user document
+        res.status(200).json(updatedUser);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: 'Server error' });
+    }
+});
+
+router.delete('/record/:id', async (req, res) => {
     const { id } = req.params;
 
     try {
@@ -252,6 +252,32 @@ router.put('/user/:email', async (req, res) => {
     } catch (err) {
         console.error('Error deleting record:', err);
         res.status(500).json({ error: 'Server error' });
+    }
+});
+
+
+router.get('/users', async (req, res) => {
+    try {
+        const users = await userModel.find();
+        res.status(200).json(users);
+    } catch (error) {
+        res.status(500).json({ message: 'Error fetching users', error });
+    }
+});
+
+router.get('/getrecords/:username', async (req, res) => {
+    const username = req.params.username;
+
+    try {
+        const user = await userModel.findOne({ username });
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        const records = await patientModel.find({ email: user.email });
+        res.json(records);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
     }
 });
 
