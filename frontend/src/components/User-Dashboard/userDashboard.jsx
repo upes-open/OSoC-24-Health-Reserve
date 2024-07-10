@@ -1,33 +1,33 @@
-import React, { useState } from 'react';
-import './Dashboard.css';
+import React, { useState } from "react";
+import "./Dashboard.css";
 
 const Dashboard = () => {
-  const [description, setDescription] = useState('');
-  const [date, setDate] = useState('');
-  const [doctorName, setDoctorName] = useState('');
-  const [hospitalName, setHospitalName] = useState('');
+  const [description, setDescription] = useState("");
+  const [date, setDate] = useState("");
+  const [doctorName, setDoctorName] = useState("");
+  const [hospitalName, setHospitalName] = useState("");
   const [itemImages, setItemImages] = useState(null);
-  const email = localStorage.getItem('email');
+  const email = localStorage.getItem("email");
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
     const payload = {
-      description : description,
+      description: description,
       dateOfUpload: date,
-      doctorName : doctorName,
-      hospitalName : hospitalName,
+      doctorName: doctorName,
+      hospitalName: hospitalName,
       image: itemImages,
-      email: email
+      email: email,
     };
 
     try {
-      const response = await fetch('http://localhost:3000/upload', {
-        method: 'POST',
+      const response = await fetch("http://localhost:3000/upload", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(payload),
-        credentials: 'include'
+        credentials: "include",
       });
 
       if (!response.ok) {
@@ -36,26 +36,24 @@ const Dashboard = () => {
       }
 
       // Reset form fields after successful submission
-      setDescription('');
-      setDate('');
-      setDoctorName('');
-      setHospitalName('');
+      setDescription("");
+      setDate("");
+      setDoctorName("");
+      setHospitalName("");
       setItemImages(null);
-      alert('Data uploaded successfully!');
+      alert("Data uploaded successfully!");
     } catch (error) {
-      console.error('Error uploading data:', error);
-      alert('Failed to upload data.');
+      console.error("Error uploading data:", error);
+      alert("Failed to upload data.");
     }
   };
 
   const convertToBase64 = (e) => {
-    console.log(e);
     const file = e.target.files[0];
     if (file) {
       const reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onload = () => {
-        console.log(reader.result);
         setItemImages(reader.result); // Store the base64 string
       };
     }
