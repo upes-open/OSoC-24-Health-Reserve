@@ -12,6 +12,8 @@
 [![My Skills](https://skillicons.dev/icons?i=react,js,nodejs)](https://skillicons.dev)<br>
 [![My Skills](https://skillicons.dev/icons?i=mongodb)](https://skillicons.dev)<br>
 
+![Alt](https://repobeats.axiom.co/api/embed/8fd656ec627373be1ef323a04c5e9fdf850cf0e0.svg "Repobeats analytics image")
+
 ## Installation
 1. Install the NodeJS LTS (v20.14.0) [Click Here](https://nodejs.org/en/download/package-manager)
 
