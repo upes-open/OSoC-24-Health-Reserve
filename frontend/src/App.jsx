@@ -27,6 +27,25 @@ function App() {
 
   const [showFooter, setShowFooter] = useState(false);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const footer = document.querySelector(".footer");
+      if (!footer) return;
+
+      const scrollPosition = window.innerHeight + window.scrollY;
+      const footerOffset = footer.offsetTop;
+
+      if (scrollPosition >= footerOffset) {
+        setShowFooter(true);
+      } else {
+        setShowFooter(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <div className="App">
       {showNavdoctor && <Navdoctor />}
