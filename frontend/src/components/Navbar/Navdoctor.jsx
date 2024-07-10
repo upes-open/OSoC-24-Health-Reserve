@@ -1,10 +1,10 @@
 /* eslint-disable no-unused-vars */
 // src/components/Navbar/Navpatient.jsx
-import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import './Navdoctor.css';
-import axios from 'axios';
-import { useState, useEffect } from 'react';
+import React from "react";
+import { Link, useNavigate } from "react-router-dom";
+import "./Navdoctor.css";
+import axios from "axios";
+import { useState, useEffect } from "react";
 //import logo from './path/to/logo'; // Update the path to the actual location of your logo
 
 function Navdoctor() {
@@ -14,21 +14,20 @@ function Navdoctor() {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate('profile');
-  }
+    navigate("profile");
+  };
 
   useEffect(() => {
     const fetchUserData = async () => {
-      const email = localStorage.getItem('email'); // Retrieve email from local storage
+      const email = localStorage.getItem("email"); // Retrieve email from local storage
       if (!email) {
-        setError('No email found in local storage');
+        setError("No email found in local storage");
         return;
       }
 
       try {
         const response = await axios.get(`http://localhost:3000/user/${email}`); // Use email in API call
         setUser(response.data); // Assuming response.data contains the user object
-        console.log(response.data)
       } catch (err) {
         setError(err.message);
       }
@@ -50,8 +49,12 @@ function Navdoctor() {
         </div>
         <div className="right">
           <ul className="doc">
-            <li><Link to="/contact">CONTACT US</Link></li>
-            <li><Link to="/doctors">SEE PATIENTS</Link></li>
+            <li>
+              <Link to="/contact">CONTACT US</Link>
+            </li>
+            <li>
+              <Link to="/doctors">SEE PATIENTS</Link>
+            </li>
           </ul>
           <div className="profile" onClick={handleClick}>
             <img src="/profile.jpeg" alt="Profile Picture" />
