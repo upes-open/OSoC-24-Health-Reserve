@@ -9,7 +9,6 @@ import { useState, useEffect } from 'react';
 
 function Navdoctor() {
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   const navigate = useNavigate();
@@ -23,23 +22,24 @@ function Navdoctor() {
       const email = localStorage.getItem('email'); // Retrieve email from local storage
       if (!email) {
         setError('No email found in local storage');
-        setLoading(false);
         return;
       }
 
       try {
         const response = await axios.get(`http://localhost:3000/user/${email}`); // Use email in API call
         setUser(response.data); // Assuming response.data contains the user object
-        setFormData(response.data); // Initialize form data with user data
-        setLoading(false);
+        console.log(response.data)
       } catch (err) {
         setError(err.message);
-        setLoading(false);
       }
     };
 
     fetchUserData();
   }, []);
+
+  if (!user) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <nav>
