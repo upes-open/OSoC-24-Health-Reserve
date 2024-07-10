@@ -14,7 +14,7 @@ import Profile from './components/Profile Page/profile';
 import Doctor from './components/Doctor/Doctor';
 import Try from './components/FolderDash/dash'; // Correct path to Dash component
 import PatientRecords from './components/PatientRecord/PatientRecords';
-
+//console is clear
 
 function App() {
   const location = useLocation();
