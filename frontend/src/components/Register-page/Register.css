@@ -7,6 +7,13 @@
   flex-wrap: wrap; /* Allow wrapping to adjust layout on smaller screens */
 }
 
+.register-head {
+  font-size: 36px;
+  display: flex;
+  justify-content: center;
+  margin: 20px 0px;
+}
+
 .register-content {
   flex: 1;
   display: flex;
