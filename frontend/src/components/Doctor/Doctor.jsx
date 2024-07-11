@@ -10,15 +10,30 @@ const Doctor = () => {
 
     useEffect(() => {
         const fetchPatients = async () => {
+            // Retrieve email from local storage
+            const doctorEmail = localStorage.getItem("email");
+            console.log("Doctor email from local storage:", doctorEmail); // Log the retrieved email
+
+            if (!doctorEmail) {
+                setError('No email found in local storage');
+                setLoading(false);
+                return;
+            }
+
             try {
-                const response = await axios.get(`http://localhost:3000/users`);
+                const response = await axios.get('http://localhost:3000/users', {
+                    params: { email: doctorEmail } // Send email as query parameter
+                });
+                console.log("API response:", response.data); // Log the API response
                 setPatients(response.data);
                 setLoading(false);
             } catch (err) {
+                console.error("API request error:", err); // Log any errors
                 setError(err.message);
                 setLoading(false);
             }
         };
+
         fetchPatients();
     }, []);
 
