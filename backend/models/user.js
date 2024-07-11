@@ -11,6 +11,7 @@ const userSchema = mongoose.Schema({
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     license: { type: String, required: function () { return this.role === 'Doctor'; } },
+    sharedWith: { type: [String] , default: [] }
 })
 
 module.exports = mongoose.model("user", userSchema);
