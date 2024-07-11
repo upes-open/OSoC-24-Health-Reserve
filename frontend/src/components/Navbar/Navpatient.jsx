@@ -16,7 +16,7 @@ function Navpatient() {
   return (
     <nav>
       <div className="logo">
-        <img src="/dummylogo.jpg" alt="Logo" />
+        <img src="/logo.png" alt="Logo" />
         <h1>Your Organization Name</h1>
       </div>
       <ul>
