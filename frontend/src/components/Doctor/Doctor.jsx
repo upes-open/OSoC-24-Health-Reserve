@@ -21,7 +21,7 @@ const Doctor = () => {
             }
 
             try {
-                const response = await axios.get('http://localhost:3000/users', {
+                const response = await axios.get('http://localhost:3000/usersdoc', {
                     params: { email: doctorEmail } // Send email as query parameter
                 });
                 console.log("API response:", response.data); // Log the API response
@@ -37,9 +37,6 @@ const Doctor = () => {
         fetchPatients();
     }, []);
 
-    if (loading) {
-        return <div>Loading...</div>;
-    }
 
     if (error) {
         return <div>Error: {error}</div>;
