@@ -3,12 +3,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  /* height: 100vh; */
+  flex-wrap: wrap; /* Allow items to wrap */
+  height: 100vh;
   padding: 20px;
 }
 
 .dash {
-  width: 350px; 
+  width: 100%; /* Full width for smaller screens */
+  max-width: 350px; /* Max width for larger screens */
   min-height: 300px; 
   margin: 20px;
   padding: 20px;
@@ -46,15 +48,13 @@
   line-height: 1.5;
 }
 
-@media (max-width: 768px) {
-  .dash-container {
-    display: flex;
-    flex-direction: column;
-  }
-}
-
+/* Media Query for larger screens */
 @media (min-width: 768px) {
   .dash-container {
-    height: 100vh;
+    justify-content: space-around; /* Space out the items */
+  }
+  
+  .dash {
+    flex: 1 1 calc(33% - 40px); /* Flex basis for larger screens */
   }
 }
