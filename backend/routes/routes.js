@@ -280,4 +280,30 @@ router.get('/getrecords/:username', async (req, res) => {
 });
 
 
+router.post('/grant-access/:email', async (req, res) => {
+    const { email } = req.params;
+    const { selectedDoctor } = req.body;
+
+    try {
+        // Ensure that sharedWith is an array in case it's not initialized correctly
+        const user = await userModel.findOneAndUpdate(
+            { email },
+            { $addToSet: { sharedWith: selectedDoctor } },
+            { 
+                new: true, // Return the updated document
+                upsert: true // Create a new document if not found
+            }
+        );
+
+        // Log the updated sharedWith array
+        console.log('Updated sharedWith array:', user.sharedWith);
+
+        res.status(200).json({ message: 'Access shared successfully' });
+    } catch (error) {
+        console.error('Error sharing access:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
+
+
 module.exports = router
