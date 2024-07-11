@@ -3,13 +3,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap; /* Allow items to wrap */
   height: 100vh;
   padding: 20px;
 }
 
 .dash {
-  width: 350px; /* Increased width */
-  height: 300px; /* Increased height */
+  width: 100%; /* Full width for smaller screens */
+  max-width: 350px; /* Max width for larger screens */
+  min-height: 300px; 
   margin: 20px;
   padding: 20px;
   background-color: #254441; /* Green background color */
@@ -44,4 +46,15 @@
   font-size: 1.2rem; /* Slightly larger font size for description */
   color: #ffffff;
   line-height: 1.5;
+}
+
+/* Media Query for larger screens */
+@media (min-width: 768px) {
+  .dash-container {
+    justify-content: space-around; /* Space out the items */
+  }
+  
+  .dash {
+    flex: 1 1 calc(33% - 40px); /* Flex basis for larger screens */
+  }
 }
