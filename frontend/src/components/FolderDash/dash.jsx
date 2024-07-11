@@ -55,13 +55,13 @@ const Try = () => {
 
             <form onSubmit={handleSubmit} className="appointment-form">
                 <div className="form-group">
-                    <label htmlFor="doctor">Enter Doctor's Name:</label>
+                    <label htmlFor="doctor">Enter Doctor's Email:</label>
                     <input
                         type="text"
                         id="doctor"
                         value={selectedDoctor}
                         onChange={handleDoctorChange}
-                        placeholder="Enter doctor's name"
+                        placeholder="Enter doctor's Email"
                         required
                     />
                 </div>

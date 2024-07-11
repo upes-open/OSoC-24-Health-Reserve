@@ -193,6 +193,20 @@ router.get('/main', isAuthenticated, async (req, res) => {
 
 });
 
+router.get('/user/:email', async (req, res) => {
+    try {
+        const email = req.params.email;
+        const user = await userModel.findOne({ email });
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+        res.json(user);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: 'Server error' });
+    }
+});
+
 
 router.put('/user/:email', async (req, res) => {
     const email = req.params.email;
@@ -241,7 +255,7 @@ router.delete('/record/:id', async (req, res) => {
 });
 
 
-router.get('/users', async (req, res) => {
+router.get('/usersdoc', async (req, res) => {
     const doctorEmail = req.query.email; // Retrieve email from query parameters
     console.log("Received email in backend:", doctorEmail); // Log the received email
 
