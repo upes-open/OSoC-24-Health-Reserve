@@ -127,6 +127,8 @@ router.post("/login", async (req, res) => {
 
             req.session.email = user.email;
 
+            console.log(req.session.email)
+
             res.cookie("token", token, { httpOnly: true }).status(200).json({ message: "Login successful" });
 
             // res.status(200).json({ message: "Login successful" });
@@ -160,6 +162,7 @@ router.post("/signup", async (req, res) => {
             contact,
             email,
             password: hash,
+            role,
             license: role === 'Doctor' ? license : undefined
         });
 
@@ -284,6 +287,29 @@ router.get('/getrecords/:username', async (req, res) => {
         res.status(500).json({ message: err.message });
     }
 });
+
+router.get("/user-role", async (req, res) => {
+
+    console.log(req.session)
+
+    if (!req.session.email) {
+        return res.status(401).json({ error: "Not authenticated" });
+    }
+
+    try {
+        const user = await userModel.findOne({ email: req.session.email });
+
+        if (!user) {
+            return res.status(404).json({ error: "User not found" });
+        }
+
+        res.status(200).json({ role: user.role });
+    } catch (err) {
+        console.error("Error fetching user role:", err);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+});
+
 
 
 router.post('/grant-access/:email', async (req, res) => {

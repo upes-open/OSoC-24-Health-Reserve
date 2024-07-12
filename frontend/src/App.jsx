@@ -1,5 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react";
+import axios from "axios";
+
 import "./App.css";
 import Navpatient from "./components/Navbar/Navpatient";
 import Navdoctor from "./components/Navbar/Navdoctor";
@@ -25,7 +27,24 @@ function App() {
     path === "/register"
   );
 
+  const [role, setRole] = useState(null);
   const [showFooter, setShowFooter] = useState(false);
+
+  useEffect(() => {
+    const fetchUserRole = async () => {
+      try {
+        const response = await axios.get("http://localhost:3000/user-role", {
+          withCredentials: true,
+        });
+        console.log(response)
+        setRole(response.data.role);
+      } catch (error) {
+        console.error("Error fetching user role:", error);
+      }
+    };
+
+    fetchUserRole();
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -48,7 +67,8 @@ function App() {
 
   return (
     <div className="App">
-      {showNavdoctor && <Navdoctor />}
+      {role === "Doctor" && showNavdoctor && <Navdoctor />}
+      {role === "Patient" && showNavdoctor && <Navpatient />}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />

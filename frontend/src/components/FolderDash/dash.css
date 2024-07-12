@@ -3,18 +3,18 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-wrap: wrap; /* Allow items to wrap */
+  flex-wrap: wrap; 
   height: 100vh;
   padding: 20px;
 }
 
 .dash {
-  width: 100%; /* Full width for smaller screens */
-  max-width: 350px; /* Max width for larger screens */
+  width: 100%; 
+  max-width: 350px; 
   min-height: 300px; 
   margin: 20px;
   padding: 20px;
-  background-color: #254441; /* Green background color */
+  background-color: #254441; 
   border-radius: 8px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
   text-align: center;
@@ -37,24 +37,23 @@
 
 .dash-title {
   margin-top: 10px;
-  font-size: 1.6rem; /* Slightly larger font size for title */
+  font-size: 1.6rem; 
   color: #fbf4f4;
 }
 
 .dash-description {
   margin-top: 10px;
-  font-size: 1.2rem; /* Slightly larger font size for description */
+  font-size: 1.2rem; 
   color: #ffffff;
   line-height: 1.5;
 }
 
-/* Media Query for larger screens */
 @media (min-width: 768px) {
   .dash-container {
-    justify-content: space-around; /* Space out the items */
+    justify-content: space-around; 
   }
   
   .dash {
-    flex: 1 1 calc(33% - 40px); /* Flex basis for larger screens */
+    flex: 1 1 calc(33% - 40px); 
   }
 }
