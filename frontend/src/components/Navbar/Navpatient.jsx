@@ -17,7 +17,7 @@ function Navpatient() {
     <nav>
       <div className="logo">
         <img src="/logo.png" alt="Logo" />
-        <h1>Your Organization Name</h1>
+        <h1>Health Reserve</h1>
       </div>
       <ul>
         <li><Link to="/contact">CONTACT US</Link></li>
