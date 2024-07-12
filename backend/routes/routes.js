@@ -210,6 +210,20 @@ router.get('/user/:email', async (req, res) => {
     }
 });
 
+router.get('/getdata', async (req, res) => {
+    try {
+        const email = req.session.email;
+        const user = await userModel.findOne({ email });
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+        res.json(user);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: 'Server error' });
+    }
+});
+
 
 router.put('/user/:email', async (req, res) => {
     const email = req.params.email;
@@ -290,7 +304,7 @@ router.get('/getrecords/:username', async (req, res) => {
 
 router.get("/user-role", async (req, res) => {
 
-    console.log(req.session)
+    // console.log(req.session)
 
     if (!req.session.email) {
         return res.status(401).json({ error: "Not authenticated" });
