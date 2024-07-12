@@ -57,7 +57,7 @@ function Navdoctor() {
                 <Link to="/doctors">SEE DOCTORS</Link>
               </li>
               <li>
-                <Link to="/doctors">UPLOAD RECORDS</Link>
+                <Link to="/upload">UPLOAD RECORDS</Link>
               </li>
               </>)}
           </ul>
