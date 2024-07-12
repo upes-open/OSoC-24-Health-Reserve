@@ -210,6 +210,7 @@ router.get('/user/:email', async (req, res) => {
     }
 });
 
+
 router.put('/user/:email', async (req, res) => {
     const email = req.params.email;
     const updateData = req.body;
@@ -257,12 +258,17 @@ router.delete('/record/:id', async (req, res) => {
 });
 
 
-router.get('/users', async (req, res) => {
+router.get('/usersdoc', async (req, res) => {
+    const doctorEmail = req.query.email; // Retrieve email from query parameters
+    console.log("Received email in backend:", doctorEmail); // Log the received email
+
     try {
-        const users = await userModel.find();
-        res.status(200).json(users);
+        // Find patients whose sharedWith array contains the doctor's email
+        const patients = await userModel.find({ sharedWith: doctorEmail });
+        res.status(200).json(patients);
     } catch (error) {
-        res.status(500).json({ message: 'Error fetching users', error });
+        console.error("Error fetching patients:", error); // Log any errors
+        res.status(500).json({ message: error.message });
     }
 });
 
@@ -303,6 +309,39 @@ router.get("/user-role", async (req, res) => {
         res.status(500).json({ error: "Internal Server Error" });
     }
 });
+
+
+
+router.post('/grant-access/:email', async (req, res) => {
+    const { email } = req.params;
+    const { selectedDoctor } = req.body;
+
+    try {
+        // Ensure that sharedWith is an array in case it's not initialized correctly
+        const user = await userModel.findOneAndUpdate(
+            { email },
+            { $addToSet: { sharedWith: selectedDoctor } },
+            { 
+                new: true, // Return the updated document
+                upsert: true // Create a new document if not found
+            }
+        );
+
+        // Log the updated sharedWith array
+        console.log('Updated sharedWith array:', user.sharedWith);
+
+        res.status(200).json({ message: 'Access shared successfully' });
+    } catch (error) {
+        console.error('Error sharing access:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
+
+
+
+
+
+
 
 
 
