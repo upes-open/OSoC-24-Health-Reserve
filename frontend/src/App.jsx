@@ -1,9 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 
 import "./App.css";
-import Navpatient from "./components/Navbar/Navpatient";
 import Navdoctor from "./components/Navbar/Navdoctor";
 import { Routes, Route, useLocation } from "react-router-dom";
 import Login from "./components/Login-page/Login";
@@ -27,24 +25,8 @@ function App() {
     path === "/register"
   );
 
-  const [role, setRole] = useState(null);
   const [showFooter, setShowFooter] = useState(false);
 
-  useEffect(() => {
-    const fetchUserRole = async () => {
-      try {
-        const response = await axios.get("http://localhost:3000/user-role", {
-          withCredentials: true,
-        });
-        console.log(response)
-        setRole(response.data.role);
-      } catch (error) {
-        console.error("Error fetching user role:", error);
-      }
-    };
-
-    fetchUserRole();
-  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -67,14 +49,11 @@ function App() {
 
   return (
     <div className="App">
-      {role === "Doctor" && showNavdoctor && <Navdoctor />}
-      {role === "Patient" && showNavdoctor && <Navpatient />}
+      {showNavdoctor && <Navdoctor />}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/navpatient" element={<Navpatient />} />
-        <Route path="/navdoctor" element={<Navdoctor />} />
         <Route path="/upload" element={<Dashboard />} />
         <Route path="/dashboard" element={<Try />} />
         <Route path="/viewrecord" element={<ViewRecord />} />

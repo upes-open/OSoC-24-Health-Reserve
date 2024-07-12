@@ -19,15 +19,11 @@ function Navdoctor() {
 
   useEffect(() => {
     const fetchUserData = async () => {
-      const email = localStorage.getItem("email"); // Retrieve email from local storage
-      if (!email) {
-        setError("No email found in local storage");
-        return;
-      }
-
       try {
-        const response = await axios.get(`http://localhost:3000/user/${email}`); // Use email in API call
-        setUser(response.data); // Assuming response.data contains the user object
+        const response = await axios.get("http://localhost:3000/getdata", {
+          withCredentials: true,
+        }); 
+        setUser(response.data); 
       } catch (err) {
         setError(err.message);
       }
@@ -52,9 +48,18 @@ function Navdoctor() {
             <li>
               <Link to="/contact">CONTACT US</Link>
             </li>
-            <li>
+            {user.role === "Doctor" && <li>
               <Link to="/doctors">SEE PATIENTS</Link>
-            </li>
+            </li>}
+            {user.role === "Patient" &&
+              (<>
+              <li>
+                <Link to="/doctors">SEE DOCTORS</Link>
+              </li>
+              <li>
+                <Link to="/doctors">UPLOAD RECORDS</Link>
+              </li>
+              </>)}
           </ul>
           <div className="profile" onClick={handleClick}>
             <img src="/profile.jpeg" alt="Profile Picture" />
