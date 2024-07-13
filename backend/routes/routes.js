@@ -343,8 +343,8 @@ router.get("/user-role", async (req, res) => {
 
 
 
-router.post('/grant-access/:email', async (req, res) => {
-    const { email } = req.params;
+router.post('/grant-access', async (req, res) => {
+    const email = req.session.email;
     const { selectedDoctor } = req.body;
 
     try {

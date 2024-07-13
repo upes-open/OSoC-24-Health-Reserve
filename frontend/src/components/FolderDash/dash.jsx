@@ -31,11 +31,8 @@ const Try = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        // Retrieve email from local storage
-        const userEmail = localStorage.getItem("email");
-
         try {
-            const response = await fetch(`http://localhost:3000/grant-access/${userEmail}`, {
+            const response = await fetch("http://localhost:3000/grant-access", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
