@@ -210,6 +210,8 @@ router.get('/user/:email', async (req, res) => {
     }
 });
 
+
+
 router.get('/getdata', async (req, res) => {
     try {
         const email = req.session.email;
@@ -273,18 +275,33 @@ router.delete('/record/:id', async (req, res) => {
 
 
 router.get('/usersdoc', async (req, res) => {
-    const doctorEmail = req.query.email; // Retrieve email from query parameters
-    console.log("Received email in backend:", doctorEmail); // Log the received email
+    const userEmail = req.session.email; // Retrieve email from session
+    console.log("Received email in backend:", userEmail); // Log the received email
 
     try {
-        // Find patients whose sharedWith array contains the doctor's email
-        const patients = await userModel.find({ sharedWith: doctorEmail });
-        res.status(200).json(patients);
+        const user = await userModel.findOne({ email: userEmail });
+
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        if (user.role === 'Doctor') {
+            // Find patients whose sharedWith array contains the doctor's email
+            const patients = await userModel.find({ sharedWith: userEmail });
+            res.status(200).json(patients);
+        } else if (user.role === 'Patient') {
+            // Find doctors whose email is in the patient's sharedWith array
+            const doctors = await userModel.find({ email: { $in: user.sharedWith } });
+            res.status(200).json(doctors);
+        } else {
+            res.status(400).json({ message: 'Invalid user role' });
+        }
     } catch (error) {
-        console.error("Error fetching patients:", error); // Log any errors
+        console.error("Error fetching users:", error); // Log any errors
         res.status(500).json({ message: error.message });
     }
 });
+
 
 router.get('/getrecords/:username', async (req, res) => {
     const username = req.params.username;

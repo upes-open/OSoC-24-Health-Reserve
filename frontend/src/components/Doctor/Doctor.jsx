@@ -7,24 +7,31 @@ const Doctor = () => {
     const [patients, setPatients] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
+    const [user, setUser] = useState(null);
+
+
+    useEffect(() => {
+        const fetchUserData = async () => {
+            try {
+                const response = await axios.get("http://localhost:3000/getdata", {
+                    withCredentials: true,
+                });
+                setUser(response.data);
+            } catch (err) {
+                setError(err.message);
+            }
+        };
+        fetchUserData();
+    }, []);
+
 
     useEffect(() => {
         const fetchPatients = async () => {
-            // Retrieve email from local storage
-            const doctorEmail = localStorage.getItem("email");
-            console.log("Doctor email from local storage:", doctorEmail); // Log the retrieved email
-
-            if (!doctorEmail) {
-                setError('No email found in local storage');
-                setLoading(false);
-                return;
-            }
-
             try {
                 const response = await axios.get('http://localhost:3000/usersdoc', {
-                    params: { email: doctorEmail } // Send email as query parameter
+                    withCredentials: true,
                 });
-                console.log("API response:", response.data); // Log the API response
+                // console.log("API response:", response.data); 
                 setPatients(response.data);
                 setLoading(false);
             } catch (err) {
@@ -48,7 +55,8 @@ const Doctor = () => {
 
     return (
         <div className='main-container'>
-            <div className='main-head'>View Patients</div>
+            {user.role === "Doctor" && <div className='main-head'>View Patients</div>}
+            {user.role === "Patient" && <div className='main-head'>View Doctors with access to your records</div>}
             <div className="card-container-pat">
                 {patients.map(patient => (
                     <SeePatientCard key={patient._id} item={patient} />
