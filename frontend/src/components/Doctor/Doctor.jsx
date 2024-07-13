@@ -44,6 +44,10 @@ const Doctor = () => {
         fetchPatients();
     }, []);
 
+    if (!user) {
+        return <div>No user</div>
+    }
+
 
     if (error) {
         return <div>Error: {error}</div>;
