@@ -1,8 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import './dash.css';
 
 const Try = () => {
     const [selectedDoctor, setSelectedDoctor] = useState('');
+    const [user, setUser] = useState(null);
+
+    useEffect(() => {
+        const fetchUserData = async () => {
+            try {
+                const response = await axios.get("http://localhost:3000/getdata", {
+                    withCredentials: true,
+                });
+                setUser(response.data);
+            } catch (err) {
+                console.log(err.message);
+            }
+        };
+        fetchUserData();
+    }, []);
+
+    if (!user) {
+        return <div>Loading...</div>
+    }
 
     const handleDoctorChange = (event) => {
         setSelectedDoctor(event.target.value);
@@ -11,11 +31,8 @@ const Try = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        // Retrieve email from local storage
-        const userEmail = localStorage.getItem("email");
-
         try {
-            const response = await fetch(`http://localhost:3000/grant-access/${userEmail}`, {
+            const response = await fetch("http://localhost:3000/grant-access", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -39,7 +56,7 @@ const Try = () => {
     };
 
     return (
-      <div className="dash-container" id='box'>
+        <div className="dash-container" id='box'>
             <div className="dash">
                 <h2 className="dash-title">Online Appointment Scheduling</h2>
                 <p className="dash-description">Our medical website allows patients to schedule appointments online with ease. Choose your preferred doctor and time slot, and get instant confirmation.</p>
@@ -53,7 +70,7 @@ const Try = () => {
                 <p className="dash-description">Our platform offers a secure and comprehensive digital health record system. Track your medical history, lab results, and prescriptions in one place.</p>
             </div>
 
-            <form onSubmit={handleSubmit} className="appointment-form">
+            {user.role === "Patient" && <form onSubmit={handleSubmit} className="appointment-form">
                 <div className="form-group">
                     <label htmlFor="doctor">Enter Doctor's Email:</label>
                     <input
@@ -66,7 +83,7 @@ const Try = () => {
                     />
                 </div>
                 <button type="submit" className="submit-button">Share Access</button>
-            </form>
+            </form>}
         </div>
     );
 };
