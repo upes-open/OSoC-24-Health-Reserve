@@ -237,7 +237,7 @@ const Register = () => {
                 <p className="error">{errors.termsAccepted}</p>
               )}
             </div>
-            <button type="submit" className="register-button">
+            <button type="submit" className={`register-button ${!form.termsAccepted ? 'disabled' : ''}`} disabled={!form.termsAccepted}>
               Register
             </button>
             <p className="signup-link">

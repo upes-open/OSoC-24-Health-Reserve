@@ -128,3 +128,9 @@ body {
 .signup-link a:hover {
     text-decoration: underline;
 }
+
+@media (max-width:600px) {
+    .hospital-login-image {
+        display: none;
+    }
+}
