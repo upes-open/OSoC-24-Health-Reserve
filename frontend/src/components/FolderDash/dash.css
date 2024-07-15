@@ -1,10 +1,18 @@
-.dash-container {
+.full-dash-container {
   background-color: #C7EAE4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  justify-content: space-evenly;
+}
+
+.dash-container {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap; 
-  height: 100vh;
+  
   padding: 20px;
 }
 
@@ -48,6 +56,65 @@
   line-height: 1.5;
 }
 
+.form-group-dash {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px; 
+}
+
+.form-group-dash label {
+  font-weight: bold; 
+}
+
+.form-group-dash input {
+  border: none;
+  border-bottom: 1px solid #ccc; /* Subtle border for inputs */
+  background-color: transparent; /* Transparent background */
+  color: #333; 
+  padding: 10px; 
+  text-align: center;
+}
+
+.form-group-dash input:focus {
+  outline: none;
+  border-color: #007bff; /* Highlight border color on focus */
+}
+
+.appointment-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border: 0.5px solid rgb(213, 188, 188);
+  padding: 25px;
+  border-radius: 10px;
+}
+
+
+.submit-button {
+  background-color: #c2fbd7;
+  border-radius: 100px;
+  box-shadow: rgba(44, 187, 99, .2) 0 -25px 18px -14px inset,rgba(44, 187, 99, .15) 0 1px 2px,rgba(44, 187, 99, .15) 0 2px 4px,rgba(44, 187, 99, .15) 0 4px 8px,rgba(44, 187, 99, .15) 0 8px 16px,rgba(44, 187, 99, .15) 0 16px 32px;
+  color: green;
+  cursor: pointer;
+  display: inline-block;
+  font-family: CerebriSans-Regular,-apple-system,system-ui,Roboto,sans-serif;
+  padding: 7px 20px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 250ms;
+  border: 0;
+  font-size: 16px;
+  user-select: none;
+}
+
+.submit-button:hover {
+  box-shadow: rgba(44,187,99,.35) 0 -25px 18px -14px inset,rgba(44,187,99,.25) 0 1px 2px,rgba(44,187,99,.25) 0 2px 4px,rgba(44,187,99,.25) 0 4px 8px,rgba(44,187,99,.25) 0 8px 16px,rgba(44,187,99,.25) 0 16px 32px;
+  transform: scale(1.05) rotate(-1deg);
+}
+
+
 @media (min-width: 768px) {
   .dash-container {
     justify-content: space-around; 
@@ -55,5 +122,11 @@
   
   .dash {
     flex: 1 1 calc(33% - 40px); 
+  }
+}
+
+@media (max-width: 768px) {
+  .full-dash-container {
+    padding-bottom: 50px;
   }
 }
