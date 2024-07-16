@@ -311,6 +311,8 @@ router.get('/usersdoc', async (req, res) => {
 });
 
 
+
+
 router.get('/getrecords/:username', async (req, res) => {
     const username = req.params.username;
 
@@ -385,6 +387,54 @@ router.post('/grant-access', async (req, res) => {
 });
 
 
+// Endpoint to show patient details if a doctor is logged in
+router.get('/doctor/patients', async (req, res) => {
+    const userEmail = req.session.email;
+    console.log("Received email in backend:", userEmail);
+
+    try {
+        const user = await userModel.findOne({ email: userEmail });
+
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        if (user.role === 'Doctor') {
+            const patients = await userModel.find({ sharedWith: userEmail });
+            return res.status(200).json(patients);
+        } else {
+            return res.status(403).json({ message: 'Unauthorized access' });
+        }
+    } catch (error) {
+        console.error("Error fetching patients:", error);
+        return res.status(500).json({ message: error.message });
+    }
+});
+
+
+// Endpoint to show doctor details if a patient is logged in
+router.get('/patient/doctors', async (req, res) => {
+    const userEmail = req.session.email;
+    console.log("Received email in backend:", userEmail);
+
+    try {
+        const user = await userModel.findOne({ email: userEmail });
+
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        if (user.role === 'Patient') {
+            const doctors = await userModel.find({ email: { $in: user.sharedWith } });
+            return res.status(200).json(doctors);
+        } else {
+            return res.status(403).json({ message: 'Unauthorized access' });
+        }
+    } catch (error) {
+        console.error("Error fetching doctors:", error);
+        return res.status(500).json({ message: error.message });
+    }
+});
 
 
 
