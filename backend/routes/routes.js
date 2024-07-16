@@ -196,9 +196,17 @@ router.post("/signup", async (req, res) => {
 
 
 router.get('/logout', (req, res) => {
-    res.cookie("token", "");
-    res.redirect('/login');
-});
+    res.clearCookie("token");
+    req.session.destroy((err) => {
+      if (err) {
+        console.log("Error clearing session:", err);
+        res.status(500).send("Error clearing session");
+      } else {
+        console.log("Session cleared successfully");
+        res.status(200).send("Logged out successfully");
+      }
+    });
+  });
 
 
 router.get('/main', isAuthenticated, async (req, res) => {

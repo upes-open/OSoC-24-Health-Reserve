@@ -13,17 +13,14 @@ const Profile = () => {
 
   useEffect(() => {
     const fetchUserData = async () => {
-      const email = localStorage.getItem("email"); // Retrieve email from local storage
-      if (!email) {
-        setError("No email found in local storage");
-        setLoading(false);
-        return;
-      }
 
       try {
-        const response = await axios.get(`http://localhost:3000/user/${email}`); // Use email in API call
-        setUser(response.data); // Assuming response.data contains the user object
-        setFormData(response.data); // Initialize form data with user data
+        const response = await axios.get("http://localhost:3000/getdata", {
+          withCredentials: true,
+        });
+        // console.log(response.data)
+        setUser(response.data); 
+        setFormData(response.data); 
         setLoading(false);
       } catch (err) {
         setError(err.message);
@@ -46,9 +43,15 @@ const Profile = () => {
     return <div>User not found</div>;
   }
 
-  const logout = () => {
-    localStorage.clear();
-    navigate("/login");
+  const logout = async () => {
+    try {
+      await axios.get("http://localhost:3000/logout");
+    } catch (error) {
+      console.log(error);
+    } finally {
+      localStorage.clear();
+      navigate("/login");
+    }
   };
 
   const handleEditClick = () => {
@@ -161,13 +164,13 @@ const Profile = () => {
                         {user.username}
                       </div>
                       <div className="full-name">
-                        <span>Full Name</span> : {user.fullname}
+                        <span>Full Name</span> : {!user.fullname ? (<p>*Please enter your name*</p>) : user.fullname}
                       </div>
                       <div className="age">
-                        <span>Age</span> : {user.age}
+                        <span>Age</span> : {!user.age ? (<p>*Please enter your age*</p>) : user.age}
                       </div>
                       <div className="gender">
-                        <span>Gender</span> : {user.gender}
+                        <span>Gender</span> : {!user.gender ? (<p>*Please enter your gender*</p>) : user.gender}
                       </div>
                     </>
                   ) : (
