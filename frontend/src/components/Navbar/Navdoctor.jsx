@@ -54,7 +54,7 @@ function Navdoctor() {
             {user.role === "Patient" &&
               (<>
               <li>
-                <Link to="/doctors">SEE DOCTORS</Link>
+                <Link to="/patients">SEE DOCTORS</Link>
               </li>
               <li>
                 <Link to="/upload">UPLOAD RECORDS</Link>

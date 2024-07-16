@@ -2,13 +2,13 @@ import React from "react";
 import "./SeePatientCard.css";
 import { Link } from "react-router-dom";
 
-const Card = ({ item }) => {
+const SeePatientCard = ({ item, role }) => {
   console.log(item);
   return (
     <div className="Pat-Card">
-      {item.role === "Doctor" && (
+      {role === "Doctor" && (
         <div className="info">
-          <div className="doctor-name">
+          <div className="patient-name">
             <span>Patient Name: </span>
             {item.username}
           </div>
@@ -32,23 +32,17 @@ const Card = ({ item }) => {
           )}
         </div>
       )}
-      {item.role === "Paitent" && (
+      {role === "Patient" && (
         <Link to={`/patient/${item.username}`} className="card-link">
           <div className="info">
             <div className="doctor-name">
-              <span>Patient Name: </span>
+              <span>Doctor Name: </span>
               {item.username}
             </div>
-            {item.age && (
+            {item.specialization && (
               <div>
-                <span>Age: </span>
-                {item.age}
-              </div>
-            )}
-            {item.gender && (
-              <div>
-                <span>Gender: </span>
-                {item.gender}
+                <span>Specialization: </span>
+                {item.specialization}
               </div>
             )}
             {item.contact && (
@@ -64,4 +58,4 @@ const Card = ({ item }) => {
   );
 };
 
-export default Card;
+export default SeePatientCard;
