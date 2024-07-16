@@ -4,6 +4,7 @@ import './dash.css';
 
 const Dash = () => {
     const [selectedDoctor, setSelectedDoctor] = useState('');
+    const [revokeDoctor, setRevokeDoctor] = useState('');
     const [user, setUser] = useState(null);
 
     useEffect(() => {
@@ -22,6 +23,10 @@ const Dash = () => {
 
     const handleDoctorChange = (event) => {
         setSelectedDoctor(event.target.value);
+    };
+
+    const handleRevokeDoctorChange = (event) => {
+        setRevokeDoctor(event.target.value);
     };
 
     const handleSubmit = async (event) => {
@@ -51,6 +56,33 @@ const Dash = () => {
         }
     };
 
+    const handleRevokeSubmit = async (event) => {
+        event.preventDefault();
+
+        try {
+            const response = await axios.post("http://localhost:3000/revoke-access", {
+                revokeDoctor
+            }, {
+                withCredentials: true, // Ensure cookies are sent
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            });
+
+            if (response.status === 200) {
+                console.log('Access revoked successfully');
+                alert('Access revoked successfully');
+                setRevokeDoctor(''); // Clear input field after successful submission
+            } else {
+                console.error('Failed to revoke access:', response.data.message);
+                alert(`Failed to revoke access: ${response.data.message}`);
+            }
+        } catch (error) {
+            console.error('Error revoking access:', error.message);
+            alert('Error revoking access');
+        }
+    };
+
     if (!user) {
         return <div>Loading...</div>;
     }
@@ -72,20 +104,37 @@ const Dash = () => {
                 </div>
             </div>
 
-            {user.role === "Patient" && <form onSubmit={handleSubmit} className="appointment-form">
-                <div className="form-group-dash">
-                    <label htmlFor="doctor">Doctor's Email:</label>
-                    <input
-                        type="text"
-                        id="doctor"
-                        value={selectedDoctor}
-                        onChange={handleDoctorChange}
-                        placeholder="Enter doctor's Email"
-                        required
-                    />
-                </div>
-                <button type="submit" className="submit-button">Share Access</button>
-            </form>}
+            {user.role === "Patient" && <div className="forms-container">
+                <form onSubmit={handleSubmit} className="appointment-form">
+                    <div className="form-group-dash">
+                        <label htmlFor="doctor">Doctor's Email:</label>
+                        <input
+                            type="text"
+                            id="doctor"
+                            value={selectedDoctor}
+                            onChange={handleDoctorChange}
+                            placeholder="Enter doctor's Email"
+                            required
+                        />
+                    </div>
+                    <button type="submit" className="submit-button">Share Access</button>
+                </form>
+
+                <form onSubmit={handleRevokeSubmit} className="appointment-form">
+                    <div className="form-group-dash">
+                        <label htmlFor="revokeDoctor">Doctor's Email:</label>
+                        <input
+                            type="text"
+                            id="revokeDoctor"
+                            value={revokeDoctor}
+                            onChange={handleRevokeDoctorChange}
+                            placeholder="Enter doctor's Email"
+                            required
+                        />
+                    </div>
+                    <button type="submit" className="submit-button revoke-button">Revoke Access</button>
+                </form>
+            </div>}
         </div>
     );
 };
