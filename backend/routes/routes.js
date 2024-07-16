@@ -103,6 +103,36 @@ router.post('/upload', async (req, res) => {
     }
 });
 
+router.post('/revoke-access', async (req, res) => {
+    const { revokeDoctor } = req.body;
+    const userEmail = req.session.email; // Assuming user's email is obtained from authentication
+
+    try {
+        // Find the user who is revoking access
+        const user = await userModel.findOne({ email: userEmail });
+
+        // Check if the user exists
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        // Check if the doctor's email exists in sharedWith array
+        if (!user.sharedWith.includes(revokeDoctor)) {
+            return res.status(400).json({ message: "Doctor's email not found in sharedWith array" });
+        }
+
+        // Remove the doctor's email from sharedWith array
+        user.sharedWith = user.sharedWith.filter(email => email !== revokeDoctor);
+
+        // Save the updated user object
+        await user.save();
+
+        res.status(200).json({ message: "Access revoked successfully" });
+    } catch (error) {
+        console.error('Error revoking access:', error.message);
+        res.status(500).json({ message: "Error revoking access" });
+    }
+});
 
 
 router.get('/record/:email', async (req, res) => {
