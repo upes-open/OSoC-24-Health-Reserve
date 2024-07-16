@@ -82,19 +82,18 @@ router.post('/upload', async (req, res) => {
 
     try {
         // Find the existing document by email and update it with new data
-        const updatedItem = await patientModel.findOneAndUpdate(
-            { email: email }, // Find the document by email
-            {
-                description: description,
-                doctorName: doctorName,
-                hospitalName: hospitalName,
-                dateOfUpload: new Date(dateOfUpload),
-                image: {
-                    data: image, // You can directly store the buffer if needed
-                }
+        const saveItem = new patientModel({
+            description: description,
+            doctorName: doctorName,
+            hospitalName: hospitalName,
+            dateOfUpload: new Date(dateOfUpload),
+            image: {
+                data: image, // You can directly store the buffer if needed 
             },
-            { new: true, upsert: true } // Create the document if it doesn't exist (upsert)
-        );
+            email: email
+        });
+
+        await saveItem.save();
 
         console.log('Data registered');
         res.status(200).send('Data uploaded successfully!');
@@ -108,6 +107,17 @@ router.post('/upload', async (req, res) => {
 
 router.get('/record/:email', async (req, res) => {
     const email = req.params.email;
+
+    try {
+        const patients = await patientModel.find({ email });
+        res.json(patients);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
+
+router.get('/getrecords', async (req, res) => {
+    const email = req.session.email;
 
     try {
         const patients = await patientModel.find({ email });

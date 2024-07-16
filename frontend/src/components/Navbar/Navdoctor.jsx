@@ -22,8 +22,9 @@ function Navdoctor() {
       try {
         const response = await axios.get("http://localhost:3000/getdata", {
           withCredentials: true,
-        }); 
-        setUser(response.data); 
+        });
+        // console.log(response.data)
+        setUser(response.data);
       } catch (err) {
         setError(err.message);
       }
@@ -48,17 +49,20 @@ function Navdoctor() {
             <li>
               <Link to="/contact">CONTACT US</Link>
             </li>
+            <li>
+              <Link to={`/viewrecord`}>VIEW RECORDS</Link>
+            </li>
             {user.role === "Doctor" && <li>
               <Link to="/doctors">SEE PATIENTS</Link>
             </li>}
             {user.role === "Patient" &&
               (<>
-              <li>
-                <Link to="/doctors">SEE DOCTORS</Link>
-              </li>
-              <li>
-                <Link to="/upload">UPLOAD RECORDS</Link>
-              </li>
+                <li>
+                  <Link to="/doctors">SEE DOCTORS</Link>
+                </li>
+                <li>
+                  <Link to="/upload">UPLOAD RECORDS</Link>
+                </li>
               </>)}
           </ul>
           <div className="profile" onClick={handleClick}>

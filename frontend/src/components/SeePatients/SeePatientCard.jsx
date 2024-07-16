@@ -32,7 +32,7 @@ const Card = ({ item }) => {
           )}
         </div>
       )}
-      {item.role === "Paitent" && (
+      {item.role === "Patient" && (
         <Link to={`/patient/${item.username}`} className="card-link">
           <div className="info">
             <div className="doctor-name">
