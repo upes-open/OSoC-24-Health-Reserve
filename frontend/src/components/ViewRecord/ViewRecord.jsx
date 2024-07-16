@@ -10,17 +10,11 @@ const ViewRecord = () => {
 
   useEffect(() => {
     const fetchPatientData = async () => {
-      const email = localStorage.getItem("email");
-      if (!email) {
-        setError("No email found in local storage");
-        setLoading(false);
-        return;
-      }
-
       try {
-        const response = await axios.get(
-          `http://localhost:3000/record/${email}`
-        );
+        const response = await axios.get("http://localhost:3000/getrecords", {
+          withCredentials: true,
+        });
+        // console.log(response.data);
         setPatients(response.data);
         setLoading(false);
       } catch (err) {
@@ -33,7 +27,6 @@ const ViewRecord = () => {
   }, []);
 
   const handleDelete = (deletedItemId) => {
-    // Filter out the deleted item from the state
     setPatients(patients.filter((patient) => patient._id !== deletedItemId));
   };
 
@@ -50,10 +43,13 @@ const ViewRecord = () => {
   }
 
   return (
-    <div className="card-container">
-      {patients.map((patient) => (
-        <Card key={patient._id} item={patient} onDelete={handleDelete} />
-      ))}
+    <div className="mainviewrecpage">
+    <div className="viewrecordhead"><h1>View Your Records</h1></div>
+      <div className="card-container">
+        {patients.map((patient) => (
+          <Card key={patient._id} item={patient} onDelete={handleDelete} />
+        ))}
+      </div>
     </div>
   );
 };

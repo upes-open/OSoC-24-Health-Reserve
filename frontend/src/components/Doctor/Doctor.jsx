@@ -43,7 +43,7 @@ const ViewPatients = () => {
       <div className="main-head">View Patients</div>
       <div className="card-container-pat">
         {patients.map((patient) => (
-          <SeePatientCard key={patient._id} item={patient} role="Doctor" />
+          <SeePatientCard key={patient._id} item={patient} />
         ))}
       </div>
     </div>

@@ -2,11 +2,11 @@ import React from "react";
 import "./SeePatientCard.css";
 import { Link } from "react-router-dom";
 
-const SeePatientCard = ({ item, role }) => {
+const SeePatientCard = ({ item }) => {
   console.log(item);
   return (
     <div className="Pat-Card">
-      {role === "Doctor" && (
+      {item.role === "Doctor" && (
         <div className="info">
           <div className="patient-name">
             <span>Patient Name: </span>
@@ -32,7 +32,7 @@ const SeePatientCard = ({ item, role }) => {
           )}
         </div>
       )}
-      {role === "Patient" && (
+      {item.role === "Patient" && (
         <Link to={`/patient/${item.username}`} className="card-link">
           <div className="info">
             <div className="doctor-name">
