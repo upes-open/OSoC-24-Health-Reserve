@@ -69,26 +69,33 @@ const verifyToken = (req, res, next) => {
 
 
 router.post('/upload', async (req, res) => {
-    const { description, dateOfUpload, doctorName, hospitalName, image, email } = req.body;
+    const { description, dateOfUpload, doctorName, hospitalName, image } = req.body;
+    const email = req.session.email; // Assuming you store user email in session
 
     if (!image) {
         return res.status(400).send('No file uploaded');
     }
-    try {
-        // Save other data into MongoDB using Mongoose
-        const saveItem = new patientModel({
-            description: description,
-            doctorName: doctorName,
-            hospitalName: hospitalName,
-            dateOfUpload: new Date(dateOfUpload),
-            image: {
-                data: image, // You can directly store the buffer if needed 
-            },
-            email: email
-        });
 
-        await saveItem.save(); // Save the document
-        //console.log(image);
+    if (!email) {
+        return res.status(400).send('User not authenticated');
+    }
+
+    try {
+        // Find the existing document by email and update it with new data
+        const updatedItem = await patientModel.findOneAndUpdate(
+            { email: email }, // Find the document by email
+            {
+                description: description,
+                doctorName: doctorName,
+                hospitalName: hospitalName,
+                dateOfUpload: new Date(dateOfUpload),
+                image: {
+                    data: image, // You can directly store the buffer if needed
+                }
+            },
+            { new: true, upsert: true } // Create the document if it doesn't exist (upsert)
+        );
+
         console.log('Data registered');
         res.status(200).send('Data uploaded successfully!');
     } catch (err) {
@@ -96,6 +103,7 @@ router.post('/upload', async (req, res) => {
         res.status(500).send('Error saving file or registering item');
     }
 });
+
 
 
 router.get('/record/:email', async (req, res) => {
@@ -344,19 +352,27 @@ router.get("/user-role", async (req, res) => {
 
 
 router.post('/grant-access', async (req, res) => {
-    const email = req.session.email;
+    const email = req.session.email; // Fetch email from session
     const { selectedDoctor } = req.body;
 
     try {
+        if (!email) {
+            return res.status(400).json({ message: 'Email not found in session' });
+        }
+
         // Ensure that sharedWith is an array in case it's not initialized correctly
         const user = await userModel.findOneAndUpdate(
-            { email },
+            { email }, // Find user by email
             { $addToSet: { sharedWith: selectedDoctor } },
             { 
                 new: true, // Return the updated document
-                upsert: true // Create a new document if not found
+                upsert: false // Do not create a new document if not found
             }
         );
+
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
 
         // Log the updated sharedWith array
         console.log('Updated sharedWith array:', user.sharedWith);
@@ -367,6 +383,7 @@ router.post('/grant-access', async (req, res) => {
         res.status(500).json({ message: 'Internal server error' });
     }
 });
+
 
 
 

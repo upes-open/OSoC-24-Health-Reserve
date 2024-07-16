@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './dash.css';
 
-const Try = () => {
+const Dash = () => {
     const [selectedDoctor, setSelectedDoctor] = useState('');
     const [user, setUser] = useState(null);
 
@@ -10,7 +10,7 @@ const Try = () => {
         const fetchUserData = async () => {
             try {
                 const response = await axios.get("http://localhost:3000/getdata", {
-                    withCredentials: true,
+                    withCredentials: true, // Ensure cookies are sent
                 });
                 setUser(response.data);
             } catch (err) {
@@ -20,10 +20,6 @@ const Try = () => {
         fetchUserData();
     }, []);
 
-    if (!user) {
-        return <div>Loading...</div>
-    }
-
     const handleDoctorChange = (event) => {
         setSelectedDoctor(event.target.value);
     };
@@ -32,28 +28,32 @@ const Try = () => {
         event.preventDefault();
 
         try {
-            const response = await fetch("http://localhost:3000/grant-access", {
-                method: 'POST',
+            const response = await axios.post("http://localhost:3000/grant-access", {
+                selectedDoctor
+            }, {
+                withCredentials: true, // Ensure cookies are sent
                 headers: {
                     'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ selectedDoctor }),
+                }
             });
 
-            if (response.ok) {
+            if (response.status === 200) {
                 console.log('Access shared successfully');
                 alert('Access shared successfully');
-                setSelectedDoctor(''); // Clear input field after submission
+                setSelectedDoctor(''); // Clear input field after successful submission
             } else {
-                const errorData = await response.json();
-                console.error('Failed to share access:', errorData.message);
-                alert(`Failed to share access: ${errorData.message}`);
+                console.error('Failed to share access:', response.data.message);
+                alert(`Failed to share access: ${response.data.message}`);
             }
         } catch (error) {
-            console.error('Error sharing access:', error);
+            console.error('Error sharing access:', error.message);
             alert('Error sharing access');
         }
     };
+
+    if (!user) {
+        return <div>Loading...</div>;
+    }
 
     return (
         <div className="full-dash-container">
@@ -90,4 +90,4 @@ const Try = () => {
     );
 };
 
-export default Try;
+export default Dash;
