@@ -64,6 +64,21 @@ body {
 
 }
 
+.full-name p {
+  display: inline;
+  color: bisque;
+}
+
+.age p {
+  display: inline;
+  color: bisque;
+}
+
+.gender p {
+  display: inline;
+  color: bisque;
+}
+
 @media (min-width: 1024px) {
 
   .main-container-profile {
