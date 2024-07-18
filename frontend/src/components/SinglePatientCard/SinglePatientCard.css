@@ -29,6 +29,7 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    cursor: pointer;
 }
 
 .info {
@@ -53,19 +54,20 @@
     font-weight: bold;
 }
 
-.delete-button {
-    border-radius: 5px;
-    font-weight: bold;
-    margin-left: 95px;
-    margin-top: 10px;
-    background-color: #f44336;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+.fullscreen-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
 }
 
-.delete-button:hover {
-    background-color: #d32f2f;
+.fullscreen-image {
+    max-width: 90%;
+    max-height: 90%;
 }
