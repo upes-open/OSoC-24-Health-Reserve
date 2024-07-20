@@ -44,7 +44,7 @@ const ViewRecord = () => {
 
   return (
     <div className="mainviewrecpage">
-    <div className="viewrecordhead"><h1>View Your Records</h1></div>
+      <div className="viewrecordhead"><h1>View Your Records</h1></div>
       <div className="card-container">
         {patients.map((patient) => (
           <Card key={patient._id} item={patient} onDelete={handleDelete} />
