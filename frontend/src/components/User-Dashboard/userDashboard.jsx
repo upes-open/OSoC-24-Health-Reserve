@@ -44,7 +44,7 @@ const Dashboard = () => {
       alert("Data uploaded successfully!");
     } catch (error) {
       console.error("Error uploading data:", error);
-      alert("Failed to upload data.");
+      alert("Failed to upload data.", error);
     }
   };
 

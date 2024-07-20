@@ -41,9 +41,11 @@ const PatientRecords = () => {
   return (
     <div className="records-container">
       <div className="records-head">Records for {username}</div>
-      {records.map((record) => (
-        <Card key={record._id} item={record} />
-      ))}
+      <div className="card-container">
+        {records.map((record) => (
+          <Card key={record._id} item={record} />
+        ))}
+      </div>
     </div>
   );
 };

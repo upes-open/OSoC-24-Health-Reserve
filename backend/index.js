@@ -4,7 +4,6 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
-const mongoose = require('mongoose');
 const MongoStore = require('connect-mongo');
 const { connectToDb } = require('./connectDB/connect'); // Updated import path
 const routes = require('./routes/routes.js');
@@ -28,8 +27,8 @@ app.use(session({
 }));
 
 // Middleware
-app.use(bodyParser.json()); // Parse JSON bodies
-app.use(bodyParser.urlencoded({ extended: true })); // Parse URL-encoded bodies
+app.use(bodyParser.json({ limit: '15mb' }));
+app.use(bodyParser.urlencoded({ limit: '15mb', extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cookieParser());
 app.use(cors({
