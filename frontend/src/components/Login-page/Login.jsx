@@ -35,11 +35,7 @@ const Login = () => {
       });
 
       if (response.ok) {
-        const result = await response.json();
-
-        // Store the email in local storage
-        localStorage.setItem("email", formData.email);
-
+        await response.json();
         navigate("/dashboard");
       } else {
         const data = await response.json();
