@@ -7,7 +7,7 @@ const Dashboard = () => {
   const [doctorName, setDoctorName] = useState("");
   const [hospitalName, setHospitalName] = useState("");
   const [itemImages, setItemImages] = useState(null);
-  const email = localStorage.getItem("email");
+  const email = sessionStorage.getItem("email");
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 

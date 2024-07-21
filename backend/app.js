@@ -1,5 +1,5 @@
-const express = require('express');
-const { connectToDb } = require('./connectDB/connect');
+const express = require("express");
+const { connectToDb } = require("./connectDB/connect");
 //const path = require('path');
 
 const app = express();
@@ -7,10 +7,6 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
-app.get('/', (req, res) => {
-    res.send("Hello World");
-});
 
 // Start the server
 // app.listen(port, () => {

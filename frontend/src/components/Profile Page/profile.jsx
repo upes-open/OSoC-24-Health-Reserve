@@ -13,14 +13,13 @@ const Profile = () => {
 
   useEffect(() => {
     const fetchUserData = async () => {
-
       try {
         const response = await axios.get("http://localhost:3000/getdata", {
           withCredentials: true,
         });
         // console.log(response.data)
-        setUser(response.data); 
-        setFormData(response.data); 
+        setUser(response.data);
+        setFormData(response.data);
         setLoading(false);
       } catch (err) {
         setError(err.message);
@@ -49,7 +48,7 @@ const Profile = () => {
     } catch (error) {
       console.log(error);
     } finally {
-      localStorage.clear();
+      sessionStorage.clear();
       navigate("/login");
     }
   };
@@ -164,13 +163,24 @@ const Profile = () => {
                         {user.username}
                       </div>
                       <div className="full-name">
-                        <span>Full Name</span> : {!user.fullname ? (<p>*Please enter your name*</p>) : user.fullname}
+                        <span>Full Name</span> :{" "}
+                        {!user.fullname ? (
+                          <p>*Please enter your name*</p>
+                        ) : (
+                          user.fullname
+                        )}
                       </div>
                       <div className="age">
-                        <span>Age</span> : {!user.age ? (<p>*Please enter your age*</p>) : user.age}
+                        <span>Age</span> :{" "}
+                        {!user.age ? <p>*Please enter your age*</p> : user.age}
                       </div>
                       <div className="gender">
-                        <span>Gender</span> : {!user.gender ? (<p>*Please enter your gender*</p>) : user.gender}
+                        <span>Gender</span> :{" "}
+                        {!user.gender ? (
+                          <p>*Please enter your gender*</p>
+                        ) : (
+                          user.gender
+                        )}
                       </div>
                     </>
                   ) : (
