@@ -129,6 +129,41 @@
   color: white;
 }
 
+.loading-spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  font-size: 24px;
+  font-weight: bold;
+  color: #1C5D73;
+  position: relative;
+}
+
+.loading-spinner::before {
+  content: '';
+  box-sizing: border-box;
+  position: absolute;
+  top: 44%;
+  left: 50%;
+  width: 40px;
+  height: 40px;
+  margin-top: -20px;
+  margin-left: -20px;
+  border-radius: 50%;
+  border: 4px solid #1C5D73;
+  border-top-color: transparent;
+  animation: spinner 1s linear infinite;
+}
+
+@keyframes spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+
 @media (min-width: 768px) {
   .dash-container {
     justify-content: space-around;
@@ -144,3 +179,5 @@
     padding-bottom: 50px;
   }
 }
+
+
