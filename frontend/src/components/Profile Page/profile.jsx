@@ -49,7 +49,6 @@ const Profile = () => {
     } catch (error) {
       console.log(error);
     } finally {
-      localStorage.clear();
       navigate("/login");
     }
   };
@@ -71,7 +70,7 @@ const Profile = () => {
         updatedFields.username = formData.username;
 
       if (Object.keys(updatedFields).length > 0) {
-        // Only send if there are updates
+
         const response = await axios.put(
           `http://localhost:3000/user/${user.email}`,
           updatedFields

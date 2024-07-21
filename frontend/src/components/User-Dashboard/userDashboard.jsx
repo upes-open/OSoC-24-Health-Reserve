@@ -7,7 +7,8 @@ const Dashboard = () => {
   const [doctorName, setDoctorName] = useState("");
   const [hospitalName, setHospitalName] = useState("");
   const [itemImages, setItemImages] = useState(null);
-  const email = localStorage.getItem("email");
+
+  
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
@@ -17,7 +18,6 @@ const Dashboard = () => {
       doctorName: doctorName,
       hospitalName: hospitalName,
       image: itemImages,
-      email: email,
     };
 
     try {
