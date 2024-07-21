@@ -84,7 +84,7 @@ const Dash = () => {
     };
 
     if (!user) {
-        return <div>Loading...</div>;
+        return <div className="loading-spinner">Loading...</div>;
     }
 
     return (

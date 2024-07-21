@@ -28,7 +28,7 @@ const ViewPatients = () => {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div className="loading-spinner">Loading...</div>;
   }
 
   if (error) {

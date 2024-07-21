@@ -32,7 +32,7 @@ const Profile = () => {
   }, []); // Empty dependency array ensures this effect runs only once
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div className="loading-spinner">Loading...</div>;
   }
 
   if (error) {
